@@ -280,7 +280,7 @@
                                 <h6 class="m-0 font-weight-bold text">Notes</h6>
                             </div>
                             <div class="card-body">
-                                <ul style="none;">
+                                <ul style="none">
                                     <li><a href="Notes.html">cuties</a></li>
                                     <li><a href="Notes.html">cuties</a></li>
                                     <li><a href="Notes.html">cuties</a></li>
