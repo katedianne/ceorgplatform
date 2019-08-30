@@ -76,7 +76,8 @@
                     data: JSON.stringify(request), //Stringified Json Object
                     dataType: 'json',
                     success: function (response) {
-                        alert(response);
+                        alert(response.userId);
+                        if (response.userId > 0) alert ("added to database");
 
 
                     }

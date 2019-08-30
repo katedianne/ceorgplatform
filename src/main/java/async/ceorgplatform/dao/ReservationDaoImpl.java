@@ -5,7 +5,7 @@
  */
 package async.ceorgplatform.dao;
 
-import async.ceorgplatform.model.Reservation;
+
 import async.ceorgplatform.model.Reservation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,10 +34,10 @@ public class ReservationDaoImpl implements ReservationDao {
 
     public int CreateReservation(Reservation request) {
 
-        String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_created, created_by, requested_by, remarks, status_id) values(?,?,?,?,?,?,?,?,1)";
+        String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?)";
 
       int result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
-            request.getEventName(), request.getDateRequested(), request.getCreatedBy(), request.getRequestedBy(), request.getRemarks()});
+            request.getEventName(), request.getDateRequested(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
 
       return result;
     }

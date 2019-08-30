@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 
 /**
  *
@@ -36,16 +37,17 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(@ModelAttribute("login") Login login) {
+    public ModelAndView loginProcess(@ModelAttribute("login") Login login, HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = null;
 
         User user = userService.validateUser(login);
 
         if (user != null) {
             mav = new ModelAndView("home");
-            mav.addObject("userId", user.getUserId());
-            mav.addObject("roleId", user.getRoleId());
-            mav.addObject("username", user.getUsername());
+            Cookie cookie1 = new Cookie("UserId", Integer.toString(user.getUserId()));
+            Cookie cookie2 = new Cookie("RoleId", Integer.toString(user.getRoleId()));
+            response.addCookie(cookie1);
+            response.addCookie(cookie2);
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");
