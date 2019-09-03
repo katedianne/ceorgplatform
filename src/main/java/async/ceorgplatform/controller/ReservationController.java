@@ -2,10 +2,14 @@ package async.ceorgplatform.controller;
 
 import async.ceorgplatform.model.Reservation;
 import async.ceorgplatform.model.User;
+import async.ceorgplatform.model.Login;
+import async.ceorgplatform.model.ReservationDataTable;
 import async.ceorgplatform.service.ReservationService;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +35,8 @@ public class ReservationController {
     @RequestMapping(value = "/addReservation", method = RequestMethod.POST)
     @ResponseBody
     public User addReservation(@RequestBody Reservation reservation, HttpServletRequest request){
-
         User user = new User();
-        
+
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -43,18 +46,44 @@ public class ReservationController {
                 }  
             }
         }
-        
+     
         Date date= new Date();
         long time = date.getTime();
-	reservation.setDateRequested(new Timestamp(time)); // set date requested to current datetime
-        
+	reservation.setDateCreated(new Timestamp(time)); // set date requested to current datetime
+
         reservation.setStatusId(1); // set status to 
-        
+
         int result = reservationService.CreateReservation(reservation);
+
         user.setUserId(result);
-        
+
         return user;
+     
+    }
+    
+    @RequestMapping(value = "/getReservation", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Reservation> getReservation( HttpServletRequest request){
+        Login login = new Login();
         
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("IsLogin")){
+                    login.setIsLogin(Integer.parseInt(cookie.getValue()));
+                }  
+            }
+        }
+        
+        List<Reservation> reservationList  = reservationService.getReservation();
+     
+        return reservationList;
+        
+    }
+    
+    private String createButtonWithId( String reservationId){
+        String button = "<button id=\"reservationEdit\" data-id=\"" + reservationId + "\">edit</button>";
+        return button;
     }
 
 }
