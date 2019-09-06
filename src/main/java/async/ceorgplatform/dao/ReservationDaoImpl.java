@@ -37,7 +37,7 @@ public class ReservationDaoImpl implements ReservationDao {
         String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?)";
 
       int result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
-            request.getEventName(), request.getDateRequested(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
+            request.getEventName(), request.getDateCreated(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
 
       return result;
     }
@@ -50,6 +50,7 @@ public class ReservationDaoImpl implements ReservationDao {
     public List<Reservation> getReservation() {
         String sql = "Select * from reservations as r inner join event_rooms as er on r.event_room_id=er.event_room_id where r.status_id = 1";
         List<Reservation> reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationMapper());
+//        reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationStatusMapper());
         return reservation;
     }
 
@@ -60,20 +61,32 @@ public class ReservationDaoImpl implements ReservationDao {
             Reservation reservation = new Reservation();
             
             reservation.setReservationId(rs.getInt("reservation_id"));
-            reservation.setScheduledStartTime(rs.getTime("scheduled_start_date"));
-            reservation.setScheduledEndTime(rs.getTime("scheduled_end_date"));
+            reservation.setScheduledStartTime(rs.getTime("scheduled_start_time"));
+            reservation.setScheduledEndTime(rs.getTime("scheduled_end_time"));
             reservation.setEventRoomId(rs.getInt("event_room_id"));
             reservation.setEventName(rs.getString("event_name"));
             reservation.setDateRequested(rs.getTimestamp("date_requested"));
+            reservation.setDateCreated(rs.getTimestamp("date_created"));
             reservation.setCreatedBy(rs.getInt("created_by"));
             reservation.setRequestedBy(rs.getInt("requested_by"));
             reservation.setRemarks(rs.getString("remarks"));
             reservation.setStatusId(rs.getInt("status_id"));
-            reservation.eventRooms.setEventRoomId(rs.getInt("event_room_id"));
-            reservation.eventRooms.setEventRoomName(rs.getString("event_room_name"));
-            reservation.eventRooms.setDateCreated(rs.getTimestamp("date_created"));
-            reservation.eventRooms.setCreatedBy(rs.getInt("created_by"));
-            reservation.eventRooms.setStatusId(rs.getInt("status_id"));
+            //reservation.setStatus(rs.getString("status_name"));
+          //  reservation.eventRooms.setEventRoomId(rs.getInt("event_room_id"));
+//            reservation.eventRooms.setEventRoomName(rs.getString("event_room_name"));
+//            reservation.eventRooms.setDateCreated(rs.getTimestamp("date_created"));
+//            reservation.eventRooms.setCreatedBy(rs.getInt("created_by"));
+//            reservation.eventRooms.setStatusId(rs.getInt("status_id"));
+            return reservation;
+        }
+    }
+    
+    class ReservationStatusMapper implements RowMapper<Reservation>{
+     
+        public Reservation mapRow(ResultSet rs, int arg1) throws SQLException{
+            Reservation reservation = new Reservation();
+            
+            reservation.setStatus(rs.getString("status_name"));
             return reservation;
         }
     }

@@ -39,8 +39,6 @@
 
  
     <script>
-
-
         $(document).ready(function () {
 
             $("#inputResDate").datepicker({
@@ -70,7 +68,7 @@
 
 
                 $.ajax({
-                    url: "../addReservation",
+                    url: "${contextPath}/addReservation",
                     type: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(request), //Stringified Json Object
@@ -78,17 +76,67 @@
                     success: function (response) {
                         alert(response.userId);
                         if (response.userId > 0) alert ("added to database");
-
-
+                        
                     }
                 });
-
-
+        
             });
+            
+            $.ajax({
+                    url: "${contextPath}/getReservation",
+                    type: "GET",
+                    contentType: "application/json",
+                    //data: JSON.stringify(request), //Stringified Json Object
+                    //dataType: 'json',
+                    success: function (data) {
+                   
+                        $("#tableReservation").dataTable({
+                            bJQueryUI : true,
+                            data : data,
+                            columns :[
+                                    { "data": "reservationId" },
+                                    { "data": "eventRooms.eventRoomName" },
+                                    { "data": "eventName" },
+                                    { "data": "dateRequested" },
+                                    { "data": "scheduledStartTime" },
+                                    { "data": "scheduledEndTime" },
+                                    { "data": "remarks" },
+                                    { "data": "status" }
+                                    ]
+                       
+
+                        });
+                    }       
+             });
+                
+//                "bServerSide": true,
+//                            "bJQueryUI" : true,
+//                            "sPaginationType" : "full_numbers",
+//                            "sAjaxSource": "../getReservation",
+//                            "aoColumns": [
+//                                {"mData": "reservationId", "sTitle": " ", "sWidth": "2%", "bSortable" : false , "sClass" : "center"},
+//                                {"mData": "eventRooms.eventRoomName", "sTitle": "Location", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+//                                {"mData": "eventName", "sTitle": "Event", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+//                                {"mData": "dateRequested", "sTitle": "Date", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+//                                {"mData": "scheduledStartTime", "sTitle": "Start Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
+//                                {"mData": "scheduledEndTime", "sTitle": "End Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
+//                                {"mData": "remarks", "sTitle": "Remarks", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+//                                {"mData": "url", "sTitle": "Status", "sWidth": "10%", "bSortable" : true , "sClass" : "center"}
+//                            ],
+//                            "oLanguage": {
+//                                "sSearch": "Filter Search Result:",
+//                                "sProcessing": "Loading Please Wait...",
+//                                "sLoadingRecords": "Loading Please Wait...",
+//                                "sZeroRecords": "No Records Found!",
+                
+               
+//                    "fnServerParams": function (aoData) {
+//                        aoData.push({ "name": "reservationId", "value": 0 });
+//                    },
+//"mRender" : "function ( aaData, type, full )  {return  '<button id=\"reservationEdit\" data-id=\"' + reservationId + '\">edit</button>'", 
+                
 
         });
-
-
     </script>
 </head>
 <body id="page-top">
@@ -100,7 +148,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/home">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -114,10 +162,10 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="home">
+        <li class="nav-item active">
+            <a class="nav-link" href="${contextPath}/home">
                 <i class="fas fa-home"></i>
-                <span>Home</span></a>
+                <span>Home ${username}</span></a>
         </li>
 
         <!-- Divider -->
@@ -127,53 +175,35 @@
         <div class="sidebar-heading">
             Interface
         </div>
-
-        <li class="nav-item active">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="${contextPath}/reservation" >
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Reservation</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="reservation">Create</a>
-                    <a class="collapse-item" href="reservation">History</a>
-                </div>
-            </div>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-               aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="${contextPath}/announcement">
                 <i class="fas fa-bullhorn"></i>
                 <span>Announcements</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="Announcement-Create.html">Create</a>
-                    <a class="collapse-item" href="Announcement-Edit.html">Edit</a>
-                </div>
-            </div>
-        </li>
-
+            
         <li class="nav-item">
-            <a class="nav-link" href="Letter-Tracker.html">
+            <a class="nav-link" href="${contextPath}/letter">
                 <i class="fas fa-paper-plane"></i>
                 <span>Letter Tracker</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="Calendar.html">
+            <a class="nav-link" href="${contextPath}/calendar">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Calendar</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="Notes.html">
+            <a class="nav-link" href="${contextPath}/notes">
                 <i class="fas fa-sticky-note"></i>
                 <span>Notes</span></a>
         </li>
     </ul>
-
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -281,6 +311,7 @@
                                style="font-size: 0.8em; background-color: white;">
                             <thead style="background-color: black; color: white;">
                             <tr>
+                                 <th class="th-sm" style="text-align: center; vertical-align: middle;"></th>
                                 <th class="th-sm" style="text-align: center; vertical-align: middle;">Location</th>
                                 <th class="th-sm" style="text-align: center; vertical-align: middle;">Event</th>
                                 <th class="th-sm" style="text-align: center; vertical-align: middle;">Date</th>
@@ -299,14 +330,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -317,6 +340,17 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -326,8 +360,10 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

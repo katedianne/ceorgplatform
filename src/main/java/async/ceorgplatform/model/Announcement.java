@@ -77,7 +77,7 @@ public class Announcement {
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
-    private int announcementId;
+    private int announcementId = 1;
     private String announcementName;
     private int author;
     private String announcement;
@@ -88,60 +88,15 @@ public class Announcement {
     public Recipient recipient;
     
     public class Recipient{
-
-        public int getRecipientId() {
-            return recipientId;
-        }
-
-        public void setRecipientId(int recipientId) {
-            this.recipientId = recipientId;
-        }
-
-        public int getAnnouncementId() {
-            return announcementId;
-        }
-
-        public void setAnnouncementId(int announcementId) {
-            this.announcementId = announcementId;
-        }
-
-        public Timestamp getDateCreated() {
-            return dateCreated;
-        }
-
-        public void setDateCreated(Timestamp dateCreated) {
-            this.dateCreated = dateCreated;
-        }
-
-        public int getCreatedBy() {
-            return createdBy;
-        }
-
-        public void setCreatedBy(int createdBy) {
-            this.createdBy = createdBy;
-        }
-
-        public int getStatusId() {
-            return statusId;
-        }
-
-        public void setStatusId(int statusId) {
-            this.statusId = statusId;
-        }
         
-        public int getAnnouncedTo() {
+        public String getAnnouncedTo() {
             return announcedTo;
         }
 
-        public void setAnnouncedTo(int announcedTo) {
+        public void setAnnouncedTo(String announcedTo) {
             this.announcedTo = announcedTo;
         }
         
-        private int recipientId;
-        private int announcementId;
-        private int announcedTo;
-        private Timestamp dateCreated;
-        private int createdBy;
-        private int statusId;
+        private String announcedTo = "haha";
     }
 }

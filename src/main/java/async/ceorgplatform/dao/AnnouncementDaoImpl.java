@@ -33,10 +33,10 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
     public void UpdateRecipient(List<Announcement> request){
         for(Announcement _request: request){
             String sqlDelete = "delete from recipient where announcement_id = ?";
-            jdbcTemplate.update(sqlDelete, new Object[]{_request.recipient.getAnnouncementId()});
+            jdbcTemplate.update(sqlDelete, new Object[]{_request.getAnnouncementId()});
             
             String sqlInsert = "insert into recipient (announcement_id, announced_to, date_created, created_by, status_id values(?,?,?,?,?)";
-            jdbcTemplate.update(sqlInsert, new Object[]{_request.recipient.getAnnouncementId(), _request.recipient.getAnnouncedTo(), });
+            jdbcTemplate.update(sqlInsert, new Object[]{_request.getAnnouncementId(), _request.recipient.getAnnouncedTo(), });
         }
     }
     
@@ -52,18 +52,23 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
         }
     }
     
-    public void CreateAnnouncement(List<Announcement> _request) {
+    public int CreateAnnouncement(List<Announcement> _request) {
 
-    for(Announcement request : _request){
-        String sql = "insert into announcement (announcement_name, author, announcement, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[] { request.getAnnouncementName(), request.getAuthor(), request.getAnnouncement(), request.getDateCreated(),
-        request.getCreatedBy(), request.getRemarks(), request.getStatusId()});
-    }
-    
-    for(Announcement request : _request){
-        String sql = "insert  into recipient (announcement_id, announced_to, date_created, created_by, status_id) values(?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{request.recipient.getAnnouncementId(), request.recipient.getAnnouncedTo(), request.recipient.getDateCreated(), request.recipient.getCreatedBy(), request.recipient.getStatusId()});
-    }
+        int result = 0;
+        for(Announcement request : _request){
+            String sql = "insert into announcement (announcement_name, author, announcement, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
+            result = jdbcTemplate.update(sql, new Object[] { request.getAnnouncementName(), request.getAuthor(), request.getAnnouncement(), request.getDateCreated(),
+            request.getCreatedBy(), request.getRemarks(), request.getStatusId()});
+        }
+        
+
+        for(Announcement request : _request){
+            String sqlRecipient = "insert  into recipient (announcement_id, announced_to, date_created, created_by, status_id) values(?,?,?,?,?)";
+            jdbcTemplate.update(sqlRecipient, new Object[]{request.getAnnouncementId(), request.recipient.getAnnouncedTo(), request.getDateCreated(), request.getCreatedBy(), request.getStatusId()});
+            
+        System.out.println(request.recipient.getAnnouncedTo());
+        }
+        return result;
     }
     public List<Announcement> getAnnouncement(){
         String sql = "Select * from announcement as a inner join recipient as r on a.announcement_id=r.announcement_id where a.status_id = 1";
@@ -84,12 +89,7 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
             announcement.setDateCreated(rs.getTimestamp("date_created"));
             announcement.setRemarks(rs.getString("remarks"));
             announcement.setStatusId(rs.getInt("status_id"));
-            announcement.recipient.setRecipientId(rs.getInt("recipient_id"));
-            announcement.recipient.setAnnouncementId(rs.getInt("announcement_id"));
-            announcement.recipient.setAnnouncedTo(rs.getInt("announced_to"));
-            announcement.recipient.setDateCreated(rs.getTimestamp("date_created"));
-            announcement.recipient.setCreatedBy(rs.getInt("created_by"));
-            announcement.recipient.setStatusId(rs.getInt("status_id"));
+            announcement.recipient.setAnnouncedTo(rs.getString("announced_to"));
             return announcement;
         }
     }

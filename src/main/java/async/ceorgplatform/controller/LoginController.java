@@ -35,6 +35,11 @@ public class LoginController {
         mav.addObject("login", new Login());
         return mav;
     }
+    
+     @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String showHome(){
+        return "home";
+    }
 
     @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
     public ModelAndView loginProcess(@ModelAttribute("login") Login login, HttpServletRequest request, HttpServletResponse response) {
@@ -46,8 +51,10 @@ public class LoginController {
             mav = new ModelAndView("home");
             Cookie cookie1 = new Cookie("UserId", Integer.toString(user.getUserId()));
             Cookie cookie2 = new Cookie("RoleId", Integer.toString(user.getRoleId()));
+            Cookie cookie3 = new Cookie("IsLogin", Integer.toString(1));
             response.addCookie(cookie1);
             response.addCookie(cookie2);
+            response.addCookie(cookie3);
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");

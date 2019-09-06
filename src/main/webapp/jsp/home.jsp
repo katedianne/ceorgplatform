@@ -14,6 +14,7 @@
 
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -36,6 +37,8 @@
     <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
     <script src="${contextPath}/resources/js/jquery-ui.min.js"></script>
     <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
+    <script src="${contextPath}/resources/js/jquery.easing.min.js"></script>
+    <script src="${contextPath}/resources/js/sb-admin-2.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -95,7 +98,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/jsp/home.jsp">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/home">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -110,7 +113,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="${contextPath}/">
+            <a class="nav-link" href="${contextPath}/home">
                 <i class="fas fa-home"></i>
                 <span>Home ${username}</span></a>
         </li>
@@ -123,44 +126,30 @@
             Interface
         </div>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="${contextPath}/reservation" >
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Reservation</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="${contextPath}/jsp/reservation.jsp">Create</a>
-                    <a class="collapse-item" href="Reservation-history.html">History</a>
-                </div>
-            </div>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-               aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="${contextPath}/announcement">
                 <i class="fas fa-bullhorn"></i>
                 <span>Announcements</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="Announcement-Create.html">Create</a>
-                    <a class="collapse-item" href="Announcement-Edit.html">Edit</a>
-                </div>
-            </div>
+            
         <li class="nav-item">
-            <a class="nav-link" href="letter-tracker.html">
+            <a class="nav-link" href="${contextPath}/letter">
                 <i class="fas fa-paper-plane"></i>
                 <span>Letter Tracker</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="Calendar.html">
+            <a class="nav-link" href="${contextPath}/calendar">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Calendar</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="Notes.html">
+            <a class="nav-link" href="${contextPath}/notes">
                 <i class="fas fa-sticky-note"></i>
                 <span>Notes</span></a>
         </li>
@@ -238,7 +227,7 @@
                                 Dropdown menus can be placed in the card header in order to extend the functionality of
                                 a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in
                                 the card header can be clicked on in order to toggle a dropdown menu.
-                                <a href="Announcements.html">See more.. </a>
+                                <a href="announcement">See more.. </a>
                             </div>
                         </div>
 
@@ -281,9 +270,9 @@
                             </div>
                             <div class="card-body">
                                 <ul style="none">
-                                    <li><a href="Notes.html">cuties</a></li>
-                                    <li><a href="Notes.html">cuties</a></li>
-                                    <li><a href="Notes.html">cuties</a></li>
+                                    <li><a href="notes">cuties</a></li>
+                                    <li><a href="notes">cuties</a></li>
+                                    <li><a href="notes">cuties</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -322,28 +311,28 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="login">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Bootstrap core JavaScript-->
+<!--         Bootstrap core JavaScript
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
+         Core plugin JavaScript
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
+         Custom scripts for all pages
         <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
+         Page level plugins 
         <script src="vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
+         Page level custom scripts 
         <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>-->
 
 </body>
 </html>

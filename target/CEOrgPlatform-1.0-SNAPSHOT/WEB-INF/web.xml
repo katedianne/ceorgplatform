@@ -12,6 +12,7 @@
     
     <display-name>CE Org Platform Web Application</display-name>
     
+    
     <welcome-file-list>
             <welcome-file></welcome-file>
     </welcome-file-list>

@@ -16,6 +16,6 @@ public interface AnnouncementService {
     void UpdateAnnouncement(Announcement request);
     void UpdateRecipient(List<Announcement> request);
     void DeleteAnnouncement(List<Announcement> request);
-    void CreateAnnouncement(List<Announcement> _request);
+    int CreateAnnouncement(List<Announcement> _request);
     List<Announcement> getAnnouncement();
 }

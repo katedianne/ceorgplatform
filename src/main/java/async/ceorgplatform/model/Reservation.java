@@ -108,10 +108,29 @@ public class Reservation {
     private int eventRoomId;
     private String eventName;
     private Timestamp dateRequested;
+    private Timestamp dateCreated;
+
+    public Timestamp getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Timestamp dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+    
     private int createdBy;
     private int requestedBy;
     private String remarks;
     private int statusId;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public EventRooms eventRooms;
 
     public class EventRooms{

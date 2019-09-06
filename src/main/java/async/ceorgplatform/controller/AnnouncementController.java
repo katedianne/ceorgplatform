@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author Kate Dianne
  */
+@Controller
 public class AnnouncementController {
     
     @Autowired
@@ -41,7 +43,8 @@ public class AnnouncementController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("UserId")) {
                     for(Announcement announcement : _announcement){
-                        announcement.setCreatedBy(Integer.parseInt(cookie.getValue())); // set created by to user id from cookie 
+                        announcement.setCreatedBy(Integer.parseInt(cookie.getValue()));
+                        announcement.setAuthor(Integer.parseInt(cookie.getValue()));// set created by to user id from cookie 
                     }
                     
                 }  
@@ -53,17 +56,21 @@ public class AnnouncementController {
         for(Announcement announcement : _announcement){
             announcement.setDateCreated(new Timestamp(time)); // set date requested to current datetime
         
-            announcement.setStatusId(1); // set status to 
+            announcement.setStatusId(1);
+            announcement.setRemarks("Sample Remarks");// set status to 
             
             
         }
             int result = announcementService.CreateAnnouncement(_announcement);
             user.setUserId(result);
-	
-        
-        
-        
         return user;
         
     }
+    
+    @RequestMapping(value = "/announcement", method = RequestMethod.GET)
+    public String showAnnouncement(){
+        return "announcement";
+    }
+    
 }
+    
