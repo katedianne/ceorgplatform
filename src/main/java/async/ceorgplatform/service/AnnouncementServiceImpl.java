@@ -5,7 +5,6 @@
  */
 package async.ceorgplatform.service;
 
-import async.ceorgplatform.dao.ActivityDao;
 import async.ceorgplatform.dao.AnnouncementDao;
 import async.ceorgplatform.model.Announcement;
 import java.util.List;
@@ -31,8 +30,9 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         announcementDao.DeleteAnnouncement(request);
     }
     
-    public void CreateAnnouncement(List<Announcement> _request){
-        announcementDao.CreateAnnouncement(_request);
+    public int CreateAnnouncement(List<Announcement> _request){
+        int result = announcementDao.CreateAnnouncement(_request);
+        return result;
     }
     
     public List<Announcement> getAnnouncement(){

@@ -1,9 +1,15 @@
+
+<%-- 
+    Document   : announcement
+    Created on : Sep 1, 2019, 10:43:24 PM
+    Author     : Kate Dianne
+--%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +44,90 @@
     
         <![endif]-->
         <script>
+
+                $(document).ready(function () {
+
+                    $("#btnAddAnnouncement").click(function () {
+                        alert("dfsd");
+                        var request = [{
+                            announcementName: $("#inputAnnouncementName").val(),
+                            announcement: $("#inputAnnouncement").val(),
+                            recipient: [{
+                                announcedTo: $("#inputRecipient").val()
+                            }]
+                        }];
+
+
+                        $.ajax({
+                            url: "${contextPath}/addAnnouncement",
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(request), //Stringified Json Object
+                            dataType: 'json',
+                            success: function (response) {
+                                alert(response.userId);
+                                if (response.userId > 0) alert ("added to database");
+
+                            }
+                        });
+
+                    });
+
+                    $.ajax({
+                            url: "${contextPath}/getAnnouncement",
+                            type: "GET",
+                            contentType: "application/json",
+                            //data: JSON.stringify(request), //Stringified Json Object
+                            //dataType: 'json',
+                            success: function (data) {
+
+                                $("#tableReservation").dataTable({
+                                    bJQueryUI : true,
+                                    data : data,
+                                    columns :[
+                                            { "data": "reservationId" },
+                                            { "data": "eventRooms.eventRoomName" },
+                                            { "data": "eventName" },
+                                            { "data": "dateRequested" },
+                                            { "data": "scheduledStartTime" },
+                                            { "data": "scheduledEndTime" },
+                                            { "data": "remarks" },
+                                            { "data": "status" }
+                                            ]
+
+
+                                });
+                            }       
+                     });
+
+        //                "bServerSide": true,
+        //                            "bJQueryUI" : true,
+        //                            "sPaginationType" : "full_numbers",
+        //                            "sAjaxSource": "../getReservation",
+        //                            "aoColumns": [
+        //                                {"mData": "reservationId", "sTitle": " ", "sWidth": "2%", "bSortable" : false , "sClass" : "center"},
+        //                                {"mData": "eventRooms.eventRoomName", "sTitle": "Location", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+        //                                {"mData": "eventName", "sTitle": "Event", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+        //                                {"mData": "dateRequested", "sTitle": "Date", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+        //                                {"mData": "scheduledStartTime", "sTitle": "Start Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
+        //                                {"mData": "scheduledEndTime", "sTitle": "End Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
+        //                                {"mData": "remarks", "sTitle": "Remarks", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
+        //                                {"mData": "url", "sTitle": "Status", "sWidth": "10%", "bSortable" : true , "sClass" : "center"}
+        //                            ],
+        //                            "oLanguage": {
+        //                                "sSearch": "Filter Search Result:",
+        //                                "sProcessing": "Loading Please Wait...",
+        //                                "sLoadingRecords": "Loading Please Wait...",
+        //                                "sZeroRecords": "No Records Found!",
+
+
+        //                    "fnServerParams": function (aoData) {
+        //                        aoData.push({ "name": "reservationId", "value": 0 });
+        //                    },
+        //"mRender" : "function ( aaData, type, full )  {return  '<button id=\"reservationEdit\" data-id=\"' + reservationId + '\">edit</button>'", 
+
+
+                });
 
 
             //         $(document).ready(function () {
@@ -211,11 +301,11 @@
                         <div id="tabs-1">
                             <div class="row form-group">
                                 <div class="col-lg-6">
-                                    <input type="text" class="announcement_title_textarea form-control" data-toggle="tooltip" title="Announcement Title" placeholder="Enter Announcement Title">
+                                    <input id="inputAnnouncementName" type="text" class="announcement_title_textarea form-control" data-toggle="tooltip" title="Announcement Title" placeholder="Enter Announcement Title">
                                 </div>
                                 <div class="col-lg-2"> </div>
                                 <div class="col-lg-4">
-                                    <select class="form-control mdb-select md-form">
+                                    <select id="inputRecipient" class="form-control mdb-select md-form">
                                         <option value="0"> Send to </option>
                                         <option value="1"> ACCESS </option>
                                         <option value="2"> CEHS </option>
@@ -232,7 +322,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col-lg-12">
-                                    <textarea class="announcement_textarea form-control" data-toggle="tooltip" title="Announcement Information" placeholder="Enter Announcement Information here" rows="6"></textarea>
+                                    <textarea id="inputAnnouncement" class="announcement_textarea form-control" data-toggle="tooltip" title="Announcement Information" placeholder="Enter Announcement Information here" rows="6"></textarea>
                                 </div>
                             </div>
                             <div class="row button_class">
@@ -245,7 +335,7 @@
                                     <button class="btn btn-primary button_image" type="button" data-toggle="tooltip" title="Upload image"> 
                                         <i class="far fa-image"> </i>
                                     </button>
-                                    <button class="btn btn-primary" > SEND </button>
+                                    <button id="btnAddAnnouncement" class="btn btn-primary" > SEND </button>
                                 </div>
                             </div>
                                 <div class="container row" >
