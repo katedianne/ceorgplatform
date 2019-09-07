@@ -22,8 +22,12 @@
         <link href="${contextPath}/resources/css/jquery-ui.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-        <link href="${contextPath}/resources/css/font-awesome/all.min.css" rel="stylesheet">
-
+        <link href="${contextPath}/resources/css/all.min.css" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-regular-400.ttf" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-regular-400.eot" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-solid-900.woff" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-solid-900.ttf" rel="stylesheet">
+        
         <script src="${contextPath}/resources/js/jquery.min.js"></script>
         <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
         <script src="${contextPath}/resources/js/jquery-ui.min.js"></script>

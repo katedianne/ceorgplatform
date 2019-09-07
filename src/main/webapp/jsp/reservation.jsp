@@ -28,7 +28,11 @@
     <link href="${contextPath}/resources/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/font-awesome/all.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/all.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/webfonts/fa-regular-400.ttf" rel="stylesheet">
+    <link href="${contextPath}/resources/webfonts/fa-regular-400.eot" rel="stylesheet">
+    <link href="${contextPath}/resources/webfonts/fa-solid-900.woff" rel="stylesheet">
+    <link href="${contextPath}/resources/webfonts/fa-solid-900.ttf" rel="stylesheet">
 
 
     <script src="${contextPath}/resources/js/jquery.min.js"></script>
@@ -56,7 +60,7 @@
 
 
             $("#btnAddRes").click(function () {
-                alert("dfsd");
+             
                 var request = {
                     scheduledStartTime: $("#inputResTimeStart").val(),
                     scheduledEndTime: $("#inputResTimeEnd").val(),
@@ -74,27 +78,31 @@
                     data: JSON.stringify(request), //Stringified Json Object
                     dataType: 'json',
                     success: function (response) {
-                        alert(response.userId);
-                        if (response.userId > 0) alert ("added to database");
                         
+                        if (response.userId > 0){ 
+                            alert ("added to database");
+                            table.ajax.reload();
+                        }
                     }
                 });
         
             });
             
-            $.ajax({
-                    url: "${contextPath}/getReservation",
-                    type: "GET",
-                    contentType: "application/json",
-                    //data: JSON.stringify(request), //Stringified Json Object
-                    //dataType: 'json',
-                    success: function (data) {
-                   
-                        $("#tableReservation").dataTable({
-                            bJQueryUI : true,
-                            data : data,
-                            columns :[
-                                    { "data": "reservationId" },
+            var table = $("#tableReservation").DataTable({
+                            "bJQueryUI" : true,
+                            "deferRender": true,
+                            "ajax": {
+                                "url": "${contextPath}/getReservation",
+                                "dataSrc": ""
+                            },
+                            "columns" :[
+                                    { "data": "reservationId", 
+                                       "render": function ( data, type, row ) {
+                                                return "<button id=\"reservationEdit\" data-id=\"" + data + "\">edit</button>" ;
+                                                    
+                                                
+                                        } 
+                                    },
                                     { "data": "eventRooms.eventRoomName" },
                                     { "data": "eventName" },
                                     { "data": "dateRequested" },
@@ -106,8 +114,19 @@
                        
 
                         });
-                    }       
-             });
+            
+//            $.ajax({
+//                    url: "${contextPath}/getReservation",
+//                    type: "GET",
+//                    contentType: "application/json",
+//                    //data: JSON.stringify(request), //Stringified Json Object
+//                    //dataType: 'json',
+//                    success: function (data) {
+//                   
+//                        
+//                    }       
+//             });
+             
                 
 //                "bServerSide": true,
 //                            "bJQueryUI" : true,
@@ -274,6 +293,8 @@
                             <select class="custom-select" id="selectResLocation">
                                 <option value="1">Gabsi</option>
                                 <option value="2">NDC</option>
+                                <option value="3">AVR</option>
+                                <option value="4">CONFERENCE ROOM</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">

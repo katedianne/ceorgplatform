@@ -48,7 +48,10 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     public List<Reservation> getReservation() {
-        String sql = "Select * from reservations as r inner join event_rooms as er on r.event_room_id=er.event_room_id where r.status_id = 1";
+        String sql = "Select r.*, s.status_name, er.event_room_name from reservations r "
+                + "inner join statuses s on r.status_id = s.status_id "
+                + "inner join event_rooms er on r.event_room_id=er.event_room_id "
+                + "where r.status_id = 1";
         List<Reservation> reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationMapper());
 //        reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationStatusMapper());
         return reservation;
@@ -59,6 +62,7 @@ public class ReservationDaoImpl implements ReservationDao {
      
         public Reservation mapRow(ResultSet rs, int arg1) throws SQLException{
             Reservation reservation = new Reservation();
+           // EventRooms eventRooms = reservation.new EventRooms();
             
             reservation.setReservationId(rs.getInt("reservation_id"));
             reservation.setScheduledStartTime(rs.getTime("scheduled_start_time"));
@@ -71,9 +75,10 @@ public class ReservationDaoImpl implements ReservationDao {
             reservation.setRequestedBy(rs.getInt("requested_by"));
             reservation.setRemarks(rs.getString("remarks"));
             reservation.setStatusId(rs.getInt("status_id"));
-            //reservation.setStatus(rs.getString("status_name"));
-          //  reservation.eventRooms.setEventRoomId(rs.getInt("event_room_id"));
-//            reservation.eventRooms.setEventRoomName(rs.getString("event_room_name"));
+            reservation.setStatus(rs.getString("status_name"));
+            reservation.eventRooms.setEventRoomName(rs.getString("event_room_name"));
+//            reservation.eventRooms.setEventRoomId(rs.getInt("event_room_id"));
+            
 //            reservation.eventRooms.setDateCreated(rs.getTimestamp("date_created"));
 //            reservation.eventRooms.setCreatedBy(rs.getInt("created_by"));
 //            reservation.eventRooms.setStatusId(rs.getInt("status_id"));

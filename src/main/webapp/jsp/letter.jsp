@@ -22,7 +22,11 @@
         <link href="${contextPath}/resources/css/jquery-ui.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-        <link href="${contextPath}/resources/css/font-awesome/all.min.css" rel="stylesheet">
+        <link href="${contextPath}/resources/css/all.min.css" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-regular-400.ttf" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-regular-400.eot" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-solid-900.woff" rel="stylesheet">
+        <link href="${contextPath}/resources/webfonts/fa-solid-900.ttf" rel="stylesheet">
 
         <script src="${contextPath}/resources/js/jquery.min.js"></script>
         <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
@@ -84,66 +88,66 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/home">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">CE ORG PLATFORM</div>
-        </a>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/home">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">CE ORG PLATFORM</div>
+                </a>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="${contextPath}/home">
-                <i class="fas fa-home"></i>
-                <span>Home ${username}</span></a>
-        </li>
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="${contextPath}/home">
+                        <i class="fas fa-home"></i>
+                        <span>Home ${username}</span></a>
+                </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Interface
-        </div>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="${contextPath}/reservation" >
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Reservation</span>
-            </a>
-        </li>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="${contextPath}/reservation" >
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Reservation</span>
+                    </a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="${contextPath}/announcement">
-                <i class="fas fa-bullhorn"></i>
-                <span>Announcements</span>
-            </a>
-            
-        <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/letter">
-                <i class="fas fa-paper-plane"></i>
-                <span>Letter Tracker</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/calendar">
-                <i class="fas fa-calendar-alt"></i>
-                <span>Calendar</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/notes">
-                <i class="fas fa-sticky-note"></i>
-                <span>Notes</span></a>
-        </li>
-    </ul>
-    <!-- End of Sidebar -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="${contextPath}/announcement">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </a>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextPath}/letter">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Letter Tracker</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextPath}/calendar">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Calendar</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${contextPath}/notes">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>Notes</span></a>
+                </li>
+            </ul>
+            <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -221,69 +225,69 @@
                                     <input type="text" class="form-control"/>
                                 </div>
                                 <div class="container" style="float: right;">
-                        <button id="btnCancelLetter" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>
-                        <button id="btnSaveLetter" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>
-                        <button id="btnAddLetter" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>
-                      </div>
-                      <div class="container">
-                        <table id="dtBasicExample" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
-                          <thead style="background-color: black; color: white;">
-                            <tr>
-                              <th class="th-sm" style="text-align: center; vertical-align: middle; width: 9%;"> </th>
-                              <th class="th-sm" style="text-align: center; vertical-align: middle;"> Control Number </th>
-                              <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Type </th>
-                              <th class="th-sm" style="text-align: center; vertical-align: middle;"> Date Released </th>
-                              <th class="th-sm" style="text-align: center; vertical-align: middle;"> Remarks </th>
-                            </tr>
-                          </thead>
-                          <tbody style="color: black;">
-                            <tr>
-                              <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                                    <button id="btnCancelLetter" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>
+                                    <button id="btnSaveLetter" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>
+                                    <button id="btnAddLetter" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>
+                                </div>
+                                <div class="container">
+                                    <table id="dtBasicExample" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
+                                        <thead style="background-color: black; color: white;">
+                                            <tr>
+                                                <th class="th-sm" style="text-align: center; vertical-align: middle; width: 9%;"> </th>
+                                                <th class="th-sm" style="text-align: center; vertical-align: middle;"> Control Number </th>
+                                                <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Type </th>
+                                                <th class="th-sm" style="text-align: center; vertical-align: middle;"> Date Released </th>
+                                                <th class="th-sm" style="text-align: center; vertical-align: middle;"> Remarks </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color: black;">
+                                            <tr>
+                                                <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <button> <i class="far fa-edit"></i> </button> <button> <i class="far fa-trash-alt"></i> </button> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
                     </div>
-
-                  </div>
-
-
-
-
-                </div>
-                <!-- End of Main Content -->
+                    <!-- End of Main Content -->
 
 
                 </div>
@@ -318,23 +322,23 @@
                     </div>
                 </div>
             </div>
-
-<!--             Bootstrap core JavaScript
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-             Core plugin JavaScript
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-             Custom scripts for all pages
-            <script src="js/sb-admin-2.min.js"></script>
-
-             Page level plugins 
-            <script src="vendor/chart.js/Chart.min.js"></script>
-
-             Page level custom scripts 
-            <script src="js/demo/chart-area-demo.js"></script>
-            <script src="js/demo/chart-pie-demo.js"></script>-->
+        </div>
+            <!--             Bootstrap core JavaScript
+                        <script src="vendor/jquery/jquery.min.js"></script>
+                        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            
+                         Core plugin JavaScript
+                        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            
+                         Custom scripts for all pages
+                        <script src="js/sb-admin-2.min.js"></script>
+            
+                         Page level plugins 
+                        <script src="vendor/chart.js/Chart.min.js"></script>
+            
+                         Page level custom scripts 
+                        <script src="js/demo/chart-area-demo.js"></script>
+                        <script src="js/demo/chart-pie-demo.js"></script>-->
 
     </body>
 </html>

@@ -5,6 +5,7 @@
  */
 package async.ceorgplatform.model;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
@@ -13,6 +14,19 @@ import java.sql.Timestamp;
  * @author Kate Dianne
  */
 public class Reservation {
+    
+    private int reservationId;
+    private Time scheduledStartTime;
+    private Time scheduledEndTime;
+    private int eventRoomId;
+    private String eventName;
+    private Timestamp dateRequested;
+    private Timestamp dateCreated;
+    private int createdBy;
+    private int requestedBy;
+    private String remarks;
+    private int statusId;
+    private String status;
 
     public int getReservationId() {
         return reservationId;
@@ -53,6 +67,14 @@ public class Reservation {
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
+    
+       public int getRequestedBy() {
+        return requestedBy;
+    }
+
+    public void setRequestedBy(int requestedBy) {
+        this.requestedBy = requestedBy;
+    }
 
     public int getCreatedBy() {
         return createdBy;
@@ -60,14 +82,6 @@ public class Reservation {
 
     public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public int getRequestedBy() {
-        return requestedBy;
-    }
-
-    public void setRequestedBy(int requestedBy) {
-        this.requestedBy = requestedBy;
     }
 
     public String getRemarks() {
@@ -94,22 +108,6 @@ public class Reservation {
         this.dateRequested = dateRequested;
     }
 
-    public EventRooms getEventRooms() {
-        return eventRooms;
-    }
-
-    public void setEventRooms(EventRooms eventRooms) {
-        this.eventRooms = eventRooms;
-    }
-
-    private int reservationId;
-    private Time scheduledStartTime;
-    private Time scheduledEndTime;
-    private int eventRoomId;
-    private String eventName;
-    private Timestamp dateRequested;
-    private Timestamp dateCreated;
-
     public Timestamp getDateCreated() {
         return dateCreated;
     }
@@ -118,11 +116,6 @@ public class Reservation {
         this.dateCreated = dateCreated;
     }
     
-    private int createdBy;
-    private int requestedBy;
-    private String remarks;
-    private int statusId;
-    private String status;
 
     public String getStatus() {
         return status;
@@ -131,9 +124,23 @@ public class Reservation {
     public void setStatus(String status) {
         this.status = status;
     }
-    public EventRooms eventRooms;
+    
+    public Reservation.EventRooms eventRooms = new Reservation.EventRooms();
 
-    public class EventRooms{
+    public EventRooms getEventRooms() {
+        return eventRooms;
+    }
+
+    public void setEventRooms(EventRooms eventRooms) {
+        this.eventRooms = eventRooms;
+    }
+
+    public static class EventRooms{
+        private int eventRoomId;
+        private String eventRoomName;
+        private Timestamp dateCreated;
+        private int createdBy;
+        private int statusId;
 
         public int getEventRoomId() {
             return eventRoomId;
@@ -174,10 +181,6 @@ public class Reservation {
         public void setStatusId(int statusId) {
             this.statusId = statusId;
         }
-        private int eventRoomId;
-        private String eventRoomName;
-        private Timestamp dateCreated;
-        private int createdBy;
-        private int statusId;
+        
     }
 }
