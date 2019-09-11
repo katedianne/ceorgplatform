@@ -8,6 +8,8 @@ package async.ceorgplatform.dao;
 import async.ceorgplatform.model.Announcement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,54 +27,54 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
+    Date date= new Date();
+    long time = date.getTime();
+    
     public void UpdateAnnouncement(Announcement request){
         String sql = "update announcement set announcement_name = ? , author = ? , announcement =? , date_created = ?, remarks = ? where announcement_id = ?";
         jdbcTemplate.update(sql, new Object[]{request.getAnnouncementName(),request.getAuthor(), request.getAnnouncement(), request.getDateCreated(), request.getRemarks(), request.getAnnouncementId()});
-    }
-    
-    public void UpdateRecipient(List<Announcement> request){
-        for(Announcement _request: request){
-            String sqlDelete = "delete from recipient where announcement_id = ?";
-            jdbcTemplate.update(sqlDelete, new Object[]{_request.getAnnouncementId()});
-            
-            String sqlInsert = "insert into recipient (announcement_id, announced_to, date_created, created_by, status_id values(?,?,?,?,?)";
-            jdbcTemplate.update(sqlInsert, new Object[]{_request.getAnnouncementId(), _request.recipient.getAnnouncedTo(), });
-        }
-    }
-    
-    public void DeleteAnnouncement(List<Announcement> request){
-        for(Announcement _request : request){
-            String sql = "update announcement set status_id = 2 where announcement_id = ?";
-            jdbcTemplate.update(sql, new Object[]{_request.getAnnouncementId()});
-        }
         
-        for(Announcement _request : request){
-            String sqlRecipient = "update recipent set status_id = 2 where announcement_id = ?";
-            jdbcTemplate.update(sqlRecipient, new Object[]{_request.getAnnouncementId()});
+        String sqlDelete = "delete from recipient where announcement_id = ?";
+        jdbcTemplate.update(sqlDelete, new Object[]{request.getAnnouncementId()});
+            
+        for(Announcement.Recipient _request: request.recipient){
+            String sqlInsert = "insert into recipient (announcement_id, announced_to, date_created, created_by values(?,?,?,?)";
+            jdbcTemplate.update(sqlInsert, new Object[]{request.getAnnouncementId(), _request.getAnnouncedTo(), new Timestamp(time), request.getCreatedBy()});
         }
     }
     
-    public int CreateAnnouncement(List<Announcement> _request) {
+    
+    
+    public void DeleteAnnouncement(Announcement request){
+        String sql = "update announcement set status_id = 2 where announcement_id = ?";
+            jdbcTemplate.update(sql, new Object[]{request.getAnnouncementId()});
+        
+        String sqlRecipient = "update recipient set status_id = 2 where announcement_id = ?";
+            jdbcTemplate.update(sqlRecipient, new Object[]{request.getAnnouncementId()});
+    }
+    
+    public int CreateAnnouncement(Announcement request) {
 
         int result = 0;
-        for(Announcement request : _request){
-            String sql = "insert into announcement (announcement_name, author, announcement, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
+        String sql = "insert into announcement (announcement_name, author, announcement, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
             result = jdbcTemplate.update(sql, new Object[] { request.getAnnouncementName(), request.getAuthor(), request.getAnnouncement(), request.getDateCreated(),
-            request.getCreatedBy(), request.getRemarks(), request.getStatusId()});
-        }
+            request.getCreatedBy(), request.getRemarks(), 6});
         
-
-        for(Announcement request : _request){
-            String sqlRecipient = "insert  into recipient (announcement_id, announced_to, date_created, created_by, status_id) values(?,?,?,?,?)";
-            jdbcTemplate.update(sqlRecipient, new Object[]{request.getAnnouncementId(), request.recipient.getAnnouncedTo(), request.getDateCreated(), request.getCreatedBy(), request.getStatusId()});
+        String lastInsertId = "select MAX(announcement_id) as announcement_id from announcement";
+        List<Announcement> requestList = jdbcTemplate.query(lastInsertId, new AnnouncementDaoImpl.IDMapper());
             
-        System.out.println(request.recipient.getAnnouncedTo());
+        for(Announcement.Recipient requestRecipient : request.recipient){
+            String sqlRecipient = "insert  into recipient (announcement_id, announced_to, date_created, created_by, status_id) values(?,?,?,?,?)";
+            jdbcTemplate.update(sqlRecipient, new Object[]{requestList.get(0).getAnnouncementId(), requestRecipient.getAnnouncedTo(), request.getDateCreated(), request.getCreatedBy(), 1});            
         }
         return result;
     }
+    
     public List<Announcement> getAnnouncement(){
-        String sql = "Select * from announcement as a inner join recipient as r on a.announcement_id=r.announcement_id where a.status_id = 1";
+        String sql = "Select * from announcement as a inner join recipient as r on a.announcement_id = r.announcement_id where a.status_id = 6 and a.status_id = 7";
         List<Announcement> announcement = jdbcTemplate.query(sql, new AnnouncementDaoImpl.AnnouncementMapper());
+        
+        
         return announcement;
     }
     
@@ -89,7 +91,20 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
             announcement.setDateCreated(rs.getTimestamp("date_created"));
             announcement.setRemarks(rs.getString("remarks"));
             announcement.setStatusId(rs.getInt("status_id"));
-            announcement.recipient.setAnnouncedTo(rs.getString("announced_to"));
+            for(Announcement.Recipient _recipient : announcement.recipient){
+                _recipient.setAnnouncedTo(rs.getInt("announced_to"));
+            }
+            return announcement;
+        }
+    }
+    
+    class IDMapper implements RowMapper<Announcement>{
+     
+        public Announcement mapRow(ResultSet rs, int arg1) throws SQLException{
+            Announcement announcement = new Announcement();
+            
+            announcement.setAnnouncementId(rs.getInt("announcement_id"));
+           
             return announcement;
         }
     }

@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+     
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -29,6 +29,7 @@
         <link href="${contextPath}/resources/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/all.min.css" rel="stylesheet">
+        <link href="${contextPath}/resources/css/bootstrap-select.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/webfonts/fa-regular-400.ttf" rel="stylesheet">
         <link href="${contextPath}/resources/webfonts/fa-regular-400.eot" rel="stylesheet">
         <link href="${contextPath}/resources/webfonts/fa-solid-900.woff" rel="stylesheet">
@@ -38,6 +39,7 @@
         <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
         <script src="${contextPath}/resources/js/jquery-ui.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
+         <script src="${contextPath}/resources/js/bootstrap-select.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -47,15 +49,17 @@
 
                 $(document).ready(function () {
 
+                 $('#inputRecipient').selectpicker();
+                
                     $("#btnAddAnnouncement").click(function () {
                         alert("dfsd");
-                        var request = [{
+                        var request = {
                             announcementName: $("#inputAnnouncementName").val(),
                             announcement: $("#inputAnnouncement").val(),
                             recipient: [{
-                                announcedTo: $("#inputRecipient").val()
+                                announcedTo: parseInt($("#inputRecipient").val())
                             }]
-                        }];
+                        };
 
 
                         $.ajax({
@@ -305,7 +309,7 @@
                                 </div>
                                 <div class="col-lg-2"> </div>
                                 <div class="col-lg-4">
-                                    <select id="inputRecipient" class="form-control mdb-select md-form">
+                                    <select id="inputRecipient" multiple class="selectpicker form-control mdb-select md-form">
                                         <option value="0"> Send to </option>
                                         <option value="1"> ACCESS </option>
                                         <option value="2"> CEHS </option>

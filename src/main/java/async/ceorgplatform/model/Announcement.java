@@ -5,7 +5,8 @@
  */
 package async.ceorgplatform.model;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,11 +47,11 @@ public class Announcement {
         this.announcement = announcement;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -77,26 +78,36 @@ public class Announcement {
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
-    private int announcementId = 1;
+    private int announcementId;
     private String announcementName;
     private int author;
     private String announcement;
-    private Timestamp dateCreated;
+    private Date dateCreated;
     private int createdBy;
     private String remarks;
     private int statusId;
-    public Recipient recipient;
     
-    public class Recipient{
+    public List<Announcement.Recipient> recipient = new ArrayList<Announcement.Recipient>();
+    
+    public List<Recipient> getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(List<Recipient> recipient) {
+        this.recipient = recipient;
+    }
+    
+    
+    public static class Recipient{
         
-        public String getAnnouncedTo() {
+        public int getAnnouncedTo() {
             return announcedTo;
         }
 
-        public void setAnnouncedTo(String announcedTo) {
+        public void setAnnouncedTo(int announcedTo) {
             this.announcedTo = announcedTo;
         }
         
-        private String announcedTo = "haha";
+        private int announcedTo ;
     }
 }

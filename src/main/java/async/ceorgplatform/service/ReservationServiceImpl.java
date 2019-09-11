@@ -18,8 +18,9 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     public ReservationDao reservationDao;
     
-    public void UpdateReservation(Reservation request) {
-        reservationDao.UpdateReservation(request);
+    public int UpdateReservation(Reservation request) {
+        int result = reservationDao.UpdateReservation(request);
+        return result;
     }
     
     public int CreateReservation(Reservation request) {
@@ -27,8 +28,14 @@ public class ReservationServiceImpl implements ReservationService {
         return result;
     }
     
-    public void DeleteReservation(Reservation request) {
-        reservationDao.DeleteReservation(request);
+    public int DeleteReservation(Reservation request) {
+        int result = reservationDao.DeleteReservation(request);
+        return result;
+    }
+    
+    public int ConfirmReservation(Reservation request){
+        int result = reservationDao.ConfirmReservation(request);
+        return result;
     }
     
     public List<Reservation> getReservation(){

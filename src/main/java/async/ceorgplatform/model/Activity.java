@@ -5,7 +5,8 @@
  */
 package async.ceorgplatform.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  *
@@ -29,19 +30,19 @@ public class Activity {
         this.activityName = activityName;
     }
 
-    public Timestamp getActivityStartDate() {
+    public Date getActivityStartDate() {
         return activityStartDate;
     }
 
-    public void setActivityStartDate(Timestamp activityStartDate) {
+    public void setActivityStartDate(Date activityStartDate) {
         this.activityStartDate = activityStartDate;
     }
 
-    public Timestamp getActivityEndDate() {
+    public Date getActivityEndDate() {
         return activityEndDate;
     }
 
-    public void setActivityEndDate(Timestamp activityEndDate) {
+    public void setActivityEndDate(Date activityEndDate) {
         this.activityEndDate = activityEndDate;
     }
 
@@ -53,11 +54,11 @@ public class Activity {
         this.description = description;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -87,10 +88,10 @@ public class Activity {
     
     private int activityId;
     private String activityName;
-    private Timestamp activityStartDate;
-    private Timestamp activityEndDate;
+    private Date activityStartDate;
+    private Date activityEndDate;
     private String description;
-    private Timestamp dateCreated;
+    private Date dateCreated;
     private int createdBy;
     private String remarks;
     private int statusId;

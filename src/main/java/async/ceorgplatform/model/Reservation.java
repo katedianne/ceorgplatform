@@ -5,9 +5,8 @@
  */
 package async.ceorgplatform.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 /**
  *
@@ -20,8 +19,8 @@ public class Reservation {
     private Time scheduledEndTime;
     private int eventRoomId;
     private String eventName;
-    private Timestamp dateRequested;
-    private Timestamp dateCreated;
+    private Date dateRequested;
+    private Date dateCreated;
     private int createdBy;
     private int requestedBy;
     private String remarks;
@@ -100,19 +99,19 @@ public class Reservation {
         this.statusId = statusId;
     }
 
-    public Timestamp getDateRequested() {
+    public Date getDateRequested() {
         return dateRequested;
     }
 
-    public void setDateRequested(Timestamp dateRequested) {
+    public void setDateRequested(Date dateRequested) {
         this.dateRequested = dateRequested;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
     
@@ -138,7 +137,7 @@ public class Reservation {
     public static class EventRooms{
         private int eventRoomId;
         private String eventRoomName;
-        private Timestamp dateCreated;
+        private Date dateCreated;
         private int createdBy;
         private int statusId;
 
@@ -158,11 +157,11 @@ public class Reservation {
             this.eventRoomName = eventRoomName;
         }
 
-        public Timestamp getDateCreated() {
+        public Date getDateCreated() {
             return dateCreated;
         }
 
-        public void setDateCreated(Timestamp dateCreated) {
+        public void setDateCreated(Date dateCreated) {
             this.dateCreated = dateCreated;
         }
 

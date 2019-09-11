@@ -14,8 +14,7 @@ import java.util.List;
  */
 public interface AnnouncementService {
     void UpdateAnnouncement(Announcement request);
-    void UpdateRecipient(List<Announcement> request);
-    void DeleteAnnouncement(List<Announcement> request);
-    int CreateAnnouncement(List<Announcement> _request);
+    void DeleteAnnouncement(Announcement request);
+    int CreateAnnouncement(Announcement _request);
     List<Announcement> getAnnouncement();
 }

@@ -46,14 +46,20 @@ public class ReservationController {
                 }  
             }
         }
-     
+        
         Date date= new Date();
         long time = date.getTime();
 	reservation.setDateCreated(new Timestamp(time)); // set date requested to current datetime
 
-        reservation.setStatusId(1); // set status to 
-
-        int result = reservationService.CreateReservation(reservation);
+        reservation.setStatusId(3); // set status to 
+        
+        int result = 0;
+        if (reservation.getReservationId() == 0){
+            result = reservationService.CreateReservation(reservation);
+        }
+        else {
+            result = reservationService.UpdateReservation(reservation);
+        }
 
         user.setUserId(result);
 
@@ -80,6 +86,55 @@ public class ReservationController {
         return reservationList;
         
     }
+    
+    
+    @RequestMapping(value = "/deleteReservation", method = RequestMethod.POST)
+    @ResponseBody
+    public User deleteReservation(@RequestBody Reservation reservation, HttpServletRequest request){
+        User user = new User();
+
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("UserId")) {
+                    reservation.setCreatedBy(Integer.parseInt(cookie.getValue())); // set created by to user id from cookie 
+                }  
+            }
+        }
+            
+        int result = reservationService.DeleteReservation(reservation);
+
+        user.setUserId(result);
+
+        return user;
+     
+    }
+    
+    
+    @RequestMapping(value = "/confirmReservation", method = RequestMethod.POST)
+    @ResponseBody
+    public User confirmReservation(@RequestBody Reservation reservation, HttpServletRequest request){
+        User user = new User();
+
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("UserId")) {
+                    reservation.setCreatedBy(Integer.parseInt(cookie.getValue())); // set created by to user id from cookie 
+                }  
+            }
+        }
+            
+        int result = reservationService.ConfirmReservation(reservation);
+
+        user.setUserId(result);
+
+        return user;
+     
+    }
+    
     
     private String createButtonWithId( String reservationId){
         String button = "<button id=\"reservationEdit\" data-id=\"" + reservationId + "\">edit</button>";

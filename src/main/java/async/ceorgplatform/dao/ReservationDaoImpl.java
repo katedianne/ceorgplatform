@@ -9,6 +9,8 @@ package async.ceorgplatform.dao;
 import async.ceorgplatform.model.Reservation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,11 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-
-    public void UpdateReservation(Reservation request) {
-        String sql = "update reservations set scheduled_start_time = ? , scheduled_end_time= ? , event_room_id= ?, event_name= ? where reservation_id = ?";
-        jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(), request.getEventName(), request.getDateRequested(), request.getCreatedBy(), request.getRequestedBy(), request.getRemarks(), request.getStatusId()});
+    
+    public int UpdateReservation(Reservation request) {
+        String sql = "update reservations set scheduled_start_time = ? , scheduled_end_time= ? , event_room_id= ?, event_name= ?, remarks=? where reservation_id = ?";
+        int result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(), request.getEventName(), request.getRemarks(), request.getReservationId()});
+        return result;
     }
 
     public int CreateReservation(Reservation request) {
@@ -42,16 +45,26 @@ public class ReservationDaoImpl implements ReservationDao {
       return result;
     }
 
-    public void DeleteReservation(Reservation request) {
-        String sql = "update reservations set status_id = 2 where reservation_id = ?";
-        jdbcTemplate.update(sql, new Object[]{request.getReservationId()});
+    public int DeleteReservation(Reservation request) {
+        String sql = "update reservations set status_id = 5 where reservation_id = ?";
+        int result = jdbcTemplate.update(sql, new Object[]{request.getReservationId()});
+        return result;
+    }
+    
+    public int ConfirmReservation(Reservation request) {
+        String sql = "update reservations set status_id = 4 where reservation_id = ?";
+        int result = jdbcTemplate.update(sql, new Object[]{request.getReservationId()});
+        
+        String sqlRemove =  "update reservations set status_id = 2 where date_requested like ? and ((scheduled_start_time >= ? and scheduled_start_time <= ?) or (scheduled_end_time > ? and scheduled_end_time < ?)) and reservation_id <> ?";
+        jdbcTemplate.update(sqlRemove, new Object[]{request.getDateRequested() + "%", request.getScheduledStartTime(), request.getScheduledEndTime(), request.getScheduledStartTime(), request.getScheduledEndTime(), request.getReservationId() });
+        return result;
     }
 
     public List<Reservation> getReservation() {
         String sql = "Select r.*, s.status_name, er.event_room_name from reservations r "
                 + "inner join statuses s on r.status_id = s.status_id "
                 + "inner join event_rooms er on r.event_room_id=er.event_room_id "
-                + "where r.status_id = 1";
+                + "where r.status_id = 3 or r.status_id = 2 ";
         List<Reservation> reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationMapper());
 //        reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationStatusMapper());
         return reservation;
@@ -69,8 +82,8 @@ public class ReservationDaoImpl implements ReservationDao {
             reservation.setScheduledEndTime(rs.getTime("scheduled_end_time"));
             reservation.setEventRoomId(rs.getInt("event_room_id"));
             reservation.setEventName(rs.getString("event_name"));
-            reservation.setDateRequested(rs.getTimestamp("date_requested"));
-            reservation.setDateCreated(rs.getTimestamp("date_created"));
+            reservation.setDateRequested(rs.getDate("date_requested"));
+            reservation.setDateCreated(rs.getDate("date_created"));
             reservation.setCreatedBy(rs.getInt("created_by"));
             reservation.setRequestedBy(rs.getInt("requested_by"));
             reservation.setRemarks(rs.getString("remarks"));

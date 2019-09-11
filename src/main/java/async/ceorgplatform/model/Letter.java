@@ -6,6 +6,7 @@
 package async.ceorgplatform.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -16,14 +17,22 @@ public class Letter {
     private String letterNumber;
     private int letterTypeId;
     private String controlNumber;
-    private Timestamp dateReleased;
-    private Timestamp dateCreated;
+    private Date dateReleased;
+    private Date dateCreated;
     private int createdBy;
     private String remarks;
     private int statusId;
-    public LetterType letterType;
+    public Letter.LetterType letterType = new Letter.LetterType();
+
+    public LetterType getLetterType() {
+        return letterType;
+    }
+
+    public void setLetterType(LetterType letterType) {
+        this.letterType = letterType;
+    }
     
-    public class LetterType{
+    public static class LetterType{
         private int letterTypeId;
         private String letterTypeName;
         private int statusId;
@@ -86,19 +95,19 @@ public class Letter {
         this.controlNumber = controlNumber;
     }
 
-    public Timestamp getDateReleased() {
+    public Date getDateReleased() {
         return dateReleased;
     }
 
-    public void setDateReleased(Timestamp dateReleased) {
+    public void setDateReleased(Date dateReleased) {
         this.dateReleased = dateReleased;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 

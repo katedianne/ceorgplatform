@@ -5,7 +5,8 @@
  */
 package async.ceorgplatform.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  *
@@ -37,11 +38,11 @@ public class Note {
         this.note = note;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -71,7 +72,7 @@ public class Note {
     private int noteId;
     private String noteTitle;
     private String note;
-    private Timestamp dateCreated;
+    private Date dateCreated;
     private int createdBy;
     private String remarks;
     private String status;

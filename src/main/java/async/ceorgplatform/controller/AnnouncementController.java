@@ -33,7 +33,7 @@ public class AnnouncementController {
     
     @RequestMapping(value = "/addAnnouncement", method = RequestMethod.POST)
     @ResponseBody
-    public User addAnnouncement(@RequestBody List<Announcement> _announcement, HttpServletRequest request){
+    public User addAnnouncement(@RequestBody Announcement announcement, HttpServletRequest request){
 
         User user = new User();
         
@@ -42,10 +42,8 @@ public class AnnouncementController {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("UserId")) {
-                    for(Announcement announcement : _announcement){
-                        announcement.setCreatedBy(Integer.parseInt(cookie.getValue()));
-                        announcement.setAuthor(Integer.parseInt(cookie.getValue()));// set created by to user id from cookie 
-                    }
+                    announcement.setCreatedBy(Integer.parseInt(cookie.getValue()));
+                    announcement.setAuthor(Integer.parseInt(cookie.getValue()));// set created by to user id from cookie 
                     
                 }  
             }
@@ -53,16 +51,13 @@ public class AnnouncementController {
         
         Date date= new Date();
         long time = date.getTime();
-        for(Announcement announcement : _announcement){
-            announcement.setDateCreated(new Timestamp(time)); // set date requested to current datetime
-        
-            announcement.setStatusId(1);
-            announcement.setRemarks("Sample Remarks");// set status to 
+        announcement.setDateCreated(new Timestamp(time)); // set date requested to current datetime
+
+        announcement.setStatusId(1);
+        announcement.setRemarks("Sample Remarks");// set status to 
             
-            
-        }
-            int result = announcementService.CreateAnnouncement(_announcement);
-            user.setUserId(result);
+        int result = announcementService.CreateAnnouncement(announcement);
+        user.setUserId(result);
         return user;
         
     }

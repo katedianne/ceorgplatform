@@ -22,15 +22,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         announcementDao.UpdateAnnouncement(request);
     }
     
-    public void UpdateRecipient(List<Announcement> request){
-        announcementDao.UpdateRecipient(request);
-    }
-    
-    public void DeleteAnnouncement(List<Announcement> request){
+    public void DeleteAnnouncement(Announcement request){
         announcementDao.DeleteAnnouncement(request);
     }
     
-    public int CreateAnnouncement(List<Announcement> _request){
+    public int CreateAnnouncement(Announcement _request){
         int result = announcementDao.CreateAnnouncement(_request);
         return result;
     }

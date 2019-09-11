@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -232,7 +232,7 @@
                                 <div class="container">
                                     <table id="dtBasicExample" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
                                         <thead style="background-color: black; color: white;">
-                                            <tr>
+                                                <tr>
                                                 <th class="th-sm" style="text-align: center; vertical-align: middle; width: 9%;"> </th>
                                                 <th class="th-sm" style="text-align: center; vertical-align: middle;"> Control Number </th>
                                                 <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Type </th>
