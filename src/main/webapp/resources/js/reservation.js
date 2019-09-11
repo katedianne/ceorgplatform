@@ -1,5 +1,49 @@
 
 $(document).ready(function () {
+    
+     $("#inputResDate").datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+
+    $("#inputResTimeStart").timepicker({
+        timeFormat: 'HH:mm:ss'
+    });
+
+    $("#inputResTimeEnd").timepicker({
+        timeFormat: 'HH:mm:ss'
+    });
+    
+    $(document).on('click', '#btnAddReservation', function (e) {
+        e.preventDefault();
+        
+        var request = {
+            scheduledStartTime: $("#inputResTimeStart").val(),
+            scheduledEndTime: $("#inputResTimeEnd").val(),
+            eventRoomId: $("#selectResLocation").val(),
+            eventName: $("#inputResEvent").val(),
+            remarks: $("#inputResRemarks").val(),
+            dateRequested: $("#inputResDate").val(),
+            reservationId: $("#btnAddReservation").data('id')
+        };
+
+
+        $.ajax({
+            url: "addReservation",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(request), //Stringified Json Object
+            dataType: 'json',
+            success: function (response) {
+
+                if (response.userId > 0) {
+                    alert("added to database");
+                    table.ajax.reload();
+                }
+           
+            }
+        });
+
+    });
 
     $(document).on('click', '.btnEditReservation', function (e) {
         var str = $(this).data("id");
@@ -22,53 +66,11 @@ $(document).ready(function () {
 
         $("#inputResRemarks").val($(this).parent().siblings()[5].innerHTML);
 
-        $("#btnAddRes").attr('data-id', str);
-    });
-
-    $("#inputResDate").datepicker({
-        dateFormat: 'yy-mm-dd'
-    });
-
-    $("#inputResTimeStart").timepicker({
-        timeFormat: 'HH:mm:ss'
-    });
-
-    $("#inputResTimeEnd").timepicker({
-        timeFormat: 'HH:mm:ss'
+        $("#btnAddReservation").attr('data-id', str);
     });
 
 
-
-    $(document).on('click', '#btnAddRes', function (e) {
-
-        var request = {
-            scheduledStartTime: $("#inputResTimeStart").val(),
-            scheduledEndTime: $("#inputResTimeEnd").val(),
-            eventRoomId: $("#selectResLocation").val(),
-            eventName: $("#inputResEvent").val(),
-            remarks: $("#inputResRemarks").val(),
-            dateRequested: $("#inputResDate").val(),
-            reservationId: $("#btnAddRes").data('id')
-        };
-
-
-        $.ajax({
-            url: "addReservation",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(request), //Stringified Json Object
-            dataType: 'json',
-            success: function (response) {
-
-                if (response.userId > 0) {
-                    alert("added to database");
-                    table.ajax.reload();
-                }
-                alert("hha");
-            }
-        });
-
-    });
+    
 
     $(document).on('click', '.btnDeleteReservation', function (e) {
         var request = {
@@ -97,6 +99,18 @@ $(document).ready(function () {
 
         
 
+    });
+    
+    $(document).on('click', '#btnCancelReservation', function (e) {
+        
+        
+        $("#btnAddReservation").attr('data-id', 0);
+        $("#inputResTimeStart").val('');
+        $("#inputResTimeEnd").val('');
+        $("#selectResLocation").val('');
+        $("#inputResEvent").val('');
+        $("#inputResRemarks").val('');
+        $("#inputResDate").val('');
     });
 
     var table = $("#tableReservation").DataTable({

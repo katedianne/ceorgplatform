@@ -64,7 +64,7 @@ public class ReservationDaoImpl implements ReservationDao {
         String sql = "Select r.*, s.status_name, er.event_room_name from reservations r "
                 + "inner join statuses s on r.status_id = s.status_id "
                 + "inner join event_rooms er on r.event_room_id=er.event_room_id "
-                + "where r.status_id = 3 or r.status_id = 2 ";
+                + "where r.status_id = 3 or r.status_id = 2 or r.status_id = 4 ";
         List<Reservation> reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationMapper());
 //        reservation = jdbcTemplate.query(sql, new ReservationDaoImpl.ReservationStatusMapper());
         return reservation;
