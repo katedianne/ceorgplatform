@@ -30,31 +30,37 @@
 
 
             $(document).ready(function () {
-
-                $("#btnLogin").click(function () {
-
-    //                var login = {
-    //                    username: $("#inputUsername").val(),
-    //                    password: $("#inputPassword").val()
-    //                };
-    //
-    //
-    //
-    //                    $.ajax({
-    //                        url: "loginProcess",
-    //                        type: "POST",
-    //                        contentType: "application/json",
-    //                        data: JSON.stringify(login), //Stringified Json Object
-    //                       // dataType: 'json',
-    //                        success: function (response) {
-    //                            alert(response);
-    //                            alert(response.username);
-    //
-    //                        }
-    //                    });
-
-
-                });
+//                $("#errorMessageLogin").hide();
+//
+//                $(document).on( 'click', '#btnLogin', function (e) {
+//                    e.preventDefault();
+//        
+//                    var username =  $("#inputUsername").val();
+//                    var password =  $("#inputPassword").val();
+//                    var login = {
+//                        username: username,
+//                        password: password
+//                    };
+//    
+//
+//                        $.ajax({
+//                            url: "loginProcess",
+//                            type: "POST",
+//                            contentType: "application/json",
+//                            data: JSON.stringify(login), //Stringified Json Object
+//                            dataType: 'json',
+//                            success: function (response) {
+//                                alert(response.username);
+//                                if (response.username === username) window.location.href = "home";
+//                                else {
+//                                     $("#errorMessageLogin").show();
+//
+//                                }
+//                            }
+//                        });
+//
+//
+//                });
             });
 
 
@@ -79,18 +85,18 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                         </div>
-                                        <form class="user" method="post" action="loginProcess">
+                                        <form class="user" method="post" action="${contextPath}/login">
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-user" name="username" id="inputUsername" aria-describedby="emailHelp" placeholder="Enter Username...">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" class="form-control form-control-user" name="password" id="inputPassword" placeholder="Password">
                                             </div>
-                                            <div class="form-group">
-                                                <span >${message}</span>
-                                            </div>
-                                            <button type="submit" id="btnLogin" class="btn btn-primary btn-user btn-block">Login</button>
+                                            <button type="submit" name="submit" id="btnLogin" class="btn btn-primary btn-user btn-block">Login</button>
                                         </form>
+<!--                                         <div class="">
+                                                <span id="errorMessageLogin">Username or Password is wrong</span>
+                                            </div>-->
                                         <hr>
                                         <div class="text-center">
                                             <a class="small" href="#">Forgot Password?</a>
