@@ -47,10 +47,9 @@ $(document).ready(function () {
         timeFormat: 'HH:mm:ss'
     });
 
-
-
-    $(document).on('click', '#btnAddRes', function (e) {
-         e.preventDefault();
+    $(document).on('click', '#btnAddReservation', function (e) {
+        e.preventDefault();
+        
         var request = {
             scheduledStartTime: $("#inputResTimeStart").val(),
             scheduledEndTime: $("#inputResTimeEnd").val(),
@@ -58,7 +57,7 @@ $(document).ready(function () {
             eventName: $("#inputResEvent").val(),
             remarks: $("#inputResRemarks").val(),
             dateRequested: $("#inputResDate").val(),
-            reservationId: $("#btnAddRes").data('id')
+            reservationId: $("#btnAddReservation").data('id')
         };
 
 
@@ -74,11 +73,38 @@ $(document).ready(function () {
                     alert("added to database");
                     table.ajax.reload();
                 }
-                alert("hha");
+           
             }
         });
 
     });
+
+    $(document).on('click', '.btnEditReservation', function (e) {
+        var str = $(this).data("id");
+
+        var text = $(this).parent().siblings()[0].innerHTML;
+
+        $("#selectResLocation option").each(function () {
+            if ($(this).text() == text) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $("#inputResEvent").val($(this).parent().siblings()[1].innerHTML);
+
+        $("#inputResDate").val($(this).parent().siblings()[2].innerHTML);
+
+        $("#inputResTimeStart").val($(this).parent().siblings()[3].innerHTML);
+
+        $("#inputResTimeEnd").val($(this).parent().siblings()[4].innerHTML);
+
+        $("#inputResRemarks").val($(this).parent().siblings()[5].innerHTML);
+
+        $("#btnAddReservation").attr('data-id', str);
+    });
+
+
+    
 
     $(document).on('click', '.btnDeleteReservation', function (e) {
         var request = {
@@ -107,6 +133,18 @@ $(document).ready(function () {
 
         
 
+    });
+    
+    $(document).on('click', '#btnCancelReservation', function (e) {
+        
+        
+        $("#btnAddReservation").attr('data-id', 0);
+        $("#inputResTimeStart").val('');
+        $("#inputResTimeEnd").val('');
+        $("#selectResLocation").val('');
+        $("#inputResEvent").val('');
+        $("#inputResRemarks").val('');
+        $("#inputResDate").val('');
     });
 
     var table = $("#tableReservation").DataTable({

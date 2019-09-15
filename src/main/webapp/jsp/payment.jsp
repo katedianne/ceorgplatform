@@ -1,10 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JC
-  Date: 29/08/2019
-  Time: 10:07 AM
-  To change this template use File | Settings | File Templates.
+<%-- 
+    Document   : payment
+    Created on : Sep 13, 2019, 12:45:31 PM
+    Author     : Mark Jason Medina
 --%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -21,7 +20,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Reservation</title>
+        <title>Payment</title>
 
 
         <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -167,7 +166,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Reservation</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Payment</h1>
                             <!-- <div>
                               <button type="button" class="btn btn-light">ADD</button>
                               <button type="button" class="btn btn-dark">CANCEL</button>
@@ -208,7 +207,6 @@
                                         <input type="text" class="form-control" id="inputResRemarks" name="inputResRemarks"/>
                                     </div>
                                 </div>
-
                                 <div class="container" style="float: right;">
                                     <button type="button" id="btnCancelReservation" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">
                                         CANCEL
@@ -318,3 +316,4 @@
         </div>
     </body>
 </html>
+

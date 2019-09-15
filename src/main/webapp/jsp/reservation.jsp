@@ -208,11 +208,12 @@
                                         <input type="text" class="form-control" id="inputResRemarks" name="inputResRemarks"/>
                                     </div>
                                 </div>
-                                <div id="btnCancelReservation" class="container" style="float: right;">
-                                    <button style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">
+
+                                <div class="container" style="float: right;">
+                                    <button type="button" id="btnCancelReservation" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">
                                         CANCEL
                                     </button>
-                                    <button id="btnAddRes" data-id="0"
+                                    <button type="button" id="btnAddReservation" data-id="0"
                                             style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">
                                         ADD
                                     </button>
