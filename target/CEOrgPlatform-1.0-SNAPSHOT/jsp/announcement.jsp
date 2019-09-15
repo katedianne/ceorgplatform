@@ -55,12 +55,19 @@
                         alert("dfsd");
                         var request = {
                             announcementName: $("#inputAnnouncementName").val(),
-                            announcement: $("#inputAnnouncement").val(),
-                            recipient: [{
-                                announcedTo: parseInt($("#inputRecipient").val())
-                            }]
+                            announcement: $("#inputAnnouncement").val()
                         };
-
+                        
+                        var recipient = [];
+                        for(var i = 0;i < $('#inputRecipient').val().length;i++) {
+                            recipient.push({
+                               announcedTo: parseInt($('#inputRecipient').val()[i]) 
+                            });
+                        }
+                        
+                        request['recipient'] = recipient;
+                        
+                        console.log(request);
 
                         $.ajax({
                             url: "${contextPath}/addAnnouncement",
