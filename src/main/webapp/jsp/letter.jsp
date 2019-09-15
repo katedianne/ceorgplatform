@@ -51,7 +51,7 @@
                     e.preventDefault();
                    var request = {
                        letterName: $("#inputLetterName").val(),
-                       letterType: $("#inputLetterType").val(),
+                       letterTypeId: parseInt($("#inputLetterType").val()),
                        dateReleased: $("#inputDateReleased").val(),
                        remarks: $("#inputRemarks").val(),
                        letterId: $("#btnAddLetter").data('id')
@@ -72,8 +72,8 @@
                            }
                        }
                    });
-
-            }
+                });
+            });
 
 
             //         $(document).ready(function () {

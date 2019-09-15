@@ -27,14 +27,14 @@ public class LetterDaoImpl implements LetterDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
   
-//    @Autowired
-//    Helper helper;
+    @Autowired
+    HelperDao helper;
     
     public int CreateLetter(Letter letter) {
 
-    String sqlLetter = "insert into letter (letter_number, letter_name, letter_type_id, control_number, date_released, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
+    String sqlLetter = "insert into letters (letter_number, letter_name, letter_type_id, control_number, date_released, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
 
-    int result = jdbcTemplate.update(sqlLetter, new Object[] { 1, letter.getLetterName(), letter.getLetterTypeId(), "ORG-"+letter.getLetterTypeId()+"ID"+"LN",
+    int result = jdbcTemplate.update(sqlLetter, new Object[] { 1, letter.getLetterName(), letter.getLetterTypeId(), helper.ControlNumber(letter.getCreatedBy(), letter.getLetterTypeId(), 1) /*"ORG-"+letter.getLetterTypeId()+"-ID"+"-LN"*/,
         letter.getDateReleased(), letter.getDateCreated(), letter.getCreatedBy(), letter.getRemarks(), 1});
     
 //    String sqlLetterType = "insert into letter_types (letter_type_name, date_created, created_by, status_id ) values(?,?,?,?)";
