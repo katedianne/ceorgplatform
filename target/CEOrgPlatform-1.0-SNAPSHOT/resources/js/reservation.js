@@ -23,7 +23,7 @@ $(document).ready(function () {
             eventName: $("#inputResEvent").val(),
             remarks: $("#inputResRemarks").val(),
             dateRequested: $("#inputResDate").val(),
-            reservationId: $("#btnAddReservation").data('id')
+            reservationId: $("#btnAddReservation").attr('data-id')
         };
 
 

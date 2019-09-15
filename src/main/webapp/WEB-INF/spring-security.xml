@@ -42,7 +42,7 @@
             password-parameter="password" />
  
         <logout logout-url="/logout" logout-success-url="/"
-            delete-cookies="JSESSIONID" invalidate-session="true" />
+            delete-cookies="(JSESSIONID, RoleId, OrgId, UserId)" invalidate-session="true" />
         
          <!-- reference to the shared request cache -->
 <!--        <request-cache ref="requestCache"/>-->

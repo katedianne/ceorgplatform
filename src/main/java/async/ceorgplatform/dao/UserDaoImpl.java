@@ -29,16 +29,16 @@ public class UserDaoImpl implements UserDao{
     
     public User validateUser(Login login) {
        
-        String sql = "SELECT * FROM users WHERE username = '" + login.getUsername() + "' and password= '" + login.getPassword() + "'";
-        
-        List<User> user = jdbcTemplate.query(sql, new UserMapper());
+//        String sql = "SELECT * FROM users WHERE username = '" + login.getUsername() + "' and password= '" + login.getPassword() + "'";
+//        
+//        List<User> user = jdbcTemplate.query(sql, new UserMapper());
 
-        if(user.size() > 0){
-            String sql2 = "SELECT user_id, role_id, username, org_id from users";
-            user = jdbcTemplate.query(sql, new UserMapper());
-            return user.get(0);
-        }
-        else return null;
+       
+        String sql2 = "SELECT user_id, role_id, username, org_id from users where username = '" + login.getUsername() + "'";
+        List<User> user = jdbcTemplate.query(sql2, new UserMapper());
+        return user.get(0);
+        
+
     }
     
     class UserMapper implements RowMapper<User>{
@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao{
             User user = new User();
             
             user.setUsername(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
+           // user.setPassword(rs.getString("password"));
             user.setUserId(rs.getInt("user_id"));
             user.setRoleId(rs.getInt("role_id"));
             user.setOrgId(rs.getInt("org_id"));

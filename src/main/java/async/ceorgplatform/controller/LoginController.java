@@ -8,6 +8,8 @@ package async.ceorgplatform.controller;
 import async.ceorgplatform.model.Login;
 import async.ceorgplatform.model.User;
 import async.ceorgplatform.service.UserService;
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,7 +45,24 @@ public class LoginController {
     }
     
      @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String showHome(HttpServletRequest request){
+    public String showHome( HttpServletRequest request, HttpServletResponse response){
+        Login login = new Login();
+        Principal principal = request.getUserPrincipal();
+        login.setUsername(principal.getName());
+        User user = userService.validateUser(login);
+
+    
+        Cookie cookie1 = new Cookie("UserId", Integer.toString(user.getUserId()));
+        Cookie cookie2 = new Cookie("RoleId", Integer.toString(user.getRoleId()));
+        Cookie cookie3 = new Cookie("OrgId", Integer.toString(user.getOrgId()));
+        cookie1.setMaxAge(60 * 60 * 24); // expire in 86400 secs
+        cookie2.setMaxAge(60 * 60 * 24); // expire in 1 day
+        cookie3.setMaxAge(60 * 60 * 24); // expire in 1 day
+        response.addCookie(cookie1);
+        response.addCookie(cookie2);
+        response.addCookie(cookie3);
+
+
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -56,32 +75,15 @@ public class LoginController {
         return "home";
     }
 
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    @ResponseBody
-    public User loginProcess(@RequestBody Login login, HttpServletRequest request, HttpServletResponse response) {
-       
-        User user = userService.validateUser(login);
-
-        if (user != null) {
-           
-            Cookie cookie1 = new Cookie("UserId", Integer.toString(user.getUserId()));
-            Cookie cookie2 = new Cookie("RoleId", Integer.toString(user.getRoleId()));
-            Cookie cookie3 = new Cookie("IsLogin", Integer.toString(1));
-            cookie1.setMaxAge(60 * 60 * 24); // expire in 86400 secs
-            cookie2.setMaxAge(60 * 60 * 24); // expire in 1 day
-            cookie3.setMaxAge(60 * 60 * 24); // expire in 1 day
-            response.addCookie(cookie1);
-            response.addCookie(cookie2);
-            response.addCookie(cookie3);
-             return user;
-        }
-        else {
-            return  new User();
-        }
-        
-        
-             
-    }
+//    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+//    @ResponseBody
+//    public User loginProcess(@RequestBody Login login, HttpServletRequest request, HttpServletResponse response) {
+//       
+//       
+//        
+//        
+//             
+//    }
     
 //    @RequestMapping(value="/logout", method = RequestMethod.GET)
 //    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
