@@ -208,7 +208,7 @@
                                         <input type="text" class="form-control" id="inputResRemarks" name="inputResRemarks"/>
                                     </div>
                                 </div>
-                                <div class="container" style="float: right;">
+                                <div id="btnCancelReservation" class="container" style="float: right;">
                                     <button style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">
                                         CANCEL
                                     </button>

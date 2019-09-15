@@ -21,6 +21,7 @@
         <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/jquery-ui.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="${contextPath}/resources/css/jquery.timepicker.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/css/all.min.css" rel="stylesheet">
         <link href="${contextPath}/resources/webfonts/fa-regular-400.ttf" rel="stylesheet">
@@ -30,6 +31,7 @@
 
         <script src="${contextPath}/resources/js/jquery.min.js"></script>
         <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
+        <script src="${contextPath}/resources/js/jquery.timepicker.min.js"></script>
         <script src="${contextPath}/resources/js/jquery-ui.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
 
@@ -38,6 +40,40 @@
     
         <![endif]-->
         <script>
+            
+            $(document).ready(function () {
+                
+                $("#inputDateReleased").datepicker({
+                    dateFormat: 'yy-mm-dd'
+                });
+                
+                $(document).on('click', '#btnAddLetter', function (e) {
+                    e.preventDefault();
+                   var request = {
+                       letterName: $("#inputLetterName").val(),
+                       letterType: $("#inputLetterType").val(),
+                       dateReleased: $("#inputDateReleased").val(),
+                       remarks: $("#inputRemarks").val(),
+                       letterId: $("#btnAddLetter").data('id')
+                   };
+
+
+                   $.ajax({
+                       url: "addLetter",
+                       type: "POST",
+                       contentType: "application/json",
+                       data: JSON.stringify(request), //Stringified Json Object
+                       dataType: 'json',
+                       success: function (response) {
+
+                           if (response.userId > 0) {
+                               alert("added to database");
+                               table.ajax.reload();
+                           }
+                       }
+                   });
+
+            }
 
 
             //         $(document).ready(function () {
@@ -210,19 +246,19 @@
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label>Letter Type:</label>
-                                    <input type="text" class="form-control" id="ControlNumber">
+                                    <input type="text" class="form-control" id="inputLetterType" name="inputLetterType">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Letter Name: </label>
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" id="inputLetterName" name="inputLetterName"/>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Date Released:</label>
-                                    <input type="date" class="form-control" id="ControlNumber">
+                                    <input type="date" class="form-control" id="inputDateReleased" name="inputDateReleased">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Remarks: </label>
-                                    <input type="text" class="form-control"/>
+                                    <input type="text" class="form-control" id="inputRemarks" name="inputRemarks"/>
                                 </div>
                                 <div class="container" style="float: right;">
                                     <button id="btnCancelLetter" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>

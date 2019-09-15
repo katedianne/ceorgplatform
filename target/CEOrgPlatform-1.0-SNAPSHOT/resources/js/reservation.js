@@ -24,6 +24,16 @@ $(document).ready(function () {
 
         $("#btnAddRes").attr('data-id', str);
     });
+    
+    $(document).on('click', '.btnCancelReservation', function (e) {
+        e.preventDefault();
+        $("#inputResEvent").val('');
+        $("#inputResDate").val('');
+        $("#inputResTimeStart").val('');
+        $("#inputResTimeEnd").val('');
+        $("#inputResRemarks").val('');
+        $("#btnAddRes").attr('data-id', 0);
+    });
 
     $("#inputResDate").datepicker({
         dateFormat: 'yy-mm-dd'
@@ -40,7 +50,7 @@ $(document).ready(function () {
 
 
     $(document).on('click', '#btnAddRes', function (e) {
-
+         e.preventDefault();
         var request = {
             scheduledStartTime: $("#inputResTimeStart").val(),
             scheduledEndTime: $("#inputResTimeEnd").val(),

@@ -22,6 +22,8 @@ public class Letter {
     private int createdBy;
     private String remarks;
     private int statusId;
+    private String codeName;
+    private String letterName;
     public Letter.LetterType letterType = new Letter.LetterType();
 
     public LetterType getLetterType() {
@@ -134,5 +136,23 @@ public class Letter {
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
+
+    public String getCodeName() {
+        return codeName;
+    }
+
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
+    }
+
+    public String getLetterName() {
+        return letterName;
+    }
+
+    public void setLetterName(String letterName) {
+        this.letterName = letterName;
+    }
+    
+    
     
 }
