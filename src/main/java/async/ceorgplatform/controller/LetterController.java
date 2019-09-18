@@ -6,7 +6,7 @@
 package async.ceorgplatform.controller;
 
 import async.ceorgplatform.model.Letter;
-import async.ceorgplatform.model.User;
+import async.ceorgplatform.model.MyUser;
 import async.ceorgplatform.service.LetterService;
 import async.ceorgplatform.service.ReservationService;
 import java.sql.Timestamp;
@@ -37,8 +37,8 @@ public class LetterController {
     
     @RequestMapping(value = "/addLetter", method = RequestMethod.POST)
     @ResponseBody
-    public User addReservation(@RequestBody Letter letter, HttpServletRequest request){
-        User user = new User();
+    public MyUser addReservation(@RequestBody Letter letter, HttpServletRequest request){
+        MyUser user = new MyUser();
 
         Cookie[] cookies = request.getCookies();
 

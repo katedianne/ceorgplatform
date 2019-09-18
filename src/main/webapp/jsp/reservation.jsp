@@ -157,10 +157,10 @@
         <jsp:include page="_footer.jsp" />   
 
 
-        <div id="dialogDeleteReservation" title="Delete Reservation Request">
+        <div id="dialogDeleteReservation" title="Delete Reservation Request" style="display:none">
             <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This reservation request will be permanently deleted. Do you want to continue?</p>
         </div>
-        <div id="dialogConfirmReservation" title="Confirm Reservation Request">
+        <div id="dialogConfirmReservation" title="Confirm Reservation Request" style="display:none">
             <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This reservation request will be approved. Do you want to continue?</p>
         </div>
     </body>
