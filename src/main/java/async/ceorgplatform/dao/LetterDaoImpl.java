@@ -26,21 +26,25 @@ public class LetterDaoImpl implements LetterDao {
     
     @Autowired
     JdbcTemplate jdbcTemplate;
+  
+    @Autowired
+    HelperDao helper;
     
-    public void CreateLetter(Letter letter) {
+    public int CreateLetter(Letter letter) {
 
-    String sqlLetter = "insert into letter (letter_number, letter_type_id, control_number, date_released, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
+    String sqlLetter = "insert into letters (letter_number, letter_name, letter_type_id, control_number, date_released, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
 
-    jdbcTemplate.update(sqlLetter, new Object[] { letter.getLetterNumber(), letter.getLetterTypeId(), letter.getControlNumber(),
-        letter.getDateReleased(), letter.getDateCreated(), letter.getCreatedBy(), letter.getRemarks(), letter.getStatusId()});
+    int result = jdbcTemplate.update(sqlLetter, new Object[] { 1, letter.getLetterName(), letter.getLetterTypeId(), helper.ControlNumber(letter.getCreatedBy(), letter.getLetterTypeId(), 1) /*"ORG-"+letter.getLetterTypeId()+"-ID"+"-LN"*/,
+        letter.getDateReleased(), letter.getDateCreated(), letter.getCreatedBy(), letter.getRemarks(), 1});
     
-    String sqlLetterType = "insert into letter_types (letter_type_name, date_created, created_by, status_id ) values(?,?,?,?)";
-    
-    jdbcTemplate.update(sqlLetterType, new Object[] { letter.letterType.getLetterTypeName(), letter.getDateCreated(), letter.getCreatedBy(), letter.getStatusId()});
+//    String sqlLetterType = "insert into letter_types (letter_type_name, date_created, created_by, status_id ) values(?,?,?,?)";
+//    
+//    jdbcTemplate.update(sqlLetterType, new Object[] { letter.letterType.getLetterTypeName(), letter.getDateCreated(), letter.getCreatedBy(), letter.getStatusId()});
+    return result;
     }
     
     public List<Letter> getLetter(){
-        String sql = "Select * from letters as ltt inner join letter_types where ltt.status_id = 1";
+        String sql = "Select * from letters as l inner join letter_types as lt on l.letter_type_id = lt.letter_type_id where l.status_id = 1";
         List<Letter> letter = jdbcTemplate.query(sql, new LetterDaoImpl.LetterMapper());
         return letter;
     }

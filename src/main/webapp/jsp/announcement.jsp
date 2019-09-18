@@ -50,17 +50,23 @@
             $(document).ready(function () {
 
                 $('#inputRecipient').selectpicker();
-
-                $("#btnAddAnnouncement").click(function () {
-                    alert("dfsd");
-                    var request = {
-                        announcementName: $("#inputAnnouncementName").val(),
-                        announcement: $("#inputAnnouncement").val(),
-                        recipient: [{
-                                announcedTo: parseInt($("#inputRecipient").val())
-                            }]
-                    };
-
+                
+                    $("#btnAddAnnouncement").click(function () {
+                        alert("dfsd");
+                        var request = {
+                            announcementName: $("#inputAnnouncementName").val(),
+                            announcement: $("#inputAnnouncement").val()
+                        };
+                        
+                        var recipient = [];
+                        for(var i = 0;i < $('#inputRecipient').val().length;i++) {
+                            recipient.push({
+                               announcedTo: parseInt($('#inputRecipient').val()[i]) 
+                            });
+                        }
+                        
+                        request['recipient'] = recipient;
+                        
 
                     $.ajax({
                         url: "${contextPath}/addAnnouncement",

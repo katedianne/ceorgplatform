@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
-
-     $("#inputResDate").datepicker({
+ 
+    $("#inputResDate").datepicker({
         dateFormat: 'yy-mm-dd'
     });
 
@@ -12,7 +12,7 @@ $(document).ready(function () {
     $("#inputResTimeEnd").timepicker({
         timeFormat: 'HH:mm:ss'
     });
-    
+
     $(document).on('click', '#btnAddReservation', function (e) {
         e.preventDefault();
         

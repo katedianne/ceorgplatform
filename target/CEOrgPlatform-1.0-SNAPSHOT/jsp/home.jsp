@@ -130,7 +130,7 @@
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-2">
-                                <h6 class="m-0 font-weight-bold text-primary">Reservation Status ${currentRoleId}</h6> <a
+                                <h6 class="m-0 font-weight-bold text-primary">Reservation Status</h6> <a
                                     href="reservation" text-align="left">See all</a>
                             </div>
                             <div class="card-body">

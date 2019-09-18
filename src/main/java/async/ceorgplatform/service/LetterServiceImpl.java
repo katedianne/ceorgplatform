@@ -22,7 +22,8 @@ public class LetterServiceImpl implements LetterService {
         return letterDao.getLetter();
     }
     
-    public void CreateLetter(Letter letter){
-        letterDao.CreateLetter(letter);
+    public int CreateLetter(Letter letter){
+        int result = letterDao.CreateLetter(letter);
+        return result;
     }
 }
