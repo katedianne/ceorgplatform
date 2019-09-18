@@ -42,8 +42,13 @@
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.timepicker.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
+        
+        <script>
+            var currentRoleId = ${currentRoleId} ;
+            var currentUserId = ${currentUserId} ;
+            var currentOrgId = ${currentOrgId} ;
+        </script>
         <script src="${contextPath}/resources/js/reservation.js"></script>
-
 
     </head>
     <body id="page-top">
@@ -110,22 +115,23 @@
                         </div>
                     </form>
                     <div class="container">
-                        <table id="tableReservation" class="table table-bordered" cellspacing="0" width="100%"
-                               style="font-size: 0.8em; background-color: white;">
+                        <table id="tableReservation" class="row-border" >
                             <thead style="background-color: black; color: white;">
                                 <tr>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;"></th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">Location</th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">Event</th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">Date</th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">Start Time</th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">End Time</th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">Remarks</th>
-                                    <th class="th-sm" style="text-align: center; vertical-align: middle;">Status</th>
+                                    <th class="th-sm" ></th>
+                                    <th class="th-sm" >Location</th>
+                                    <th class="th-sm">Event</th>
+                                    <th class="th-sm" >Date</th>
+                                    <th class="th-sm">Start Time</th>
+                                    <th class="th-sm">End Time</th>
+                                    <th class="th-sm" >Remarks</th>
+                                    <th class="th-sm" >Status</th>
+                                     <th class="th-sm" ></th>
                                 </tr>
                             </thead>
-                            <tbody style="color: black;">
+                            <tbody style="color: black;" >
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

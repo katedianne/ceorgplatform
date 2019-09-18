@@ -30,8 +30,8 @@ public class ReservationDaoImpl implements ReservationDao {
     JdbcTemplate jdbcTemplate;
     
     public int UpdateReservation(Reservation request) {
-        String sql = "update reservations set scheduled_start_time = ? , scheduled_end_time= ? , event_room_id= ?, event_name= ?, remarks=? where reservation_id = ?";
-        int result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(), request.getEventName(), request.getRemarks(), request.getReservationId()});
+        String sql = "update reservations set date_requested = ?, scheduled_start_time = ? , scheduled_end_time= ? , event_room_id= ?, event_name= ?, remarks=? where reservation_id = ?";
+        int result = jdbcTemplate.update(sql, new Object[]{request.getDateRequested(), request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(), request.getEventName(), request.getRemarks(), request.getReservationId()});
         return result;
     }
 

@@ -6,7 +6,6 @@ async\ceorgplatform\dao\UserDaoImpl$UserMapper.class
 async\ceorgplatform\dao\PaymentDaoImpl.class
 async\ceorgplatform\service\NoteServiceImpl.class
 async\ceorgplatform\dao\NoteDaoImpl.class
-async\ceorgplatform\model\User.class
 async\ceorgplatform\dao\ReservationDao.class
 async\ceorgplatform\service\ReservationServiceImpl.class
 async\ceorgplatform\dao\NoteDaoImpl$NoteMapper.class

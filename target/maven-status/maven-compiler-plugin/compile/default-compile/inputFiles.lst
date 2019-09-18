@@ -3,7 +3,6 @@ C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatfo
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\dao\NoteDao.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\NoteServiceImpl.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\PaymentServiceImpl.java
-C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\model\User.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\ReservationServiceImpl.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\ActivityServiceImpl.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\LetterService.java
@@ -11,6 +10,7 @@ C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatfo
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\controller\LetterController.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\controller\NotesController.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\NoteService.java
+C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\model\UserPrincipal.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\ActivityService.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\controller\SampleController.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\LetterServiceImpl.java
@@ -19,6 +19,7 @@ C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatfo
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\dao\AnnouncementDaoImpl.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\model\Payment.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\beans\session.java
+C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\model\MyUser.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\service\UserService.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\model\Activity.java
 C:\Users\JC\Documents\git projects\ceorgplatform\src\main\java\async\ceorgplatform\controller\LoginController.java

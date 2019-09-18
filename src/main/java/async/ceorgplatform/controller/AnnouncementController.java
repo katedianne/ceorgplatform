@@ -7,7 +7,8 @@ package async.ceorgplatform.controller;
 
 import async.ceorgplatform.model.Announcement;
 import async.ceorgplatform.model.Reservation;
-import async.ceorgplatform.model.User;
+import async.ceorgplatform.model.MyUser;
+import async.ceorgplatform.model.UserPrincipal;
 import async.ceorgplatform.service.AnnouncementService;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,22 +35,14 @@ public class AnnouncementController {
     
     @RequestMapping(value = "/addAnnouncement", method = RequestMethod.POST)
     @ResponseBody
-    public User addAnnouncement(@RequestBody Announcement announcement, HttpServletRequest request){
-
-        User user = new User();
+    public MyUser addAnnouncement(@RequestBody Announcement announcement, HttpServletRequest request){
         
-        Cookie[] cookies = request.getCookies();
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("UserId")) {
-                    announcement.setCreatedBy(Integer.parseInt(cookie.getValue()));
-                    announcement.setAuthor(Integer.parseInt(cookie.getValue()));// set created by to user id from cookie 
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUser user = new MyUser();
+        
+        announcement.setCreatedBy(currentUser.getUser().getUserId());
+        announcement.setAuthor(currentUser.getUser().getUserId());// set created by to user id from spring security current logged in
                     
-                }  
-            }
-        }
-        
         Date date= new Date();
         long time = date.getTime();
         announcement.setDateCreated(new Timestamp(time)); // set date requested to current datetime
