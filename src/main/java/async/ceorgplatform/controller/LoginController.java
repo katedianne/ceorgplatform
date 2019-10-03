@@ -47,12 +47,7 @@ public class LoginController {
     
      @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView showHome( HttpServletRequest request, HttpServletResponse response){
-//        Login login = new Login();
-//        Principal principal = request.getUserPrincipal();
-//        login.setUsername(principal.getName());
-//        MyUser user = userService.validateUser(login);
-//
-//    
+ 
         UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
   
         ModelAndView mav = new ModelAndView("home");

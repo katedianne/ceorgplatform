@@ -2,46 +2,33 @@
 $(document).ready(function () {
  
     $("#inputResDate").datepicker({
-        dateFormat: 'yy-mm-dd'
+        dateFormat: 'yy-mm-dd',
+        minDate: 0 
     });
 
     $("#inputResTimeStart").timepicker({
-        timeFormat: 'HH:mm:ss'
+        timeFormat: 'HH:mm:ss',
+        interval: 30,
+        minTime: '7:30am',
+        maxTime: '9:00pm',
+        change: function (time) {
+            $("#inputResTimeEnd").prop('disabled', false);
+            var minStartTime = $(this).timepicker().format(time);
+            $("#inputResTimeEnd").timepicker({
+                timeFormat: 'HH:mm:ss',
+                interval: 30,
+                minTime: minStartTime,
+                maxTime: '9:00pm'
+
+            });
+        }
     });
 
-    $("#inputResTimeEnd").timepicker({
-        timeFormat: 'HH:mm:ss'
-    });
+    
 
     $(document).on('click', '#btnAddReservation', function (e) {
-        e.preventDefault();
-        
-        var request = {
-            scheduledStartTime: $("#inputResTimeStart").val(),
-            scheduledEndTime: $("#inputResTimeEnd").val(),
-            eventRoomId: $("#selectResLocation").val(),
-            eventName: $("#inputResEvent").val(),
-            remarks: $("#inputResRemarks").val(),
-            dateRequested: $("#inputResDate").val(),
-            reservationId: $("#btnAddReservation").data('id')
-        };
-
-
-        $.ajax({
-            url: "addReservation",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(request), //Stringified Json Object
-            dataType: 'json',
-            success: function (response) {
-
-                if (response.userId > 0) {
-                    alert("added to database");
-                    table.ajax.reload();
-                }
-           
-            }
-        });
+       // e.preventDefault();
+         $("#formReservation").valid();
 
     });
 
@@ -96,7 +83,7 @@ $(document).ready(function () {
     });
     
     $(document).on('click', '#btnCancelReservation', function (e) {
-        
+        e.preventDefault();
         
         $("#btnAddReservation").data('id', 0);
         $("#inputResTimeStart").val('');
@@ -227,47 +214,94 @@ $(document).ready(function () {
                 }
             });
             
+    $.validator.setDefaults({
+        errorElement: "span",
+        errorClass: "help-block",
+        highlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length || element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);     
+            }
+        }
+    });      
   
 
-//    $("#formReservation").validate({
-//        rules:{
-//            selectResLocation : {
-//                required: true
-//            },
-//            inputResEvent : {
-//                required: true
-//            },
-//            inputResDate : {
-//                required: true, 
-//                date : true
-//                
-//            },
-//            inputResTimeStart : {
-//                required: true
-//            },
-//            inputResTimeEnd : {
-//                required : true
-//            },
-//            inputResRemarks : {
-//                required : true
-//            }
-//            
-//        },
-//        errorElement: "em",
-//        errorPlacement: function (error, element) {
-//            // Add the `help-block` class to the error element
-//            error.addClass("help-block");
-//            error.insertAfter(element);
-//
-//        },
-//        highlight: function (element, errorClass, validClass) {
-//            $(element).parents(".col-md-2").addClass("has-error").removeClass("has-success");
-//        },
-//        unhighlight: function (element, errorClass, validClass) {
-//            $(element).parents(".col-md-2").addClass("has-success").removeClass("has-error");
-//        }
-//        
-//    });
+    $("#formReservation").validate({
+        rules:{
+            selectResLocation : {
+                required: true
+            },
+            inputResEvent : {
+                required: true
+            },
+            inputResDate : {
+                required: true, 
+                date : true
+               
+            },
+            inputResTimeStart : {
+                required: true
+            },
+            inputResTimeEnd : {
+                required : true
+//                remote:
+//                    {
+//                      url: 'validateEmail.php',
+//                      type: "post",
+//                      data:
+//                      {
+//                          inputResTimeEnd : function()
+//                          {
+//                              return $('#register-form :input[name="email"]').val();
+//                          }
+//                      }
+//                    }
+            },
+            inputResRemarks : {
+                required : true
+            }     
+        },
+        submitHandler: function (form) {
+            var request = {
+                scheduledStartTime: $("#inputResTimeStart").val(),
+                scheduledEndTime: $("#inputResTimeEnd").val(),
+                eventRoomId: $("#selectResLocation").val(),
+                eventName: $("#inputResEvent").val(),
+                remarks: $("#inputResRemarks").val(),
+                dateRequested: $("#inputResDate").val(),
+                reservationId: $("#btnAddReservation").data('id')
+            };
+
+
+            $.ajax({
+                url: "addReservation",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(request), //Stringified Json Object
+                dataType: 'json',
+                success: function (response) {
+
+                    if (response.userId > 0) {
+                        alert("added to database");
+                        table.ajax.reload();
+                    }
+                    else {
+                        alert("There is a conflict in your reservation request.");
+                    }
+
+                }
+            });
+            return false;
+        }
+
+    });
             
      
 //                "bServerSide": true,
