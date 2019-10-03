@@ -42,14 +42,22 @@
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.timepicker.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
+
         
         <script>
-            var currentRoleId = ${currentRoleId} ;
-            var currentUserId = ${currentUserId} ;
-            var currentOrgId = ${currentOrgId} ;
+            var currentRoleId = ${currentRoleId};
+            var currentUserId = ${currentUserId};
+            var currentOrgId = ${currentOrgId};
         </script>
         <script src="${contextPath}/resources/js/reservation.js"></script>
 
+        <style>
+            .help-block {
+                color: red
+                
+            }
+        </style>
+        
     </head>
     <body id="page-top">
 
@@ -82,39 +90,39 @@
                                     <option value="3">AVR</option>
                                     <option value="4">CONFERENCE ROOM</option>
                                 </select>
-                                </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Event:</label>
-                                        <input type="text" class="form-control" id="inputResEvent" name="inputResEvent">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Date: </label>
-                                        <input type="date" class="form-control" id="inputResDate" name="inputResDate"/>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Time Start:</label>
-                                        <input type="text" class="form-control" id="inputResTimeStart" name="inputResTimeStart">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Time End: </label>
-                                        <input type="text" class="form-control" id="inputResTimeEnd" name="inputResTimeEnd"/>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Remarks: </label>
-                                        <input type="text" class="form-control" id="inputResRemarks" name="inputResRemarks"/>
-                                    </div>
-                                </div>
-                                <div class="container" style="float: right;">
-                                    <button type="button" id="btnCancelReservation" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">
-                                        CANCEL
-                                    </button>
-                                    <button type="button" id="btnAddReservation" data-id="0"
-                                            style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">
-                                        ADD
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="container">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Event:</label>
+                                <input type="text" class="form-control" id="inputResEvent" name="inputResEvent">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Date: </label>
+                                <input type="text" class="form-control" id="inputResDate" name="inputResDate"/>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Time Start:</label>
+                                <input type="text" class="form-control" id="inputResTimeStart" name="inputResTimeStart">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Time End: </label>
+                                <input type="text" class="form-control" id="inputResTimeEnd" name="inputResTimeEnd" disabled=""/>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Remarks: </label>
+                                <input type="text" class="form-control" id="inputResRemarks" name="inputResRemarks"/>
+                            </div>
+                        </div>
+                        <div class="container" style="float: right;">
+                            <button type="button" id="btnCancelReservation" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">
+                                CANCEL
+                            </button>
+                            <button type="submit" id="btnAddReservation" data-id="0"
+                                    style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">
+                                ADD
+                            </button>
+                        </div>
+                    </form>
+                    <div class="container">
                         <table id="tableReservation" class="row-border" >
                             <thead style="background-color: black; color: white;">
                                 <tr>
@@ -126,7 +134,7 @@
                                     <th class="th-sm">End Time</th>
                                     <th class="th-sm" >Remarks</th>
                                     <th class="th-sm" >Status</th>
-                                     <th class="th-sm" ></th>
+                                    <th class="th-sm" ></th>
                                 </tr>
                             </thead>
                             <tbody style="color: black;" >
