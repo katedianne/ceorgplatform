@@ -6,8 +6,11 @@
 package async.ceorgplatform.controller;
 
 import async.ceorgplatform.model.Login;
-import async.ceorgplatform.model.User;
+import async.ceorgplatform.model.MyUser;
+import async.ceorgplatform.model.UserPrincipal;
 import async.ceorgplatform.service.UserService;
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -28,7 +36,8 @@ public class LoginController {
 
     @Autowired
     UserService userService;
-
+    
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("login");
@@ -37,31 +46,42 @@ public class LoginController {
     }
     
      @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String showHome(){
-        return "home";
-    }
-
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(@ModelAttribute("login") Login login, HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = null;
-
-        User user = userService.validateUser(login);
-
-        if (user != null) {
-            mav = new ModelAndView("home");
-            Cookie cookie1 = new Cookie("UserId", Integer.toString(user.getUserId()));
-            Cookie cookie2 = new Cookie("RoleId", Integer.toString(user.getRoleId()));
-            Cookie cookie3 = new Cookie("IsLogin", Integer.toString(1));
-            response.addCookie(cookie1);
-            response.addCookie(cookie2);
-            response.addCookie(cookie3);
-        } else {
-            mav = new ModelAndView("login");
-            mav.addObject("message", "Username or Password is wrong!!");
-        }
+    public ModelAndView showHome( HttpServletRequest request, HttpServletResponse response){
+//        Login login = new Login();
+//        Principal principal = request.getUserPrincipal();
+//        login.setUsername(principal.getName());
+//        MyUser user = userService.validateUser(login);
+//
+//    
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  
+        ModelAndView mav = new ModelAndView("home");
+        mav.addObject("currentRoleId", currentUser.getUser().getRoleId());
+        mav.addObject("currentUserId", currentUser.getUser().getUserId());
+        mav.addObject("currentOrgId", currentUser.getUser().getOrgId());
+        
         return mav;
     }
 
+//    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+//    @ResponseBody
+//    public User loginProcess(@RequestBody Login login, HttpServletRequest request, HttpServletResponse response) {
+//       
+//       
+//        
+//        
+//             
+//    }
+    
+//    @RequestMapping(value="/logout", method = RequestMethod.GET)
+//    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+//       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//       if (auth != null){    
+//          new SecurityContextLogoutHandler().logout(request, response, auth);
+//       }
+//       return "login";
+//    }
+    
 
 
 //   @RequestMapping(value = "/login", method = RequestMethod.GET)

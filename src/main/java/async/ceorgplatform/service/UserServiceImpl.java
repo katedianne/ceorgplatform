@@ -7,7 +7,7 @@ package async.ceorgplatform.service;
 
 import async.ceorgplatform.dao.UserDao;
 import async.ceorgplatform.model.Login;
-import async.ceorgplatform.model.User;
+import async.ceorgplatform.model.MyUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserDao userDao;
     
-    public User validateUser (Login login){
+    public MyUser validateUser (Login login){
         return userDao.validateUser(login);
     }
 }

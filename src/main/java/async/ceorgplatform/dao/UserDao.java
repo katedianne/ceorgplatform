@@ -6,12 +6,12 @@
 package async.ceorgplatform.dao;
 
 import async.ceorgplatform.model.Login;
-import async.ceorgplatform.model.User;
+import async.ceorgplatform.model.MyUser;
 
 /**
  *
  * @author JC
  */
 public interface UserDao {
-    User validateUser(Login login);
+    MyUser validateUser(Login login);
 }

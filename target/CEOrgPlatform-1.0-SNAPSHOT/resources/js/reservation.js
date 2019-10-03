@@ -1,40 +1,6 @@
 
 $(document).ready(function () {
-
-    $(document).on('click', '.btnEditReservation', function (e) {
-        var str = $(this).data("id");
-
-        var text = $(this).parent().siblings()[0].innerHTML;
-
-        $("#selectResLocation option").each(function () {
-            if ($(this).text() == text) {
-                $(this).attr('selected', 'selected');
-            }
-        });
-
-        $("#inputResEvent").val($(this).parent().siblings()[1].innerHTML);
-
-        $("#inputResDate").val($(this).parent().siblings()[2].innerHTML);
-
-        $("#inputResTimeStart").val($(this).parent().siblings()[3].innerHTML);
-
-        $("#inputResTimeEnd").val($(this).parent().siblings()[4].innerHTML);
-
-        $("#inputResRemarks").val($(this).parent().siblings()[5].innerHTML);
-
-        $("#btnAddRes").attr('data-id', str);
-    });
-    
-    $(document).on('click', '.btnCancelReservation', function (e) {
-        e.preventDefault();
-        $("#inputResEvent").val('');
-        $("#inputResDate").val('');
-        $("#inputResTimeStart").val('');
-        $("#inputResTimeEnd").val('');
-        $("#inputResRemarks").val('');
-        $("#btnAddRes").attr('data-id', 0);
-    });
-
+ 
     $("#inputResDate").datepicker({
         dateFormat: 'yy-mm-dd'
     });
@@ -82,25 +48,19 @@ $(document).ready(function () {
     $(document).on('click', '.btnEditReservation', function (e) {
         var str = $(this).data("id");
 
-        var text = $(this).parent().siblings()[0].innerHTML;
+        $("#selectResLocation").val($(this).data('room'));  //get room id from datatable
 
-        $("#selectResLocation option").each(function () {
-            if ($(this).text() == text) {
-                $(this).attr('selected', 'selected');
-            }
-        });
+        $("#inputResEvent").val($(this).parent().siblings()[1].innerHTML); //get event name from datatable
 
-        $("#inputResEvent").val($(this).parent().siblings()[1].innerHTML);
+        $("#inputResDate").val($(this).parent().siblings()[2].innerHTML);  //get date from datatable
 
-        $("#inputResDate").val($(this).parent().siblings()[2].innerHTML);
+        $("#inputResTimeStart").val($(this).parent().siblings()[3].innerHTML);  //get time start from datatable
 
-        $("#inputResTimeStart").val($(this).parent().siblings()[3].innerHTML);
+        $("#inputResTimeEnd").val($(this).parent().siblings()[4].innerHTML);  //get time end from datatable
 
-        $("#inputResTimeEnd").val($(this).parent().siblings()[4].innerHTML);
+        $("#inputResRemarks").val($(this).parent().siblings()[5].innerHTML);  //get location from datatable
 
-        $("#inputResRemarks").val($(this).parent().siblings()[5].innerHTML);
-
-        $("#btnAddReservation").attr('data-id', str);
+        $("#btnAddReservation").data('id', str); 
     });
 
 
@@ -138,7 +98,7 @@ $(document).ready(function () {
     $(document).on('click', '#btnCancelReservation', function (e) {
         
         
-        $("#btnAddReservation").attr('data-id', 0);
+        $("#btnAddReservation").data('id', 0);
         $("#inputResTimeStart").val('');
         $("#inputResTimeEnd").val('');
         $("#selectResLocation").val('');
@@ -157,9 +117,15 @@ $(document).ready(function () {
         "columns": [
             {"data": "reservationId",
                 "render": function (data, type, row) {
-                    return "<button class=\"btnEditReservation\"  data-id=\"" + data + "\"><i class=\"far fa-edit\"></i></button>" +
-                            "<button class=\"btnDeleteReservation\"  data-id=\"" + data + "\"><i class=\"far fa-trash-alt\"></i></button>" +
-                            "<button class=\"btnConfirmReservation\"  data-id=\"" + data + "\"><i class=\"far fa-check-circle\"></i></button>";
+                    if (currentRoleId === 4) { //check if current user has user role only
+                        return "<button class=\"btnEditReservation\"  data-id=\"" + data + "\" data-room=\"" + row.eventRoomId + "\"><i class=\"far fa-edit\"></i></button>" +
+                                "<button class=\"btnDeleteReservation\"  data-id=\"" + data + "\"><i class=\"far fa-trash-alt\"></i></button>";
+                    }
+                    else {
+                        return "<button class=\"btnEditReservation\"  data-id=\"" + data + "\" data-room=\"" + row.eventRoomId + "\"><i class=\"far fa-edit\"></i></button>" +
+                                "<button class=\"btnDeleteReservation\"  data-id=\"" + data + "\"><i class=\"far fa-trash-alt\"></i></button>" +
+                                "<button class=\"btnConfirmReservation\"  data-id=\"" + data + "\"><i class=\"far fa-check-circle\"></i></button>";
+                    }
                 }
             },
             {"data": "eventRooms.eventRoomName"},
@@ -168,16 +134,25 @@ $(document).ready(function () {
             {"data": "scheduledStartTime"},
             {"data": "scheduledEndTime"},
             {"data": "remarks"},
-            {"data": "status"}
+            {"data": "status"},
+            {"data": "eventRoomId"}
+        ],
+        "columnDefs": [
+            {
+                targets: 0,
+                className: 'text-center'
+            }
         ]
-
-
+        
     });
+
+    table.column( 8 ).visible( false );
     
     var dialogDeleteReservation = $( "#dialogDeleteReservation" ).dialog({
                 autoOpen: false,
-                height: 200,
-                width: 350,
+                resizable: false,
+                height: 250,
+                width: 400,
                 modal: true,
                 buttons: {
                   "Yes": function(){
@@ -215,8 +190,9 @@ $(document).ready(function () {
                 
     var dialogConfirmReservation = $( "#dialogConfirmReservation" ).dialog({
                 autoOpen: false,
-                height: 200,
-                width: 350,
+                resizable: false,
+                height: 250,
+                width: 400,
                 modal: true,
                 buttons: {
                   "Yes": function(){
@@ -250,6 +226,8 @@ $(document).ready(function () {
                    dialogConfirmReservation.dialog( "close" );
                 }
             });
+            
+  
 
 //    $("#formReservation").validate({
 //        rules:{

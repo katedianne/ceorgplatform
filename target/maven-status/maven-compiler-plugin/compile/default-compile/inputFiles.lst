@@ -16,6 +16,7 @@ C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\NoteDaoImpl.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\AnnouncementDao.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\service\NoteService.java
+C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\UserPrincipal.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\OrganizationDaoImpl.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\OrganizationDao.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\PaymentDao.java
@@ -24,7 +25,6 @@ C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\servic
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\Payment.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\ActivityDao.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\service\AnnouncementService.java
-C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\User.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\PaymentDaoImpl.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\ActivityDaoImpl.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\Activity.java
@@ -40,6 +40,7 @@ C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\dao\ReservationDao.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\service\OrganizationService.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\service\ActivityService.java
+C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\model\MyUser.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\service\ReservationServiceImpl.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\controller\LetterController.java
 C:\Users\Anne\Desktop\SAD\ceorgplatform\src\main\java\async\ceorgplatform\service\NoteServiceImpl.java

@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author JC
  */
-public class User {
+public class MyUser {
     private int userId;
     private String username;
     private String password;
