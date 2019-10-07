@@ -32,11 +32,18 @@
         <script src="${contextPath}/resources/js/bootstrap.bundle.min.js"></script>
         <script src="${contextPath}/resources/js/jquery-ui.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
+        <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
     
         <![endif]-->
+        <script>
+            var currentRoleId = ${currentRoleId};
+            var currentUserId = ${currentUserId};
+            var currentOrgId = ${currentOrgId};
+        </script>
+        <script src="${contextPath}/resources/js/notes.js"></script>
         <script>
 
 
@@ -107,21 +114,21 @@
                             </div>
                             <input class="form-control my-0 py-0" type="text" placeholder="Search" aria-label="Search">
                         </div>
+                        <form id="formNote">
+                            <div class="input-group md-form form-sm form-1 pl-0">
+                                <input id="inputNoteTitle" class="form-control my-4 py-0" type="text" placeholder="Title" aria-label="Title">
+                            </div>
 
-                        <div class="input-group md-form form-sm form-1 pl-0">
-                            <input class="form-control my-4 py-0" type="text" placeholder="Title" aria-label="Title">
-                        </div>
+                            <div class="form-group">
+                                <label>     </label>
+                                <textarea id="inputNote" class="form-control rounded-0 my-0 py-4" row="10"></textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label>     </label>
-                            <textarea class="form-control rounded-0 my-0 py-4" row="10"></textarea>
-                        </div>
-
-                        <div>
-                            <button type="button" class="btn btn-success">ADD</button>
-                            <button type="button" class="btn btn-danger">CANCEL</button>
-                        </div>
-
+                            <div>
+                                <button id="btnAddNote" type="button" class="btn btn-success">ADD</button>
+                                <button id="btnCancelNote" type="button" class="btn btn-danger">CANCEL</button>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="col-md-4">

@@ -13,8 +13,8 @@ import java.util.List;
  * @author acer
  */
 public interface NoteDao {
-    void UpdateNote(Note request);
-    void DeleteNote(Note request);
-    void CreateNote(Note request);
+    int UpdateNote(Note request);
+    int DeleteNote(Note request);
+    int CreateNote(Note request);
     List<Note> getNote();
 }

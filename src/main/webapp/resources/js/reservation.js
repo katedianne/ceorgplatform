@@ -67,10 +67,10 @@ $(document).ready(function () {
      
         var request = {
             reservationId: $(this).data('id'),
-            scheduledStartTime: $("#inputResTimeStart").val(),
-            scheduledEndTime: $("#inputResTimeEnd").val(),
-            eventRoomId: $("#selectResLocation").val(),
-            dateRequested: $("#inputResDate").val()
+            scheduledStartTime: $(this).parent().siblings()[3].innerHTML,
+            scheduledEndTime: $(this).parent().siblings()[4].innerHTML,
+            eventRoomId: $(this).data('room'),
+            dateRequested: $(this).parent().siblings()[2].innerHTML
             
         };
         

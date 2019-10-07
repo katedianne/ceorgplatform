@@ -26,9 +26,10 @@ public class ActivityDaoImpl implements ActivityDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
-    public void UpdateActivity(Activity activity){
+    public int UpdateActivity(Activity activity){
         String sql = "update activities set activity_name = ? , activty_start_date= ? , activity_end_date = ? , description = ?, date_created = ?, remarks = ? where activity_id = ?";
-        jdbcTemplate.update(sql, new Object[]{activity.getActivityName(),activity.getActivityStartDate(), activity.getActivityEndDate(), activity.getDescription(), activity.getDateCreated(), activity.getRemarks(), activity.getActivityId()});
+        int result = jdbcTemplate.update(sql, new Object[]{activity.getActivityName(),activity.getActivityStartDate(), activity.getActivityEndDate(), activity.getDescription(), activity.getDateCreated(), activity.getRemarks(), activity.getActivityId()});
+        return result;
     }
     
     public void DeleteActivity(Activity activity){
@@ -36,13 +37,13 @@ public class ActivityDaoImpl implements ActivityDao {
         jdbcTemplate.update(sql, new Object[]{activity.getActivityId()});
     }
     
-    public void CreateActivity(Activity activity) {
+    public int CreateActivity(Activity activity) {
 
-    String sql = "insert into activities (activity_name, activity_start_date, activity_end_date, desciption, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into activities (activity_name, activity_start_date, activity_end_date, description, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?)";
 
-    jdbcTemplate.update(sql, new Object[] { activity.getActivityName(), activity.getActivityStartDate(), activity.getActivityEndDate(),
-        activity.getDescription(), activity.getDateCreated(), activity.getCreatedBy(), activity.getRemarks(), activity.getStatusId()});
-    
+        int result = jdbcTemplate.update(sql, new Object[] { activity.getActivityName(), activity.getActivityStartDate(), activity.getActivityEndDate(),
+            activity.getDescription(), activity.getDateCreated(), activity.getCreatedBy(), activity.getRemarks(), activity.getStatusId()});
+        return result;
     }
     
     public List<Activity> getActivity(){

@@ -18,16 +18,19 @@ public class NoteServiceImpl implements NoteService {
     @Autowired
     public NoteDao noteDao;
        
-    public void UpdateNote(Note request){
-        noteDao.UpdateNote(request);
+    public int UpdateNote(Note request){
+        int result = noteDao.UpdateNote(request);
+        return result;
     }
     
-    public void DeleteNote(Note request){
-        noteDao.DeleteNote(request);
+    public int DeleteNote(Note request){
+        int result = noteDao.DeleteNote(request);
+        return result;
     }
     
-    public void CreateNote(Note request){
-        noteDao.CreateNote(request);
+    public int CreateNote(Note request){
+        int result = noteDao.CreateNote(request);
+        return result;
     }
     
     public  List<Note> getNote(){

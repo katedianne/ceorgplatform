@@ -26,22 +26,25 @@ public class NoteDaoImpl implements NoteDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
-    public void UpdateNote(Note request){
+    public int UpdateNote(Note request){
         String sql = "update notes set note_title = ? , note = ? , remarks = ? where note_id = ?";
-        jdbcTemplate.update(sql, new Object[]{request.getNoteTitle(),request.getNote(), request.getRemarks(), request.getNoteId()});
+        int result = jdbcTemplate.update(sql, new Object[]{request.getNoteTitle(),request.getNote(), request.getRemarks(), request.getNoteId()});
+        return result;
     }
     
-    public void DeleteNote(Note request){
+    public int DeleteNote(Note request){
         String sql = "update note set status_id = 2 where note_id = ?";
-        jdbcTemplate.update(sql, new Object[]{request.getNoteId()});
+        int result = jdbcTemplate.update(sql, new Object[]{request.getNoteId()});
+        return result;
     }
     
-    public void CreateNote(Note request) {
+    public int CreateNote(Note request) {
 
-    String sql = "insert into notes (note_id, note_tile, note, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,1)";
+        String sql = "insert into notes (note_id, note_tile, note, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,1)";
 
-    jdbcTemplate.update(sql, new Object[] { request.getNoteId(), request.getNoteTitle(), request.getNote(), request.getDateCreated(),
-        request.getCreatedBy(), request.getRemarks()});
+        int result = jdbcTemplate.update(sql, new Object[] { request.getNoteId(), request.getNoteTitle(), request.getNote(), request.getDateCreated(),
+            request.getCreatedBy(), request.getRemarks()});
+        return result;
     }
     public List<Note> getNote(){
         String sql = "Select n.note_id, n.note_title, n.note, n.date_created, n.created_by, n.remarks, s.status_name from notes as n inner join statuses as s on n.status_id = s.status_id where s.status_id = 1";
@@ -60,7 +63,7 @@ public class NoteDaoImpl implements NoteDao {
             getDB.setDateCreated(rs.getTimestamp(4));
             getDB.setCreatedBy(rs.getInt(5));
             getDB.setRemarks(rs.getString(6));
-            getDB.setStatus(rs.getString(7));
+            getDB.setStatusId(rs.getInt(7));
             return getDB;
         }
     }

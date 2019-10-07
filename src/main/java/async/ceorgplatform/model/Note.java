@@ -62,18 +62,20 @@ public class Note {
         this.remarks = remarks;
     }
 
-    public String getStatus() {
-        return status;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
+
+    
     private int noteId;
     private String noteTitle;
     private String note;
     private Date dateCreated;
     private int createdBy;
     private String remarks;
-    private String status;
+    private int statusId;
 }

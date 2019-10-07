@@ -18,16 +18,18 @@ public class ActivityServiceImpl implements ActivityService {
     @Autowired
     public ActivityDao activityDao;
     
-    public void UpdateActivity(Activity activity){
-        activityDao.UpdateActivity(activity);
+    public int UpdateActivity(Activity activity){
+        int result =  activityDao.UpdateActivity(activity);
+        return result;
     }
     
     public void DeleteActivity(Activity activity){
         activityDao.DeleteActivity(activity);
     }
     
-    public void CreateActivity(Activity activity){
-        activityDao.CreateActivity(activity);
+    public int CreateActivity(Activity activity){
+        int result = activityDao.CreateActivity(activity);
+        return result;
     }
     
     public List<Activity> getActivity(){

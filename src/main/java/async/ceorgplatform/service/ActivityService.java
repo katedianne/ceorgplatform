@@ -13,8 +13,8 @@ import java.util.List;
  * @author Kate Dianne
  */
 public interface ActivityService {
-    void UpdateActivity(Activity activity);
+    int UpdateActivity(Activity activity);
     void DeleteActivity(Activity activity);
-    void CreateActivity(Activity activity);
+    int CreateActivity(Activity activity);
     List<Activity> getActivity();
 }

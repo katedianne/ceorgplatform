@@ -10,6 +10,8 @@
     <bean id="letterDao" class="async.ceorgplatform.dao.LetterDaoImpl" />
     <bean id="paymentService" class="async.ceorgplatform.service.PaymentServiceImpl" />
     <bean id="paymentDao" class="async.ceorgplatform.dao.PaymentDaoImpl" />
+    <bean id="noteService" class="async.ceorgplatform.service.NoteServiceImpl" />
+    <bean id="noteDao" class="async.ceorgplatform.dao.NoteDaoImpl" />
     <bean id="activityService" class="async.ceorgplatform.service.ActivityServiceImpl" />
     <bean id="activityDao" class="async.ceorgplatform.dao.ActivityDaoImpl" />
     <bean id="reservationService" class="async.ceorgplatform.service.ReservationServiceImpl" />
@@ -24,6 +26,6 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/ce_org" />
         <property name="username" value="root" />
-        <property name="password" value="password" />
+        <property name="password" value="P@ssw0rd" />
     </bean>
 </beans>
