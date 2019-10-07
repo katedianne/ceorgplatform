@@ -1,7 +1,0 @@
-async\ceorgplatform\model\Login.class
-async\ceorgplatform\dao\UserDaoImpl$UserMapper.class
-async\ceorgplatform\model\User.class
-async\ceorgplatform\dao\UserDaoImpl.class
-async\ceorgplatform\dao\UserDao.class
-async\ceorgplatform\controller\LoginController.class
-async\ceorgplatform\service\UserService.class

@@ -5,7 +5,8 @@
  */
 package async.ceorgplatform.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  *
@@ -16,93 +17,17 @@ public class Payment {
     private double principalAmount;
     private int orgId;
     private String paymentName;
-    private Timestamp dateCreated;
+    private Date dateCreated;
     private int createdBy;
     private String remarks;
-    public UpdateTrail updateTrail;
-    
-    public class UpdateTrail{
+    public Payment.UpdateTrail updateTrail = new Payment.UpdateTrail();    
 
-        public int getPaymentId() {
-            return paymentId;
-        }
+    public UpdateTrail getUpdateTrail() {
+        return updateTrail;
+    }
 
-        public void setPaymenId(int paymentId) {
-            this.paymentId = paymentId;
-        }
-
-        public String getStatusFrom() {
-            return statusFrom;
-        }
-
-        public void setStatusFrom(String statusFrom) {
-            this.statusFrom = statusFrom;
-        }
-
-        public String getStatusTo() {
-            return statusTo;
-        }
-
-        public void setStatusTo(String statusTo) {
-            this.statusTo = statusTo;
-        }
-
-        public double getPaymentBalance() {
-            return paymentBalance;
-        }
-
-        public void setPaymentBalance(double paymentBalance) {
-            this.paymentBalance = paymentBalance;
-        }
-
-        public double getPaymentAmount() {
-            return paymentAmount;
-        }
-
-        public void setPaymentAmount(double paymentAmount) {
-            this.paymentAmount = paymentAmount;
-        }
-
-        public Timestamp getDateCreated() {
-            return dateCreated;
-        }
-
-        public void setDateCreated(Timestamp dateCreated) {
-            this.dateCreated = dateCreated;
-        }
-
-        public int getCreatedBy() {
-            return createdBy;
-        }
-
-        public void setCreatedBy(int createdBy) {
-            this.createdBy = createdBy;
-        }
-
-        public String getRemarks() {
-            return remarks;
-        }
-
-        public void setRemarks(String remarks) {
-            this.remarks = remarks;
-        }
-
-        public int getStatusId() {
-            return statusId;
-        }
-
-        public void setStatusId(int statusId) {
-            this.statusId = statusId;
-        }
-        private int paymentId;
-        private String statusFrom;
-        private String statusTo;
-        private double paymentBalance;
-        private double paymentAmount;
-        private Timestamp dateCreated;
-        private int createdBy;
-        private String remarks;
-        private int statusId;
+    public void setUpdateTrail(UpdateTrail updateTrail) {
+        this.updateTrail = updateTrail;
     }
 
     public String getRemarks() {
@@ -146,11 +71,11 @@ public class Payment {
         this.paymentName = paymentName;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -170,4 +95,88 @@ public class Payment {
         this.statusId = statusId;
     }
     
+    
+    public static class UpdateTrail{
+
+        public int getPaymentId() {
+            return paymentId;
+        }
+
+        public void setPaymenId(int paymentId) {
+            this.paymentId = paymentId;
+        }
+
+        public String getStatusFrom() {
+            return statusFrom;
+        }
+
+        public void setStatusFrom(String statusFrom) {
+            this.statusFrom = statusFrom;
+        }
+
+        public String getStatusTo() {
+            return statusTo;
+        }
+
+        public void setStatusTo(String statusTo) {
+            this.statusTo = statusTo;
+        }
+
+        public double getPaymentBalance() {
+            return paymentBalance;
+        }
+
+        public void setPaymentBalance(double paymentBalance) {
+            this.paymentBalance = paymentBalance;
+        }
+
+        public double getPaymentAmount() {
+            return paymentAmount;
+        }
+
+        public void setPaymentAmount(double paymentAmount) {
+            this.paymentAmount = paymentAmount;
+        }
+
+        public Date getDateCreated() {
+            return dateCreated;
+        }
+
+        public void setDateCreated(Date dateCreated) {
+            this.dateCreated = dateCreated;
+        }
+
+        public int getCreatedBy() {
+            return createdBy;
+        }
+
+        public void setCreatedBy(int createdBy) {
+            this.createdBy = createdBy;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        public int getStatusId() {
+            return statusId;
+        }
+
+        public void setStatusId(int statusId) {
+            this.statusId = statusId;
+        }
+        private int paymentId;
+        private String statusFrom;
+        private String statusTo;
+        private double paymentBalance;
+        private double paymentAmount;
+        private Date dateCreated;
+        private int createdBy;
+        private String remarks;
+        private int statusId;
+    }
 }

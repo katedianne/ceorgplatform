@@ -13,8 +13,9 @@ import java.util.List;
  * @author Kate Dianne
  */
 public interface ReservationService {
-    void UpdateReservation(Reservation request);
+    int UpdateReservation(Reservation request);
     int CreateReservation(Reservation request);
-    void DeleteReservation(Reservation request);
+    int DeleteReservation(Reservation request);
+    int ConfirmReservation(Reservation request);
     List<Reservation> getReservation();
 }

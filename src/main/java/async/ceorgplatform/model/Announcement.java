@@ -5,7 +5,8 @@
  */
 package async.ceorgplatform.model;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,11 +47,11 @@ public class Announcement {
         this.announcement = announcement;
     }
 
-    public Timestamp getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Timestamp dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -81,53 +82,23 @@ public class Announcement {
     private String announcementName;
     private int author;
     private String announcement;
-    private Timestamp dateCreated;
+    private Date dateCreated;
     private int createdBy;
     private String remarks;
     private int statusId;
-    public Recipient recipient;
     
-    public class Recipient{
+    public List<Announcement.Recipient> recipient = new ArrayList<Announcement.Recipient>();
+    
+    public List<Recipient> getRecipient() {
+        return recipient;
+    }
 
-        public int getRecipientId() {
-            return recipientId;
-        }
-
-        public void setRecipientId(int recipientId) {
-            this.recipientId = recipientId;
-        }
-
-        public int getAnnouncementId() {
-            return announcementId;
-        }
-
-        public void setAnnouncementId(int announcementId) {
-            this.announcementId = announcementId;
-        }
-
-        public Timestamp getDateCreated() {
-            return dateCreated;
-        }
-
-        public void setDateCreated(Timestamp dateCreated) {
-            this.dateCreated = dateCreated;
-        }
-
-        public int getCreatedBy() {
-            return createdBy;
-        }
-
-        public void setCreatedBy(int createdBy) {
-            this.createdBy = createdBy;
-        }
-
-        public int getStatusId() {
-            return statusId;
-        }
-
-        public void setStatusId(int statusId) {
-            this.statusId = statusId;
-        }
+    public void setRecipient(List<Recipient> recipient) {
+        this.recipient = recipient;
+    }
+    
+    
+    public static class Recipient{
         
         public int getAnnouncedTo() {
             return announcedTo;
@@ -137,11 +108,6 @@ public class Announcement {
             this.announcedTo = announcedTo;
         }
         
-        private int recipientId;
-        private int announcementId;
-        private int announcedTo;
-        private Timestamp dateCreated;
-        private int createdBy;
-        private int statusId;
+        private int announcedTo ;
     }
 }

@@ -15,14 +15,15 @@
 
 	<import resource="classpath:async/config/user-beans.xml" />
 
-	<context:component-scan base-package="async.ceorgplatform.controller" />
+	<context:component-scan base-package="async.ceorgplatform" />
 	<context:annotation-config />
 
-	<mvc:annotation-driven />
+        
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
+        <mvc:annotation-driven />
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
