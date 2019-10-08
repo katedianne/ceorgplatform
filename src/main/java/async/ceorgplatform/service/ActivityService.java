@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ActivityService {
     int UpdateActivity(Activity activity);
-    void DeleteActivity(Activity activity);
+    int DeleteActivity(Activity activity);
     int CreateActivity(Activity activity);
     List<Activity> getActivity();
 }

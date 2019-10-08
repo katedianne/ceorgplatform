@@ -46,99 +46,14 @@
     
         <![endif]-->
         <script>
+            var currentRoleId = ${currentRoleId};
+            var currentUserId = ${currentUserId};
+            var currentOrgId = ${currentOrgId};
+        </script>
+        <script src="${contextPath}/resources/js/announcement.js"></script>
+        <script>
 
-            $(document).ready(function () {
-
-                $('#inputRecipient').selectpicker();
-                
-                    $("#btnAddAnnouncement").click(function () {
-                        alert("dfsd");
-                        var request = {
-                            announcementName: $("#inputAnnouncementName").val(),
-                            announcement: $("#inputAnnouncement").val()
-                        };
-                        
-                        var recipient = [];
-                        for(var i = 0;i < $('#inputRecipient').val().length;i++) {
-                            recipient.push({
-                               announcedTo: parseInt($('#inputRecipient').val()[i]) 
-                            });
-                        }
-                        
-                        request['recipient'] = recipient;
-                        
-
-                    $.ajax({
-                        url: "${contextPath}/addAnnouncement",
-                        type: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(request), //Stringified Json Object
-                        dataType: 'json',
-                        success: function (response) {
-                            alert(response.userId);
-                            if (response.userId > 0)
-                                alert("added to database");
-
-                        }
-                    });
-
-                });
-
-                $.ajax({
-                    url: "${contextPath}/getAnnouncement",
-                    type: "GET",
-                    contentType: "application/json",
-                    //data: JSON.stringify(request), //Stringified Json Object
-                    //dataType: 'json',
-                    success: function (data) {
-
-                        $("#tableReservation").dataTable({
-                            bJQueryUI: true,
-                            data: data,
-                            columns: [
-                                {"data": "reservationId"},
-                                {"data": "eventRooms.eventRoomName"},
-                                {"data": "eventName"},
-                                {"data": "dateRequested"},
-                                {"data": "scheduledStartTime"},
-                                {"data": "scheduledEndTime"},
-                                {"data": "remarks"},
-                                {"data": "status"}
-                            ]
-
-
-                        });
-                    }
-                });
-
-                //                "bServerSide": true,
-                //                            "bJQueryUI" : true,
-                //                            "sPaginationType" : "full_numbers",
-                //                            "sAjaxSource": "../getReservation",
-                //                            "aoColumns": [
-                //                                {"mData": "reservationId", "sTitle": " ", "sWidth": "2%", "bSortable" : false , "sClass" : "center"},
-                //                                {"mData": "eventRooms.eventRoomName", "sTitle": "Location", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-                //                                {"mData": "eventName", "sTitle": "Event", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-                //                                {"mData": "dateRequested", "sTitle": "Date", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-                //                                {"mData": "scheduledStartTime", "sTitle": "Start Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
-                //                                {"mData": "scheduledEndTime", "sTitle": "End Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
-                //                                {"mData": "remarks", "sTitle": "Remarks", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-                //                                {"mData": "url", "sTitle": "Status", "sWidth": "10%", "bSortable" : true , "sClass" : "center"}
-                //                            ],
-                //                            "oLanguage": {
-                //                                "sSearch": "Filter Search Result:",
-                //                                "sProcessing": "Loading Please Wait...",
-                //                                "sLoadingRecords": "Loading Please Wait...",
-                //                                "sZeroRecords": "No Records Found!",
-
-
-                //                    "fnServerParams": function (aoData) {
-                //                        aoData.push({ "name": "reservationId", "value": 0 });
-                //                    },
-                //"mRender" : "function ( aaData, type, full )  {return  '<button id=\"reservationEdit\" data-id=\"' + reservationId + '\">edit</button>'", 
-
-
-            });
+            
 
 
             //         $(document).ready(function () {
@@ -248,7 +163,7 @@
                                                                                                         <button id="btnAddAnnounce" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>-->
                     </div> 
                     <div class="container"> </br>
-                        <table id="dtBasicExample" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
+                        <table id="tableAnnouncement" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
                             <thead style="background-color: black; color: white;">
                                 <tr>
                                     <th class="th-sm" style="text-align: center; vertical-align: middle; width: 50px"> </th>
@@ -260,40 +175,13 @@
                             </thead>
                             <tbody style="color: black;">
                                 <tr>
-                                    <td> <button style="border:none; background-color: white;" title="View"> <i class="fas fa-eye"></i> </button> </td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td> <button style="border:none; background-color: white;" title="View"> <i class="fas fa-eye"></i> </button> </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr>
-                                    <td> <button style="border:none; background-color: white;" title="View"> <i class="fas fa-eye"></i> </button> </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td> <button style="border:none; background-color: white;" title="View"> <i class="fas fa-eye"></i> </button> </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td> <button style="border:none; background-color: white;" title="View"> <i class="fas fa-eye"></i> </button> </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>      
@@ -306,6 +194,9 @@
         </div>
         <!-- End of Page Wrapper -->
 
-        <jsp:include page="_footer.jsp" />          
+        <jsp:include page="_footer.jsp" />  
+        <div id="dialogDeleteAnnouncement" title="Delete Announcement" style="display:none">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This Announcement will be deleted. Do you want to continue?</p>
+        </div>
     </body>
 </html>

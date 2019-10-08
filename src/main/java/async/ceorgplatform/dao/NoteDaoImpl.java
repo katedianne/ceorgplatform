@@ -40,7 +40,7 @@ public class NoteDaoImpl implements NoteDao {
     
     public int CreateNote(Note request) {
 
-        String sql = "insert into notes (note_id, note_tile, note, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,1)";
+        String sql = "insert into notes (note_id, note_title, note, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,1)";
 
         int result = jdbcTemplate.update(sql, new Object[] { request.getNoteId(), request.getNoteTitle(), request.getNote(), request.getDateCreated(),
             request.getCreatedBy(), request.getRemarks()});

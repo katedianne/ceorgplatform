@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -57,9 +58,36 @@ public class AnnouncementController {
     }
     
     @RequestMapping(value = "/announcement", method = RequestMethod.GET)
-    public String showAnnouncement(){
-        return "announcement";
+    public ModelAndView showAnnouncement(){
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ModelAndView mav = new ModelAndView("announcement");
+        mav.addObject("currentRoleId", currentUser.getUser().getRoleId());
+        mav.addObject("currentUserId", currentUser.getUser().getUserId());
+        mav.addObject("currentOrgId", currentUser.getUser().getOrgId());
+        
+        return mav;
     }
     
+    @RequestMapping(value = "/getAnnouncement", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Announcement> getAnnouncement( HttpServletRequest request){        
+        List<Announcement> announcementList  = announcementService.getAnnouncement();
+        return announcementList;
+    }
+    
+    @RequestMapping(value = "/deleteAnnouncement", method = RequestMethod.POST)
+    @ResponseBody
+        public MyUser deleteAnnouncement(@RequestBody Announcement announcement, HttpServletRequest request){
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUser user = new MyUser();
+
+        announcement.setCreatedBy(currentUser.getUser().getUserId()); // set created by to user id from cookie 
+    
+        int result = announcementService.DeleteAnnouncement(announcement);
+
+        user.setUserId(result);
+
+        return user;
+    }
 }
     

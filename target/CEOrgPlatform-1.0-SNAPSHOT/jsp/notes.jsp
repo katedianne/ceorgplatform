@@ -125,7 +125,7 @@
                             </div>
 
                             <div>
-                                <button id="btnAddNote" type="button" class="btn btn-success">ADD</button>
+                                <button id="btnAddNote" type="submit" class="btn btn-success">ADD</button>
                                 <button id="btnCancelNote" type="button" class="btn btn-danger">CANCEL</button>
                             </div>
                         </form>

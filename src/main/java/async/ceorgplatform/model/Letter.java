@@ -16,6 +16,7 @@ public class Letter {
     private int letterId;
     private String letterNumber;
     private int letterTypeId;
+    private String letterTypeName;
     private String controlNumber;
     private Date dateReleased;
     private Date dateCreated;
@@ -89,6 +90,14 @@ public class Letter {
         this.letterTypeId = letterTypeId;
     }
 
+    public String getLetterTypeName() {
+        return letterTypeName;
+    }
+
+    public void setLetterTypeName(String letterTypeName) {
+        this.letterTypeName = letterTypeName;
+    }
+    
     public String getControlNumber() {
         return controlNumber;
     }

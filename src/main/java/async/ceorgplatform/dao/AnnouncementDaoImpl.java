@@ -30,9 +30,10 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
     Date date= new Date();
     long time = date.getTime();
     
-    public void UpdateAnnouncement(Announcement request){
+    public int UpdateAnnouncement(Announcement request){
+        int result = 0;
         String sql = "update announcement set announcement_name = ? , author = ? , announcement =? , date_created = ?, remarks = ? where announcement_id = ?";
-        jdbcTemplate.update(sql, new Object[]{request.getAnnouncementName(),request.getAuthor(), request.getAnnouncement(), request.getDateCreated(), request.getRemarks(), request.getAnnouncementId()});
+        result = jdbcTemplate.update(sql, new Object[]{request.getAnnouncementName(),request.getAuthor(), request.getAnnouncement(), request.getDateCreated(), request.getRemarks(), request.getAnnouncementId()});
         
         String sqlDelete = "delete from recipient where announcement_id = ?";
         jdbcTemplate.update(sqlDelete, new Object[]{request.getAnnouncementId()});
@@ -41,16 +42,20 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
             String sqlInsert = "insert into recipient (announcement_id, announced_to, date_created, created_by values(?,?,?,?)";
             jdbcTemplate.update(sqlInsert, new Object[]{request.getAnnouncementId(), _request.getAnnouncedTo(), new Timestamp(time), request.getCreatedBy()});
         }
+        
+        return result;
     }
     
     
     
-    public void DeleteAnnouncement(Announcement request){
+    public int DeleteAnnouncement(Announcement request){
         String sql = "update announcement set status_id = 2 where announcement_id = ?";
-            jdbcTemplate.update(sql, new Object[]{request.getAnnouncementId()});
+            int result = jdbcTemplate.update(sql, new Object[]{request.getAnnouncementId()});
         
         String sqlRecipient = "update recipient set status_id = 2 where announcement_id = ?";
             jdbcTemplate.update(sqlRecipient, new Object[]{request.getAnnouncementId()});
+          
+        return result;    
     }
     
     public int CreateAnnouncement(Announcement request) {
@@ -71,7 +76,7 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
     }
     
     public List<Announcement> getAnnouncement(){
-        String sql = "Select * from announcement as a inner join recipient as r on a.announcement_id = r.announcement_id where a.status_id = 6 and a.status_id = 7";
+        String sql = "Select * from announcement as a inner join organizations as o on a.created_by = o.org_id where a.status_id = 6 or a.status_id = 7";
         List<Announcement> announcement = jdbcTemplate.query(sql, new AnnouncementDaoImpl.AnnouncementMapper());
         
         
@@ -88,7 +93,8 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
             announcement.setAuthor(rs.getInt("author"));
             announcement.setAnnouncement(rs.getString("announcement"));
             announcement.setCreatedBy(rs.getInt("created_by"));
-            announcement.setDateCreated(rs.getTimestamp("date_created"));
+            announcement.setCreatedByName(rs.getString("org_name"));
+            announcement.setDateCreated(rs.getDate("date_created"));
             announcement.setRemarks(rs.getString("remarks"));
             announcement.setStatusId(rs.getInt("status_id"));
             for(Announcement.Recipient _recipient : announcement.recipient){

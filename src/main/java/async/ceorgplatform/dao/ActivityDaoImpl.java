@@ -32,9 +32,9 @@ public class ActivityDaoImpl implements ActivityDao {
         return result;
     }
     
-    public void DeleteActivity(Activity activity){
+    public int DeleteActivity(Activity activity){
         String sql = "update activities set status_id = 2 where activity_id = ?";
-        jdbcTemplate.update(sql, new Object[]{activity.getActivityId()});
+        return jdbcTemplate.update(sql, new Object[]{activity.getActivityId()});
     }
     
     public int CreateActivity(Activity activity) {
@@ -59,11 +59,11 @@ public class ActivityDaoImpl implements ActivityDao {
             
             activity.setActivityId(rs.getInt("activity_id"));
             activity.setActivityName(rs.getString("activity_name"));
-            activity.setActivityStartDate(rs.getTimestamp("activity_start_date"));
-            activity.setActivityEndDate(rs.getTimestamp("activity_end_date"));
+            activity.setActivityStartDate(rs.getDate("activity_start_date"));
+            activity.setActivityEndDate(rs.getDate("activity_end_date"));
             activity.setDescription(rs.getString("description"));
             activity.setCreatedBy(rs.getInt("created_by"));
-            activity.setDateCreated(rs.getTimestamp("date_created"));
+            activity.setDateCreated(rs.getDate("date_created"));
             activity.setStatusId(rs.getInt("status_id"));
             activity.setRemarks(rs.getString("remarks"));
             return activity;

@@ -18,12 +18,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     @Autowired
     public AnnouncementDao announcementDao;
     
-    public void UpdateAnnouncement(Announcement request){
-        announcementDao.UpdateAnnouncement(request);
+    public int UpdateAnnouncement(Announcement request){
+        return announcementDao.UpdateAnnouncement(request);
     }
     
-    public void DeleteAnnouncement(Announcement request){
-        announcementDao.DeleteAnnouncement(request);
+    public int DeleteAnnouncement(Announcement request){
+        return announcementDao.DeleteAnnouncement(request);
     }
     
     public int CreateAnnouncement(Announcement _request){

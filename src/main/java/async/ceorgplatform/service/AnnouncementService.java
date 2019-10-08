@@ -13,8 +13,8 @@ import java.util.List;
  * @author Kate Dianne
  */
 public interface AnnouncementService {
-    void UpdateAnnouncement(Announcement request);
-    void DeleteAnnouncement(Announcement request);
+    int UpdateAnnouncement(Announcement request);
+    int DeleteAnnouncement(Announcement request);
     int CreateAnnouncement(Announcement _request);
     List<Announcement> getAnnouncement();
 }

@@ -15,4 +15,5 @@ import java.util.List;
 public interface LetterService {
     List<Letter> getLetter();
     int CreateLetter(Letter letter);
+    int DeleteLetter (Letter letter);
 }

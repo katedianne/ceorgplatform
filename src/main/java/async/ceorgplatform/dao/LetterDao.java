@@ -15,4 +15,5 @@ import java.util.List;
 public interface LetterDao {
     List<Letter> getLetter();
     int CreateLetter(Letter letter);
+    int DeleteLetter(Letter letter);
 }

@@ -26,4 +26,9 @@ public class LetterServiceImpl implements LetterService {
         int result = letterDao.CreateLetter(letter);
         return result;
     }
+
+    @Override
+    public int DeleteLetter(Letter letter) {
+        return letterDao.DeleteLetter(letter);
+    }
 }

@@ -63,6 +63,14 @@ public class Announcement {
         this.createdBy = createdBy;
     }
 
+    public String getCreatedByName() {
+        return createdByName;
+    }
+
+    public void setCreatedByName(String createdByName) {
+        this.createdByName = createdByName;
+    }
+    
     public String getRemarks() {
         return remarks;
     }
@@ -84,6 +92,7 @@ public class Announcement {
     private String announcement;
     private Date dateCreated;
     private int createdBy;
+    private String createdByName;
     private String remarks;
     private int statusId;
     

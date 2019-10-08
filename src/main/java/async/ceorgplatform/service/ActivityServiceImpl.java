@@ -23,8 +23,8 @@ public class ActivityServiceImpl implements ActivityService {
         return result;
     }
     
-    public void DeleteActivity(Activity activity){
-        activityDao.DeleteActivity(activity);
+    public int DeleteActivity(Activity activity){
+        return activityDao.DeleteActivity(activity);
     }
     
     public int CreateActivity(Activity activity){

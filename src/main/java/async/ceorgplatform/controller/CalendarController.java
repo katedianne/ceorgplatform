@@ -11,6 +11,7 @@ import async.ceorgplatform.model.UserPrincipal;
 import async.ceorgplatform.service.ActivityService;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,5 +68,27 @@ public class CalendarController {
 
         return user;
      
+    }
+    
+    @RequestMapping(value = "/getCalendar", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Activity> getReservation( HttpServletRequest request){        
+        List<Activity> activityList  = activityService.getActivity();
+        return activityList;
+    }
+    
+    @RequestMapping(value = "/deleteActivity", method = RequestMethod.POST)
+    @ResponseBody
+    public MyUser deleteReservation(@RequestBody Activity activity, HttpServletRequest request){
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUser user = new MyUser();
+
+        activity.setCreatedBy(currentUser.getUser().getUserId()); // set created by to user id from cookie 
+    
+        int result = activityService.DeleteActivity(activity);
+
+        user.setUserId(result);
+
+        return user;
     }
 }
