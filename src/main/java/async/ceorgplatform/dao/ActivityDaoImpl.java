@@ -27,8 +27,8 @@ public class ActivityDaoImpl implements ActivityDao {
     JdbcTemplate jdbcTemplate;
     
     public int UpdateActivity(Activity activity){
-        String sql = "update activities set activity_name = ? , activty_start_date= ? , activity_end_date = ? , description = ?, date_created = ?, remarks = ? where activity_id = ?";
-        int result = jdbcTemplate.update(sql, new Object[]{activity.getActivityName(),activity.getActivityStartDate(), activity.getActivityEndDate(), activity.getDescription(), activity.getDateCreated(), activity.getRemarks(), activity.getActivityId()});
+        String sql = "update activities set activity_name = ? , activity_start_date= ? , activity_end_date = ? , description = ? where activity_id = ?";
+        int result = jdbcTemplate.update(sql, new Object[]{activity.getActivityName(),activity.getActivityStartDate(), activity.getActivityEndDate(), activity.getDescription(), activity.getActivityId()});
         return result;
     }
     

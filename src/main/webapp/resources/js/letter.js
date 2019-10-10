@@ -4,10 +4,25 @@ $(document).ready(function () {
         dateFormat: 'yy-mm-dd'
     });
 
+   $(document).on('click', '.btnEditLetter', function (e) {
+        var str = $(this).data("id");
+
+        $("#inputLetterType").val($(this).parent().siblings()[1].innerHTML);  //get room id from datatable
+
+        $("#inputLetterName").val($(this).parent().siblings()[2].innerHTML); //get event name from datatable
+
+        $("#inputDateReleased").val($(this).parent().siblings()[3].innerHTML);  //get date from datatable
+
+        $("#inputRemarks").val($(this).parent().siblings()[4].innerHTML);  //get time start from datatable
+
+        $("#btnAddLetter").data('id', str); 
+    });
+
     $(document).on('click', '#btnAddLetter', function (e) {
-        e.preventDefault();
+     
         $("#formLetter").valid();
        
+    
     });
     
     var table = $("#tableLetter").DataTable({
@@ -33,6 +48,7 @@ $(document).ready(function () {
             },
             {"data": "controlNumber"},
             {"data": "letterTypeName"},
+            {"data": "letterName"},
             {"data": "dateReleased"},
             {"data": "remarks"}
         ],

@@ -16,4 +16,5 @@ public interface LetterDao {
     List<Letter> getLetter();
     int CreateLetter(Letter letter);
     int DeleteLetter(Letter letter);
+    int UpdateLetter(Letter letter);
 }

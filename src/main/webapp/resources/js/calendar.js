@@ -9,7 +9,19 @@ $(document).ready(function () {
         minDate: 0 
     });
 
+    $(document).on('click', '.btnEditCalendar', function (e) {
+        var str = $(this).data("id");
 
+        $("#inputEvent").val($(this).parent().siblings()[0].innerHTML);  //get room id from datatable
+
+        $("#inputDateStart").val($(this).parent().siblings()[1].innerHTML); //get event name from datatable
+
+        $("#inputDateEnd").val($(this).parent().siblings()[2].innerHTML);  //get date from datatable
+
+        $("#inputDescription").val($(this).parent().siblings()[3].innerHTML);  //get time start from datatable
+
+        $("#btnAddCalendar").data('id', str); 
+    });
 
     $(document).on('click', '#btnAddCalendar', function (e) {
        // e.preventDefault();

@@ -27,8 +27,8 @@ public class NoteDaoImpl implements NoteDao {
     JdbcTemplate jdbcTemplate;
     
     public int UpdateNote(Note request){
-        String sql = "update notes set note_title = ? , note = ? , remarks = ? where note_id = ?";
-        int result = jdbcTemplate.update(sql, new Object[]{request.getNoteTitle(),request.getNote(), request.getRemarks(), request.getNoteId()});
+        String sql = "update notes set note_title = ? , note = ? where note_id = ?";
+        int result = jdbcTemplate.update(sql, new Object[]{request.getNoteTitle(),request.getNote(), request.getNoteId()});
         return result;
     }
     
@@ -57,13 +57,13 @@ public class NoteDaoImpl implements NoteDao {
         public Note mapRow(ResultSet rs, int arg1) throws SQLException{
             Note getDB = new Note();
             
-            getDB.setNoteId(rs.getInt(1));
-            getDB.setNoteTitle(rs.getString(2));
-            getDB.setNote(rs.getString(3));
-            getDB.setDateCreated(rs.getTimestamp(4));
-            getDB.setCreatedBy(rs.getInt(5));
-            getDB.setRemarks(rs.getString(6));
-            getDB.setStatusId(rs.getInt(7));
+            getDB.setNoteId(rs.getInt("note_id"));
+            getDB.setNoteTitle(rs.getString("note_title"));
+            getDB.setNote(rs.getString("note"));
+            getDB.setDateCreated(rs.getDate("date_created"));
+            getDB.setCreatedBy(rs.getInt("created_by"));
+            getDB.setRemarks(rs.getString("remarks"));
+       
             return getDB;
         }
     }

@@ -54,6 +54,13 @@ public class LetterDaoImpl implements LetterDao {
         int result = jdbcTemplate.update(sql, new Object[]{letter.getLetterId()});
         return result;
     }
+
+    @Override
+    public int UpdateLetter(Letter letter) {
+        String sql = "update letters set letter_type = ?, letter_name = ? , date_released = ? , remarks= ? where letter_id = ?";
+        return jdbcTemplate.update(sql, new Object[]{letter.getLetterType(), letter.getLetterName(), letter.getDateReleased(), letter.getRemarks(), letter.getLetterId()});
+       
+    }
     
     class LetterMapper implements RowMapper<Letter>{
      
@@ -64,6 +71,7 @@ public class LetterDaoImpl implements LetterDao {
             letter.setLetterNumber(rs.getString("letter_number"));
             letter.setLetterTypeId(rs.getInt("letter_type_id"));
             letter.setLetterTypeName(rs.getString("letter_type_name"));
+            letter.setLetterName(rs.getString("letter_name"));
             letter.setControlNumber(rs.getString("control_number"));
             letter.setDateReleased(rs.getDate("date_released"));
             letter.setDateCreated(rs.getDate("date_created"));

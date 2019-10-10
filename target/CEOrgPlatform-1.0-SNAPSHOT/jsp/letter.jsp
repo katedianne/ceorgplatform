@@ -128,7 +128,7 @@
                             </div>
                             <div class="container" style="float: right;">
                                 <button id="btnCancelLetter" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>
-                                <button id="btnSaveLetter" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>
+<!--                                <button id="btnSaveLetter" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>-->
                                 <button type="submit" id="btnAddLetter" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>
                             </div>
 
@@ -139,12 +139,14 @@
                                             <th class="th-sm" style="text-align: center; vertical-align: middle; width: 9%;"> </th>
                                             <th class="th-sm" style="text-align: center; vertical-align: middle;"> Control Number </th>
                                             <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Type </th>
+                                            <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Name </th>
                                             <th class="th-sm" style="text-align: center; vertical-align: middle;"> Date Released </th>
                                             <th class="th-sm" style="text-align: center; vertical-align: middle;"> Remarks </th>
                                         </tr>
                                     </thead>
                                     <tbody style="color: black;">
                                         <tr>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>

@@ -11,6 +11,7 @@ import async.ceorgplatform.model.UserPrincipal;
 import async.ceorgplatform.service.NoteService;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,5 +69,12 @@ public class NotesController {
 
         return user;
      
+    }
+    
+    @RequestMapping(value = "/getNotes", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Note> getNotes(HttpServletRequest request){        
+        List<Note> noteList  = noteService.getNote();
+        return noteList;
     }
 }

@@ -35,7 +35,7 @@ public class LetterController {
     LetterService letterService;
     
     @RequestMapping(value = "/letter", method = RequestMethod.GET)
-    public ModelAndView showNote(){
+    public ModelAndView showLetter(){
         UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ModelAndView mav = new ModelAndView("letter");
         mav.addObject("currentRoleId", currentUser.getUser().getRoleId());
@@ -47,7 +47,7 @@ public class LetterController {
     
     @RequestMapping(value = "/addLetter", method = RequestMethod.POST)
     @ResponseBody
-    public MyUser addNote(@RequestBody Letter letter, HttpServletRequest request){
+    public MyUser addLetter(@RequestBody Letter letter, HttpServletRequest request){
        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        MyUser user = new MyUser();
      
@@ -64,7 +64,7 @@ public class LetterController {
             result = letterService.CreateLetter(letter);
         }
         else {
-//            result = letterService.UpdateLetter(letter);
+            result = letterService.UpdateLetter(letter);
         }
 
         user.setUserId(result);

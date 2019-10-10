@@ -107,7 +107,7 @@
                 <!-- Content Row -->
                 <div class="row">
 
-                    <div class="col-md-4">
+                    <div class="col-lg-4">
                         <div class="input-group md-form form-sm form-1 pl-0">
                             <div class="input-group-prepend">
                                 <span class="input-group-text blue lighten-3" id="basic-text1"><i class="fas fa-search text-white" aria-hideen="true"></i></span>
@@ -120,9 +120,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>     </label>
-                                <textarea id="inputNote" class="form-control rounded-0 my-0 py-4" row="10"></textarea>
-                            </div>
+                                <textarea id="inputNote" class="form-control rounded-0 my-0 py-4" row="10" placeholder="notes"></textarea>
+                            </div>  
 
                             <div>
                                 <button id="btnAddNote" type="submit" class="btn btn-success">ADD</button>
@@ -131,90 +130,27 @@
                         </form>
                     </div>
 
-                    <div class="col-md-4">
-
-                        <div class="card mb-2 py-4 border-bottom-primary">
-                            <div class="card-header py-1 mb-1">
-                                <h5 class="m-0 font-weight-bold text-primary">Note 1</h5>
-                            </div>
-                            <div class="card-body">
-                                lorem ipsum
-                            </div>
-                        </div>
-
-                        <div class="card mb-2 py-4 border-bottom-warning">
-                            <div class="card-header py-1 mb-1">
-                                <h5 class="m-0 font-weight-bold text-primary">Note 1</h5>
-                            </div>
-                            <div class="card-body">
-                                .border-left-primary
-                            </div>
-                        </div>
-
-                        <div class="card mb-2 py-4 border-bottom-success">
-                            <div class="card-header py-1 mb-1">
-                                <h5 class="m-0 font-weight-bold text-primary">Note 1</h5>
-                            </div>
-                            <div class="card-body">
-                                .border-left-primary
-                            </div>
-                        </div>
-
+                    <div class="col-lg-4" id="firstColNotesContainer">
+                        
                     </div>
 
-                    <!-- Border Bottom Utilities -->
-                    <div class="col-md-4">
-
-                        <div class="card shadow mb-4 border-bottom-warning">
-                            <a href="#collapseCardExample1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                            </a>
-                            <!-- Card Content - Collapse -->
-                            <div class="collapse show" id="collapseCardExample1">
-                                <div class="card-body">
-                                    This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
+                    <div class="col-lg-4" id="secondColNotesContainer">
+<!--                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between border-bottom-primary">
+                                <h6 class="m-0 font-weight-bold text-primary">Title </h6>
+                                <div class="dropdown no-arrow">
+                                    <a href="#" class="btnEditNote"><i class="fas fa-edit fa-sm fa-fw"></i></a>
+                                    <a href="#" class="btnDeleteNote"> <i class="fas fa-trash-alt fa-sm fa-fw"></i></a>
                                 </div>
                             </div>
 
-                            <div class="card shadow mb-4 border-bottom-danger">
-                                <a href="#collapseCardExample2" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                    <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                                </a>
-                                <!-- Card Content - Collapse -->
-                                <div class="collapse" id="collapseCardExample2">
-                                    <div class="card-body">
-                                        This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-                                    </div>
-                                </div>
-
-                                <div class="card shadow mb-4 border-bottom-success">
-                                    <a href="#collapseCardExample3" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                        <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                                    </a>
-                                    <!-- Card Content - Collapse -->
-                                    <div class="collapse" id="collapseCardExample3">
-                                        <div class="card-body">
-                                            This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-                                        </div>
-                                    </div>
-
-                                    <div class="card shadow mb-4 border-bottom-primary">
-                                        <a href="#collapseCardExample5" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                            <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                                        </a>
-                                        <!-- Card Content - Collapse -->
-                                        <div class="collapse" id="collapseCardExample5">
-                                            <div class="card-body">
-                                                This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-                                            </div>
-                                        </div>
-                                    </div>              
-                                </div>
+                            <div class="card-body">
+                                Dropdown menus can be  placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
                             </div>
-                        </div>
+                        </div>-->
                     </div>
-                    
-                    
+
+
                 </div>
                 <!-- End of Main Content -->
 
