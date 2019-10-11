@@ -60,6 +60,11 @@
                 <i class="fas fa-sticky-note"></i>
                 <span>Notes</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="${contextPath}/payment">
+                <i class="fas fa-donate"></i>
+                <span>Payment</span></a>
+        </li>
     </ul>
     <!-- End of Sidebar -->
 

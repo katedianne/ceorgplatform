@@ -43,6 +43,26 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
         }
     }
     
+    public int AcknowledgeAnnouncement(Announcement request){
+        int result = 0;
+        for(Announcement.Recipient _request : request.recipient){
+            String sql = "update recipient set status_id = 7 where announcement_id = ? and announced_to = ?";
+            result = jdbcTemplate.update(sql, new Object[]{request.getAnnouncementId(), _request.getAnnouncedTo()});
+        }
+        
+        String check = "select announced_to from recipient where announcement_id = " + request.getAnnouncementId() + " and status_id = 6";
+        List<Announcement.Recipient> announcement = jdbcTemplate.query(check, new AnnouncementDaoImpl.AnnouncedToMapper());
+        
+        for(Announcement.Recipient _announcement : announcement){
+            if(_announcement.getAnnouncedTo() > 0){
+                String acknowledge = "update announcement set status_id = 7 where announcement_id = ?";
+                jdbcTemplate.update(acknowledge, new Object[]{request.getAnnouncementId()});
+            }
+        }
+        
+        return result;
+    }
+    
     
     
     public void DeleteAnnouncement(Announcement request){
@@ -65,7 +85,7 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
             
         for(Announcement.Recipient requestRecipient : request.recipient){
             String sqlRecipient = "insert  into recipient (announcement_id, announced_to, date_created, created_by, status_id) values(?,?,?,?,?)";
-            jdbcTemplate.update(sqlRecipient, new Object[]{requestList.get(0).getAnnouncementId(), requestRecipient.getAnnouncedTo(), request.getDateCreated(), request.getCreatedBy(), 1});            
+            jdbcTemplate.update(sqlRecipient, new Object[]{requestList.get(0).getAnnouncementId(), requestRecipient.getAnnouncedTo(), request.getDateCreated(), request.getCreatedBy(), 6});            
         }
         return result;
     }
@@ -104,6 +124,17 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
             Announcement announcement = new Announcement();
             
             announcement.setAnnouncementId(rs.getInt("announcement_id"));
+           
+            return announcement;
+        }
+    }
+    
+    class AnnouncedToMapper implements RowMapper<Announcement.Recipient>{
+     
+        public Announcement.Recipient mapRow(ResultSet rs, int arg1) throws SQLException{
+            Announcement.Recipient announcement = new Announcement.Recipient();
+            
+            announcement.setAnnouncedTo(rs.getInt("announcement_id"));
            
             return announcement;
         }

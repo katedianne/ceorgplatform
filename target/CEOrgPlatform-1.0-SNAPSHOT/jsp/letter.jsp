@@ -136,7 +136,13 @@
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label>Letter Type:</label>
-                                    <input type="text" class="form-control" id="inputLetterType" name="inputLetterType">
+                                    <select class="custom-select" id="inputLetterType" name="inputLetterType">
+                                    <option value="">Please select letter type</option>
+                                    <option value="1">REQUEST</option>
+                                    <option value="2">EXCUSE</option>
+                                    <option value="3">MEMO</option>
+                                    <option value="4">APPROVAL</option>
+                                </select>                  
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Letter Name: </label>

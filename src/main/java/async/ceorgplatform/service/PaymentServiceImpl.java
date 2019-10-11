@@ -14,12 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Kate Dianne
  */
-public class PaymentServiceImpl {
+public class PaymentServiceImpl implements PaymentService {
     @Autowired
     public PaymentDao paymentDao;
     
     public void CreatePayment(Payment payment){
         paymentDao.CreatePayment(payment);
+    }
+    
+    public int EditPayment(Payment request){
+        return paymentDao.EditPayment(request);
     }
     
     public void UpdatePayment(Payment payment){

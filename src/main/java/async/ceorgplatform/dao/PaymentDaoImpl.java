@@ -29,23 +29,42 @@ public class PaymentDaoImpl implements PaymentDao {
     
     public void CreatePayment(Payment payment) {
 
-    String sql = "insert into payments (payment_balance, principal_amount, org_id, payment_name, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?)";
+    String sql = "insert into payments (payment_balance, principal_amount, org_id, payment_name, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,8)";
 
     jdbcTemplate.update(sql, new Object[] { payment.getPaymentBalance(), payment.getPrincipalAmount(), payment.getOrgId(),
-        payment.getPaymentName(), payment.getDateCreated(), payment.getCreatedBy(), payment.getRemarks(), payment.getStatusId()});
+        payment.getPaymentName(), payment.getDateCreated(), payment.getCreatedBy(), payment.getRemarks()});
+    }
+    
+    public int EditPayment(Payment request){
+        String sql = "update payments set payment_balance = ?, principal_amount = ?, payment_name = ?, created_by = ?, remarks = ? where payment_id = ? ";
+        int result = jdbcTemplate.update(sql, new Object[] {request.getPaymentBalance(), request.getPrincipalAmount(), request.getPaymentName(), request.getRemarks(), request.getPaymentId()});
+        return result;
     }
     
     public void UpdatePayment(Payment payment) {
+        double paymentAmount = 0;
+        for(Payment.UpdateTrail _request : payment.updateTrail){
+            String sqlInsert = "insert into update_trail (payment_id, status_from, status_to, payment_balance, payment_amount, date_created, created_by, remarks, status_id values (?,?,?,?,?,?,?,?,1)";
+            jdbcTemplate.update(sqlInsert, new Object[] { _request.getPaymentId(), _request.getStatusFrom(), _request.getStatusTo(),_request.getPaymentBalance(),
+                _request.getPaymentAmount(), payment.getDateCreated(), payment.getCreatedBy(), payment.getRemarks()});
+            paymentAmount = _request.getPaymentAmount();
+        }
+        String sqlSelect = "select payment_balance from payments where payment_id = " + payment.getPaymentId();
+        List<Payment> paymentList = jdbcTemplate.query(sqlSelect, new PaymentDaoImpl.PaymentMapper());
+        
+        double paymentBalance = 0;
+        for(Payment _paymentBalance : paymentList){
+            paymentBalance = _paymentBalance.getPaymentBalance();
+        }
+        
+        String sql = "update payments set payment_balance = ?, created_by = ? , remarks = ? where payment_id = ?";
+        jdbcTemplate.update(sql, new Object[] { paymentBalance - paymentAmount, payment.getCreatedBy(), payment.getRemarks(), payment.getPaymentId()});
+        
+        if (paymentAmount == paymentBalance){
+            String sqlUpdateStatus = "update payments set status_id = 9 where payment_id = ?";
+            jdbcTemplate.update(sqlUpdateStatus, new Object[] {payment.getPaymentId()});
+        }
     
-    String sqlInsert = "insert into update_trail (payment_id, status_from, status_to, payment_balance, payment_amount, date_created, created_by, remarks, status_id values (?,?,?,?,?,?,?,?,?)";
-    
-    jdbcTemplate.update(sqlInsert, new Object[] { payment.updateTrail.getPaymentId(), payment.updateTrail.getStatusFrom(), payment.updateTrail.getStatusTo(),
-        payment.updateTrail.getPaymentBalance(), payment.updateTrail.getPaymentAmount(), payment.updateTrail.getDateCreated(), payment.updateTrail.getCreatedBy(), payment.updateTrail.getRemarks(), payment.getStatusId()});
-    
-    String sqlSelect = "select payment_balance from update_trail where update_trail_id = 1 ";
-    
-    String sql = "update payments set payment_balance = ?, created_by = ? , remarks = ";
-    jdbcTemplate.update(sql, new Object[] { payment.getPaymentBalance(), payment.getCreatedBy(), payment.getRemarks()});
     }
     
     public List<Payment> getPayment(){
@@ -59,15 +78,15 @@ public class PaymentDaoImpl implements PaymentDao {
         public Payment mapRow(ResultSet rs, int arg1) throws SQLException{
             Payment payment = new Payment();
             
+            payment.setPaymentId(rs.getInt("payment_id"));
             payment.setPaymentBalance(rs.getDouble("payment_balance"));
-            payment.setPrincipalAmount(rs.getInt("principal_amount"));
+            payment.setPrincipalAmount(rs.getDouble("principal_amount"));
             payment.setOrgId(rs.getInt("org_id"));
             payment.setPaymentName(rs.getString("payment_name"));
             payment.setDateCreated(rs.getTimestamp("date_created"));
             payment.setCreatedBy(rs.getInt("created_by"));
             payment.setRemarks(rs.getString("remarks"));
             payment.setStatusId(rs.getInt("status_id"));
-            payment.updateTrail.setPaymentBalance(rs.getDouble("payment_balance"));
             return payment;
         }
     }

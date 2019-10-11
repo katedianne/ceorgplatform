@@ -13,6 +13,7 @@ import java.util.List;
  * @author Kate Dianne
  */
 public interface PaymentDao {
+    int EditPayment(Payment request);
     void CreatePayment(Payment payment);
     void UpdatePayment(Payment payment);
     List<Payment> getPayment();

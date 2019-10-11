@@ -28,45 +28,45 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class NotesController {
-    @Autowired
-    NoteService noteService;
-    
-    @RequestMapping(value = "/notes", method = RequestMethod.GET)
-    public ModelAndView showNote(){
-        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ModelAndView mav = new ModelAndView("notes");
-        mav.addObject("currentRoleId", currentUser.getUser().getRoleId());
-        mav.addObject("currentUserId", currentUser.getUser().getUserId());
-        mav.addObject("currentOrgId", currentUser.getUser().getOrgId());
-        
-        return mav;
-    }
-    
-    @RequestMapping(value = "/addNote", method = RequestMethod.POST)
-    @ResponseBody
-    public MyUser addNote(@RequestBody Note note, HttpServletRequest request){
-       UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       MyUser user = new MyUser();
-     
-       note.setCreatedBy(currentUser.getUser().getUserId()); // set created by to user id from current logged in 
-     
-        Date date= new Date();
-        long time = date.getTime();
-	note.setDateCreated(new Timestamp(time)); // set date requested to current datetime
-
-        note.setStatusId(1); // set status to pencil book
-        
-        int result = 0;
-        if (note.getNoteId() == 0){
-            result = noteService.CreateNote(note);
-        }
-        else {
-            result = noteService.UpdateNote(note);
-        }
-
-        user.setUserId(result);
-
-        return user;
-     
-    }
+//    @Autowired
+//    NoteService noteService;
+//    
+//    @RequestMapping(value = "/notes", method = RequestMethod.GET)
+//    public ModelAndView showNote(){
+//        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        ModelAndView mav = new ModelAndView("notes");
+//        mav.addObject("currentRoleId", currentUser.getUser().getRoleId());
+//        mav.addObject("currentUserId", currentUser.getUser().getUserId());
+//        mav.addObject("currentOrgId", currentUser.getUser().getOrgId());
+//        
+//        return mav;
+//    }
+//    
+//    @RequestMapping(value = "/addNote", method = RequestMethod.POST)
+//    @ResponseBody
+//    public MyUser addNote(@RequestBody Note note, HttpServletRequest request){
+//       UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//       MyUser user = new MyUser();
+//     
+//       note.setCreatedBy(currentUser.getUser().getUserId()); // set created by to user id from current logged in 
+//     
+//        Date date= new Date();
+//        long time = date.getTime();
+//	note.setDateCreated(new Timestamp(time)); // set date requested to current datetime
+//
+//        note.setStatusId(1); // set status to pencil book
+//        
+//        int result = 0;
+//        if (note.getNoteId() == 0){
+//            result = noteService.CreateNote(note);
+//        }
+//        else {
+//            result = noteService.UpdateNote(note);
+//        }
+//
+//        user.setUserId(result);
+//
+//        return user;
+//     
+//    }
 }

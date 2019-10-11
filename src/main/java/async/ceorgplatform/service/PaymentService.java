@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface PaymentService {
     void CreatePayment(Payment payment);
+    int EditPayment(Payment request);
     void UpdatePayment(Payment payment);
     List<Payment> getPayment();
 }
