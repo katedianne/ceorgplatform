@@ -112,7 +112,7 @@
                 <!-- Content Row -->
                 <div class="row">
 
-                    <div class="col-lg-7">
+                    <div class="col-md-8">
 
                         <!-- Default Card Example -->
                         <div class="card shadow mb-4">
@@ -120,28 +120,26 @@
                                 <h6 class="m-0 font-weight-bold text">Announcements</h6>
                             </div>
                             <div class="card-body">
-                                Dropdown menus can be placed in the card header in order to extend the functionality of
-                                a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in
-                                the card header can be clicked on in order to toggle a dropdown menu.
+                                Invitation to submit Proposals or Quotations for Accreditation: Purified Drinking water provider
                                 <a href="announcement">See more.. </a>
                             </div>
                         </div>
 
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
-                            <div class="card-header py-2">
-                                <h6 class="m-0 font-weight-bold text-primary">Reservation Status</h6> <a
-                                    href="reservation" text-align="left">See all</a>
+                            <div class="card-header ">
+                                <h6 class="font-weight-bold text">Reservation Status</h6>
+                            <a href="reservation">See all</a>
                             </div>
                             <div class="card-body">
                                 <h4 class="small font-weight-bold">Event 1<span class="float-right">Complete</span></h4>
                                 <div class="progress mb-4">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                    <div class="progress-bar" role="progressbar" style="width: 100%"
                                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h4 class="small font-weight-bold">Event 2<span class="float-right">70%</span></h4>
                                 <div class="progress mb-4">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 70%"
+                                    <div class="progress-bar" role="progressbar" style="width: 70%"
                                          aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h4 class="small font-weight-bold">Event 3<span class="float-right">60%</span></h4>
@@ -157,7 +155,7 @@
                     </div>
 
                     <!-- Basic Card Example -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
 
 
                         <div class="card shadow mb-4">
@@ -166,9 +164,22 @@
                             </div>
                             <div class="card-body">
                                 <ul style="none">
-                                    <li><a href="notes">cuties</a></li>
-                                    <li><a href="notes">cuties</a></li>
-                                    <li><a href="notes">cuties</a></li>
+                                    <li><a href="notes">Minutes of Meeting</a></li>
+                                    <li><a href="notes">Tools and Instruments</a></li>
+                                    <li><a href="notes">Bid Notices and Invitations</a></li>
+                                    <li><a href="notes">Minutes of Meeting</a></li>
+                                    <li><a href="notes">Tools and Instruments</a></li>
+                                    <li><a href="notes">Bid Notices and Invitations</a></li>
+                                    <li><a href="notes">Minutes of Meeting</a></li>
+                                    <li><a href="notes">Tools and Instruments</a></li>
+                                    <li><a href="notes">Bid Notices and Invitations</a></li>
+                                    <li><a href="notes">Minutes of Meeting</a></li>
+                                    <li><a href="notes">Tools and Instruments</a></li>
+                                    <li><a href="notes">Bid Notices and Invitations</a></li>
+                                    <li><a href="notes">Minutes of Meeting</a></li>
+                                    <li><a href="notes">Tools and Instruments</a></li>
+                                    <li><a href="notes">Bid Notices and Invitations</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
