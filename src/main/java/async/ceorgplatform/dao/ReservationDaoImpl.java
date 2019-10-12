@@ -42,14 +42,20 @@ public class ReservationDaoImpl implements ReservationDao {
         String check = "select date_requested, scheduled_start_time, scheduled_end_time, event_room_id from reservations where date_requested like '" + dateRequested + "%' and ((scheduled_start_time >= '" + request.getScheduledStartTime() + "' and scheduled_start_time <= '" + request.getScheduledEndTime() + "') or (scheduled_end_time > '" + request.getScheduledStartTime() + "' and scheduled_end_time < '" + request.getScheduledEndTime() + "')) and event_room_id = " + request.getEventRoomId() + "  and status_id = 4";
         List<Reservation> checkList = jdbcTemplate.query(check, new ReservationDaoImpl.CheckReservationMapper());
         int result = 0;
-        for (Reservation _checkList : checkList){
-            if(_checkList.getEventRoomId() != request.getEventRoomId()){
-                String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_requested, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
+        if (checkList.get(0).getStatusId() == 0){
+            String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_requested, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
 
-                result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
-                request.getEventName(), request.getDateRequested(), request.getDateCreated(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
-            }
+            result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
+            request.getEventName(), request.getDateRequested(), request.getDateCreated(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
         }
+//        for (Reservation _checkList : checkList){
+//            if(_checkList.getEventRoomId() != request.getEventRoomId()){
+//                String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_requested, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
+//
+//                result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
+//                request.getEventName(), request.getDateRequested(), request.getDateCreated(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
+//            }
+//        }
         
       return result;
     }
