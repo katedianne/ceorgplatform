@@ -46,52 +46,14 @@
             var currentOrgId = ${currentOrgId};
         </script>
         <script src="${contextPath}/resources/js/letter.js"></script>
-        <script>
-
-
-
-
-            //         $(document).ready(function () {
-            //             $("#tabs").tabs();
-            //
-            //             $("#btnAddChecklist").click(function () {
-            //                 $("#liCheklist").show();
-            //                 $("#liAuditFindings").show();
-            //                 $("#liMatrix").show();
-            //
-            //                 $("#tabs").tabs("option", "active", 1);
-            //             });
-            //
-            //             $("#btnLogin").click(function () {
-            //
-            //
-            // //                var login = {
-            // //                    username: $("#inputUsername").val(),
-            // //                    password: $("#inputPassword").val()
-            // //                };
-            // //
-            // //
-            // //
-            // //                    $.ajax({
-            // //                        url: "loginProcess",
-            // //                        type: "POST",
-            // //                        contentType: "application/json",
-            // //                        data: JSON.stringify(login), //Stringified Json Object
-            // //                       // dataType: 'json',
-            // //                        success: function (response) {
-            // //                            alert(response);
-            // //                            alert(response.username);
-            // //
-            // //                        }
-            // //                    });
-            //
-            //
-            //             });
-            //
-            //         });
-
-
-        </script>
+    
+        <style>
+            .help-block {
+                color: red
+                
+            }
+        </style>
+        
     </head>
     <body id="page-top">
 

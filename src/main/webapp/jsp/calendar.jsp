@@ -41,54 +41,12 @@
         </script>
         <script src="${contextPath}/resources/js/calendar.js"></script>
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-    
-        <![endif]-->
-        <script>
-
-
-            //         $(document).ready(function () {
-            //             $("#tabs").tabs();
-            //
-            //             $("#btnAddChecklist").click(function () {
-            //                 $("#liCheklist").show();
-            //                 $("#liAuditFindings").show();
-            //                 $("#liMatrix").show();
-            //
-            //                 $("#tabs").tabs("option", "active", 1);
-            //             });
-            //
-            //             $("#btnLogin").click(function () {
-            //
-            //
-            // //                var login = {
-            // //                    username: $("#inputUsername").val(),
-            // //                    password: $("#inputPassword").val()
-            // //                };
-            // //
-            // //
-            // //
-            // //                    $.ajax({
-            // //                        url: "loginProcess",
-            // //                        type: "POST",
-            // //                        contentType: "application/json",
-            // //                        data: JSON.stringify(login), //Stringified Json Object
-            // //                       // dataType: 'json',
-            // //                        success: function (response) {
-            // //                            alert(response);
-            // //                            alert(response.username);
-            // //
-            // //                        }
-            // //                    });
-            //
-            //
-            //             });
-            //
-            //         });
-
-
-        </script>
+        <style>
+            .help-block {
+                color: red
+                
+            }
+        </style>
     </head>
     <body id="page-top">
 
@@ -112,25 +70,25 @@
                         <div class="row">
                             <div class="form-group col-md-2">
                                 <label>Event:</label>
-                                <input id="inputEvent" type="text" class="form-control" >
+                                <input id="inputEvent" name="inputEvent" type="text" class="form-control" >
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Date Start: </label>
-                                <input id="inputDateStart" type="date" class="form-control"/>
+                                <input id="inputDateStart" name="inputDateStart" type="date" class="form-control"/>
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Date End:</label>
-                                <input id="inputDateEnd" type="date" class="form-control">
+                                <input id="inputDateEnd" name="inputDateEnd" type="date" class="form-control">
                             </div>
                             <div class="form-group col-md-4">
                                 <label>Description: </label>
-                                <input id="inputDescription" type="text" class="form-control"/>
+                                <input id="inputDescription" name="inputDescription" type="text" class="form-control"/>
                             </div>
                         </div>
                         <div class="container" style="float: right;">
                             <button id="btnCancelCalendar" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>
-                            <button id="btnSaveCalendar" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>
-                            <button id="btnAddCalendar" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>
+                            <!--                            <button id="btnSaveCalendar" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>-->
+                            <button id="btnAddCalendar" type="submit" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>
                         </div>
                     </form>
                     <div class="container">
@@ -171,3 +129,4 @@
         </div>
     </body>
 </html>
+    

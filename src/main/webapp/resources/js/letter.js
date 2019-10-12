@@ -25,6 +25,17 @@ $(document).ready(function () {
     
     });
     
+    $(document).on('click', '#btnCancelLetter', function (e) {
+        e.preventDefault();
+        
+        $("#btnAddLetter").data('id', 0);
+        $("#inputLetterType").val('');
+        $("#inputLetterName").val('');
+        $("#inputDateReleased").val('');
+        $("#inputRemarks").val('');
+     
+    });
+    
     var table = $("#tableLetter").DataTable({
         "bJQueryUI": true,
         "deferRender": true,
@@ -60,6 +71,24 @@ $(document).ready(function () {
         ]
         
     });
+    
+    $.validator.setDefaults({
+        errorElement: "span",
+        errorClass: "help-block",
+        highlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length || element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);     
+            }
+        }
+    });   
     
     $("#formLetter").validate({
         rules:{

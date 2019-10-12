@@ -49,6 +49,9 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
     
     
     public int DeleteAnnouncement(Announcement request){
+
+        
+        
         String sql = "update announcement set status_id = 2 where announcement_id = ?";
             int result = jdbcTemplate.update(sql, new Object[]{request.getAnnouncementId()});
         

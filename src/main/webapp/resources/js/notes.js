@@ -2,8 +2,6 @@ $(document).ready(function () {
     
     getNotes();
 
-    
-
     $(document).on('click', '.btnEditNote', function (e) {
         var str = $(this).data("id");
    
@@ -24,8 +22,73 @@ $(document).ready(function () {
         $("#inputNote").val('');
         $("#btnAddNote").data('id', 0);
     });
+    
+    $(document).on('click', '.btnDeleteNote', function (e) {
+        var request = {
+                        noteId: $(this).data('id')
+                    };
+        $("#dialogDeleteNote").data("request", request);
 
+        dialogDeleteNote.dialog( "open" );
+        
+    });
 
+    var dialogDeleteNote = $( "#dialogDeleteNote" ).dialog({
+                autoOpen: false,
+                resizable: false,
+                height: 250,
+                width: 400,
+                modal: true,
+                buttons: {
+                  "Yes": function(){
+                    
+                    var request = $("#dialogDeleteNote").data("request");
+                    
+                    $.ajax({
+                        url: "deleteNote",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(request), //Stringified Json Object
+                        dataType: 'json',
+                        success: function (response) {
+
+                            if (response.userId > 0) {
+                                alert("deleted to database");
+                                getNotes();
+                            }
+                        }
+                    });
+                      
+                    dialogDeleteNote.dialog( "close" );
+
+                  },
+                  
+                  "Cancel": function() {
+                    dialogDeleteNote.dialog( "close" );
+                  }
+                },
+                close: function() {
+                  dialogDeleteNote.dialog( "close" );
+                }
+            });
+
+    $.validator.setDefaults({
+        errorElement: "span",
+        errorClass: "help-block",
+        highlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length || element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);     
+            }
+        }
+    });      
 
     $("#formNote").validate({
         rules: {

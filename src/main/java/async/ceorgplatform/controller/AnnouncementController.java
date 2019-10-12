@@ -83,6 +83,7 @@ public class AnnouncementController {
 
         announcement.setCreatedBy(currentUser.getUser().getUserId()); // set created by to user id from cookie 
     
+
         int result = announcementService.DeleteAnnouncement(announcement);
 
         user.setUserId(result);

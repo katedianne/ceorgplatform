@@ -77,4 +77,19 @@ public class NotesController {
         List<Note> noteList  = noteService.getNote();
         return noteList;
     }
+    
+    @RequestMapping(value = "/deleteNote", method = RequestMethod.POST)
+    @ResponseBody
+    public MyUser deleteNote(@RequestBody Note note, HttpServletRequest request){
+        UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUser user = new MyUser();
+
+        note.setCreatedBy(currentUser.getUser().getUserId()); // set created by to user id from cookie 
+    
+        int result = noteService.DeleteNote(note);
+
+        user.setUserId(result);
+
+        return user;
+    }
 }

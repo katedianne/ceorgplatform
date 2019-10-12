@@ -40,6 +40,7 @@
         <script src="${contextPath}/resources/js/jquery-ui.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
         <script src="${contextPath}/resources/js/bootstrap-select.min.js"></script>
+        <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -51,52 +52,13 @@
             var currentOrgId = ${currentOrgId};
         </script>
         <script src="${contextPath}/resources/js/announcement.js"></script>
-        <script>
-
-            
-
-
-            //         $(document).ready(function () {
-            //             $("#tabs").tabs();
-            //
-            //             $("#btnAddChecklist").click(function () {
-            //                 $("#liCheklist").show();
-            //                 $("#liAuditFindings").show();
-            //                 $("#liMatrix").show();
-            //
-            //                 $("#tabs").tabs("option", "active", 1);
-            //             });
-            //
-            //             $("#btnLogin").click(function () {
-            //
-            //
-            // //                var login = {
-            // //                    username: $("#inputUsername").val(),
-            // //                    password: $("#inputPassword").val()
-            // //                };
-            // //
-            // //
-            // //
-            // //                    $.ajax({
-            // //                        url: "loginProcess",
-            // //                        type: "POST",
-            // //                        contentType: "application/json",
-            // //                        data: JSON.stringify(login), //Stringified Json Object
-            // //                       // dataType: 'json',
-            // //                        success: function (response) {
-            // //                            alert(response);
-            // //                            alert(response.username);
-            // //
-            // //                        }
-            // //                    });
-            //
-            //
-            //             });
-            //
-            //         });
-
-
-        </script>
+        
+        <style>
+            .help-block {
+                color: red
+                
+            }
+        </style>
     </head>
     <body id="page-top">
 
@@ -116,15 +78,17 @@
                       <button type="button" class="btn btn-dark">CANCEL</button>
                     </div> -->
                 </div>
-                <!-- Summary -->
-                <div id="tabs-1">
+                
+                
+                <div>
+                    <form id="formAnnouncement">
                     <div class="row form-group">
-                        <div class="col-lg-6">
-                            <input id="inputAnnouncementName" type="text" class="announcement_title_textarea form-control" data-toggle="tooltip" title="Announcement Title" placeholder="Enter Announcement Title">
+                        <div class="col-lg-6 form-group">
+                            <input id="inputAnnouncementName" name="inputAnnouncementName" type="text" class="form-control" data-toggle="tooltip"  placeholder="Enter Announcement Title">
                         </div>
                         <div class="col-lg-2"> </div>
-                        <div class="col-lg-4">
-                            <select id="inputRecipient" multiple class="selectpicker form-control mdb-select md-form">
+                        <div class="col-lg-4 form-group">
+                            <select id="inputRecipient" name="inputRecipient" multiple class="selectpicker form-control mdb-select md-form">
                                 <option value="0"> Send to </option>
                                 <option value="1"> ACCESS </option>
                                 <option value="2"> CEHS </option>
@@ -141,7 +105,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-12">
-                            <textarea id="inputAnnouncement" class="announcement_textarea form-control" data-toggle="tooltip" title="Announcement Information" placeholder="Enter Announcement Information here" rows="6"></textarea>
+                            <textarea id="inputAnnouncement" name="inputAnnouncement" class="form-control" data-toggle="tooltip"  placeholder="Enter Announcement Information here" rows="6"></textarea>
                         </div>
                     </div>
                     <div class="row button_class">
@@ -154,9 +118,10 @@
                             <button class="btn btn-primary button_image" type="button" data-toggle="tooltip" title="Upload image"> 
                                 <i class="far fa-image"> </i>
                             </button>
-                            <button id="btnAddAnnouncement" class="btn btn-primary" > SEND </button>
+                            <button id="btnAddAnnouncement" type="submit" class="btn btn-primary" > SEND </button>
                         </div>
                     </div>
+                   </form>
                     <div class="container row" >
                         <!--                                                                                <button id="btnCancelAnnounce" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>
                                                                                                         <button id="btnSaveAnnounce" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>

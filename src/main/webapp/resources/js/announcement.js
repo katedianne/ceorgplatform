@@ -3,36 +3,7 @@ $(document).ready(function () {
     $('#inputRecipient').selectpicker();
 
     $("#btnAddAnnouncement").click(function () {
-        alert("dfsd");
-        var request = {
-            announcementName: $("#inputAnnouncementName").val(),
-            announcement: $("#inputAnnouncement").val()
-        };
-
-        var recipient = [];
-        for (var i = 0; i < $('#inputRecipient').val().length; i++) {
-            recipient.push({
-                announcedTo: parseInt($('#inputRecipient').val()[i])
-            });
-        }
-
-        request['recipient'] = recipient;
-
-
-        $.ajax({
-            url: "${contextPath}/addAnnouncement",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(request), //Stringified Json Object
-            dataType: 'json',
-            success: function (response) {
-                alert(response.userId);
-                if (response.userId > 0)
-                    alert("added to database");
-
-            }
-        });
-
+         $("#formAnnouncement").valid();
     });
 
     var table = $("#tableAnnouncement").DataTable({
@@ -52,7 +23,7 @@ $(document).ready(function () {
                     else {
                         return "<button class=\"btnViewAnnouncement\"  data-id=\"" + data + "\"><i class=\"far fas fa-eye\"></i></button>" +
                                 "<button class=\"btnDeleteAnnouncement\"  data-id=\"" + data + "\"><i class=\"far fa-trash-alt\"></i></button>"
-                                
+
                     }
                 }
             },
@@ -67,84 +38,121 @@ $(document).ready(function () {
                 className: 'text-center'
             }
         ]
-        
+
     });
-    
+
     $(document).on('click', '.btnDeleteAnnouncement', function (e) {
         var request = {
-                        announcementId: $(this).data('id')
-                    };
+            announcementId: $(this).data('id')
+        };
         $("#dialogDeleteAnnouncement").data("request", request);
 
-        dialogDeleteAnnouncement.dialog( "open" );
-        
+        dialogDeleteAnnouncement.dialog("open");
+
     });
-    
-     var dialogDeleteAnnouncement = $( "#dialogDeleteAnnouncement" ).dialog({
-                autoOpen: false,
-                resizable: false,
-                height: 250,
-                width: 400,
-                modal: true,
-                buttons: {
-                  "Yes": function(){
-                    
-                    var request = $("#dialogDeleteAnnouncement").data("request");
-                    
-                    $.ajax({
-                        url: "deleteAnnouncement",
-                        type: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(request), //Stringified Json Object
-                        dataType: 'json',
-                        success: function (response) {
 
-                            if (response.userId > 0) {
-                                alert("deleted to database");
-                                table.ajax.reload();
-                            }
+    var dialogDeleteAnnouncement = $("#dialogDeleteAnnouncement").dialog({
+        autoOpen: false,
+        resizable: false,
+        height: 250,
+        width: 400,
+        modal: true,
+        buttons: {
+            "Yes": function () {
+
+                var request = $("#dialogDeleteAnnouncement").data("request");
+
+                $.ajax({
+                    url: "deleteAnnouncement",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(request), //Stringified Json Object
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if (response.userId > 0) {
+                            alert("deleted to database");
+                            table.ajax.reload();
                         }
-                    });
-                      
-                    dialogDeleteAnnouncement.dialog( "close" );
+                    }
+                });
 
-                  },
-                  
-                  "Cancel": function() {
-                    dialogDeleteAnnouncement.dialog( "close" );
-                  }
-                },
-                close: function() {
-                  //form[ 0 ].reset();
-                  dialogDeleteAnnouncement.dialog( "close" );
+                dialogDeleteAnnouncement.dialog("close");
+
+            },
+            "Cancel": function () {
+                dialogDeleteAnnouncement.dialog("close");
+            }
+        },
+        close: function () {
+            //form[ 0 ].reset();
+            dialogDeleteAnnouncement.dialog("close");
+        }
+    });
+
+    $.validator.setDefaults({
+        errorElement: "span",
+        errorClass: "help-block",
+        highlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+        },
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length || element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+
+    $("#formAnnouncement").validate({
+        rules: {
+            inputAnnouncementName: {
+                required: true
+            },
+            inputRecipient: {
+                required: true
+            },
+            inputAnnouncement : {
+                required: true
+            }
+        },
+        submitHandler: function (form) {
+            var recipient = [];
+            
+            for (var i = 0; i < $('#inputRecipient').val().length; i++) {
+                recipient.push({
+                    announcedTo: parseInt($('#inputRecipient').val()[i])
+                });
+            }
+            
+            var request = {
+                announcementName: $("#inputAnnouncementName").val(),
+                announcement: $("#inputAnnouncement").val(),
+                recipient : recipient
+            };
+
+
+            $.ajax({
+                url: "addAnnouncement",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(request), //Stringified Json Object
+                dataType: 'json',
+                success: function (response) {
+                    alert(response.userId);
+                    if (response.userId > 0)
+                        alert("added to database");
+                    table.ajax.reload();
                 }
             });
+            return false;
+        }
 
-    //                "bServerSide": true,
-    //                            "bJQueryUI" : true,
-    //                            "sPaginationType" : "full_numbers",
-    //                            "sAjaxSource": "../getReservation",
-    //                            "aoColumns": [
-    //                                {"mData": "reservationId", "sTitle": " ", "sWidth": "2%", "bSortable" : false , "sClass" : "center"},
-    //                                {"mData": "eventRooms.eventRoomName", "sTitle": "Location", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-    //                                {"mData": "eventName", "sTitle": "Event", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-    //                                {"mData": "dateRequested", "sTitle": "Date", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-    //                                {"mData": "scheduledStartTime", "sTitle": "Start Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
-    //                                {"mData": "scheduledEndTime", "sTitle": "End Time", "sWidth": "10%", "bSortable" : false , "sClass" : "center"},
-    //                                {"mData": "remarks", "sTitle": "Remarks", "sWidth": "10%", "bSortable" : true , "sClass" : "center"},
-    //                                {"mData": "url", "sTitle": "Status", "sWidth": "10%", "bSortable" : true , "sClass" : "center"}
-    //                            ],
-    //                            "oLanguage": {
-    //                                "sSearch": "Filter Search Result:",
-    //                                "sProcessing": "Loading Please Wait...",
-    //                                "sLoadingRecords": "Loading Please Wait...",
-    //                                "sZeroRecords": "No Records Found!",
-
-
-    //                    "fnServerParams": function (aoData) {
-    //                        aoData.push({ "name": "reservationId", "value": 0 });
-    //                    },
-    //"mRender" : "function ( aaData, type, full )  {return  '<button id=\"reservationEdit\" data-id=\"' + reservationId + '\">edit</button>'", 
-
+    });
 
 });

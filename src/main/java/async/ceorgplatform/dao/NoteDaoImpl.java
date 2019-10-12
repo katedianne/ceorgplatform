@@ -33,7 +33,7 @@ public class NoteDaoImpl implements NoteDao {
     }
     
     public int DeleteNote(Note request){
-        String sql = "update note set status_id = 2 where note_id = ?";
+        String sql = "update notes set status_id = 2 where note_id = ?";
         int result = jdbcTemplate.update(sql, new Object[]{request.getNoteId()});
         return result;
     }
