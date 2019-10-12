@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException  {
         
         
-        String sql = "SELECT u.*, concat('ROLE_', role) role FROM users u inner join roles r on u.role_id = r.role_id WHERE username = '" + username + "'";
+        String sql = "SELECT u.*, concat('ROLE_', role) role, org_name FROM users u inner join roles r on u.role_id = r.role_id inner join organizations o on u.org_id = o.org_id WHERE username ='" + username + "'";
         List<MyUser> user = jdbcTemplate.query(sql, new UserMapper());
         if (user == null) {
             throw new UsernameNotFoundException(username);
@@ -72,6 +72,8 @@ public class UserDaoImpl implements UserDao, UserDetailsService {
             user.setUserId(rs.getInt("user_id"));
             user.setRoleId(rs.getInt("role_id"));
             user.setOrgId(rs.getInt("org_id"));
+            user.setOrg(rs.getString("org_name"));
+            
 
             return user;
              

@@ -13,8 +13,9 @@ import java.util.List;
  * @author Kate Dianne
  */
 public interface PaymentService {
-    void CreatePayment(Payment payment);
+    int CreatePayment(Payment payment);
     int EditPayment(Payment request);
-    void UpdatePayment(Payment payment);
+    int UpdatePayment(Payment payment);
+    int DeletePayment(Payment payment);
     List<Payment> getPayment();
 }

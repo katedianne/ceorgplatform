@@ -54,6 +54,7 @@ public class LoginController {
         mav.addObject("currentRoleId", currentUser.getUser().getRoleId());
         mav.addObject("currentUserId", currentUser.getUser().getUserId());
         mav.addObject("currentOrgId", currentUser.getUser().getOrgId());
+        mav.addObject("currentOrgName", currentUser.getUser().getOrg());
         
         return mav;
     }

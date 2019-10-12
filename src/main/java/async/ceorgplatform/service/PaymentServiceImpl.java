@@ -18,19 +18,24 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     public PaymentDao paymentDao;
     
-    public void CreatePayment(Payment payment){
-        paymentDao.CreatePayment(payment);
+    public int CreatePayment(Payment payment){
+       return paymentDao.CreatePayment(payment);
     }
     
     public int EditPayment(Payment request){
         return paymentDao.EditPayment(request);
     }
     
-    public void UpdatePayment(Payment payment){
-        paymentDao.UpdatePayment(payment);
+    public int UpdatePayment(Payment payment){
+       return paymentDao.UpdatePayment(payment);
     }
     
     public List<Payment> getPayment(){
         return paymentDao.getPayment();
+    }
+
+    @Override
+    public int DeletePayment(Payment payment) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

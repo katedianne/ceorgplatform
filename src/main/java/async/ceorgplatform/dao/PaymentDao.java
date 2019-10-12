@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PaymentDao {
     int EditPayment(Payment request);
-    void CreatePayment(Payment payment);
-    void UpdatePayment(Payment payment);
+    int CreatePayment(Payment payment);
+    int UpdatePayment(Payment payment);
     List<Payment> getPayment();
 }

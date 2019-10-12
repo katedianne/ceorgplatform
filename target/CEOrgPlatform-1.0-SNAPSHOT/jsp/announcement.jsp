@@ -89,16 +89,16 @@
                         <div class="col-lg-2"> </div>
                         <div class="col-lg-4 form-group">
                             <select id="inputRecipient" name="inputRecipient" multiple class="selectpicker form-control mdb-select md-form">
-                                <option value="0"> Send to </option>
+                                <option value=""> Send to </option>
                                 <option value="1"> ACCESS </option>
-                                <option value="2"> CEHS </option>
-                                <option value="3"> ECESS </option>
-                                <option value="4"> EEN </option>
-                                <option value="5"> PICE </option>
-                                <option value="6"> PIIE </option>
-                                <option value="7"> PSME </option>
-                                <option value="8"> PUP Aggregates </option>
-                                <option value="9"> PUP-RAILS </option>
+                                <option value="2"> PUP Aggregates </option>
+                                <option value="3"> PICES </option>
+                                <option value="4"> ECESS </option>
+                                <option value="5"> PUP-RAILS </option>
+                                <option value="6"> EEN </option>
+                                <option value="7"> PIIE </option>
+                                <option value="8"> PSME </option>
+                                <option value="9"> CSHS </option>
                                 <option value="10"> CE-SC </option>
                             </select>
                         </div>
