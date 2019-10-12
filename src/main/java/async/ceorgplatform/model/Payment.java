@@ -5,7 +5,9 @@
  */
 package async.ceorgplatform.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -13,6 +15,7 @@ import java.util.Date;
  * @author Kate Dianne
  */
 public class Payment {
+    private int paymentId;
     private double paymentBalance;
     private double principalAmount;
     private int orgId;
@@ -20,14 +23,22 @@ public class Payment {
     private Date dateCreated;
     private int createdBy;
     private String remarks;
-    public Payment.UpdateTrail updateTrail = new Payment.UpdateTrail();    
+    public List<Payment.UpdateTrail> updateTrail = new ArrayList<Payment.UpdateTrail>();    
 
-    public UpdateTrail getUpdateTrail() {
+    public List<UpdateTrail> getUpdateTrail() {
         return updateTrail;
     }
 
-    public void setUpdateTrail(UpdateTrail updateTrail) {
+    public void setUpdateTrail(List<UpdateTrail> updateTrail) {
         this.updateTrail = updateTrail;
+    }
+
+    public int getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
     }
 
     public String getRemarks() {

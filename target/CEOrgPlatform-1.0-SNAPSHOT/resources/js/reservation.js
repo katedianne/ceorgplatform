@@ -111,7 +111,7 @@ $(document).ready(function () {
                     else {
                         return "<button class=\"btnEditReservation\"  data-id=\"" + data + "\" data-room=\"" + row.eventRoomId + "\"><i class=\"far fa-edit\"></i></button>" +
                                 "<button class=\"btnDeleteReservation\"  data-id=\"" + data + "\"><i class=\"far fa-trash-alt\"></i></button>" +
-                                "<button class=\"btnConfirmReservation\"  data-id=\"" + data + "\"><i class=\"far fa-check-circle\"></i></button>";
+                                "<button class=\"btnConfirmReservation\"  data-id=\"" + data + "\" data-room=\"" + row.eventRoomId + "\"><i class=\"far fa-check-circle\"></i></button>";
                     }
                 }
             },
@@ -195,7 +195,7 @@ $(document).ready(function () {
                       success: function (response) {
 
                           if (response.userId > 0) {
-                              alert("reserve to database");
+                              alert("reserved to database");
                               table.ajax.reload();
                           }
                       }

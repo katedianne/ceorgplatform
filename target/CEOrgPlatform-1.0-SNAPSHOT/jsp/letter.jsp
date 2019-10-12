@@ -46,14 +46,14 @@
             var currentOrgId = ${currentOrgId};
         </script>
         <script src="${contextPath}/resources/js/letter.js"></script>
-    
+
         <style>
             .help-block {
                 color: red
-                
+
             }
         </style>
-        
+
     </head>
     <body id="page-top">
 
@@ -69,12 +69,19 @@
                     <h1 class="h3 mb-0 text-gray-800">Letter Tracker</h1>
                 </div>
 
+ 
                 <div id="tabs-1">
                     <form id="formLetter">
                         <div class="row">
                             <div class="form-group col-md-2">
                                 <label>Letter Type:</label>
-                                <input type="text" class="form-control" id="inputLetterType" name="inputLetterType">
+                                <select class="custom-select" id="inputLetterType" name="inputLetterType">
+                                    <option value="">Please select letter type</option>
+                                    <option value="1">REQUEST</option>
+                                    <option value="2">EXCUSE</option>
+                                    <option value="3">MEMO</option>
+                                    <option value="4">APPROVAL</option>
+                                </select>     
                             </div>
                             <div class="form-group col-md-3">
                                 <label>Letter Name: </label>
@@ -90,41 +97,36 @@
                             </div>
                             <div class="container" style="float: right;">
                                 <button id="btnCancelLetter" style="float:right; border-radius: 1px; background-color: #FC5E5E; margin-left: 3px; margin-bottom: 2px">CANCEL</button>
-<!--                                <button id="btnSaveLetter" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>-->
+                                <!--                                <button id="btnSaveLetter" style="float:right; border-radius: 1px; background-color: #F8C471; margin-left: 3px; margin-bottom: 2px">SAVE</button>-->
                                 <button type="submit" id="btnAddLetter" style="float:right; border-radius: 1px; background-color: #7DCEA0; margin-bottom: 3px;">ADD</button>
                             </div>
-
-                            <div class="container">
-                                <table id="tableLetter" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
-                                    <thead style="background-color: black; color: white;">
-                                        <tr>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle; width: 9%;"> </th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;"> Control Number </th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Type </th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Name </th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;"> Date Released </th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;"> Remarks </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="color: black;">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </form>
+                    <div class="container">
+                        <table id="tableLetter" class="table table-bordered" cellspacing="0" width="100%" style="font-size: 0.8em; background-color: white;">
+                            <thead style="background-color: black; color: white;">
+                                <tr>
+                                    <th class="th-sm" style="text-align: center; vertical-align: middle; width: 9%;"> </th>
+                                    <th class="th-sm" style="text-align: center; vertical-align: middle;"> Control Number </th>
+                                    <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Type </th>
+                                    <th class="th-sm" style="text-align: center; vertical-align: middle;"> Letter Name </th>
+                                    <th class="th-sm" style="text-align: center; vertical-align: middle;"> Date Released </th>
+                                    <th class="th-sm" style="text-align: center; vertical-align: middle;"> Remarks </th>
+                                </tr>
+                            </thead>
+                            <tbody style="color: black;">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
-
-
-
 
             </div>
             <!-- End of Content Wrapper -->

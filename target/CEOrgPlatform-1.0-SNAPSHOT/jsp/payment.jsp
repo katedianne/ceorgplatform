@@ -41,7 +41,7 @@
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.timepicker.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
-        <script src="${contextPath}/resources/js/reservation.js"></script>
+        <script src="${contextPath}/resources/js/payment.js"></script>
 
 
     </head>
@@ -50,66 +50,7 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/home">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">CE ORG PLATFORM</div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="${contextPath}/home">
-                        <i class="fas fa-home"></i>
-                        <span>Home ${username}</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="${contextPath}/reservation" >
-                        <i class="fas fa-fw fa-wrench"></i>
-                        <span>Reservation</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="${contextPath}/announcement">
-                        <i class="fas fa-bullhorn"></i>
-                        <span>Announcements</span>
-                    </a>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/letter">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Letter Tracker</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/calendar">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Calendar</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/notes">
-                        <i class="fas fa-sticky-note"></i>
-                        <span>Notes</span></a>
-                </li>
-            </ul>
+            <jsp:include page="_navigationBar.jsp" />
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -177,32 +118,28 @@
                             <form id="formReservation">
                                 <div class="row">
                                     <div class="form-group col-md-2">
-                                        <label>Location:</label>
-                                        <select class="custom-select" id="selectResLocation" name="selectResLocation">
-                                            <option value="">Please select a room</option>
-                                            <option value="1">Gabsi</option>
-                                            <option value="2">NDC</option>
-                                            <option value="3">AVR</option>
-                                            <option value="4">CONFERENCE ROOM</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Event:</label>
+                                        <label>Balance:</label>
                                         <input type="text" class="form-control" id="inputResEvent" name="inputResEvent">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Date: </label>
-                                        <input type="date" class="form-control" id="inputResDate" name="inputResDate"/>
+                                        <label>Amount:</label>
+                                        <input type="text" class="form-control" id="inputResEvent" name="inputResEvent">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Time Start:</label>
-                                        <input type="text" class="form-control" id="inputResTimeStart" name="inputResTimeStart">
+                                        <label>Payment:</label>
+                                        <input type="text" class="form-control" id="inputResDate" name="inputResDate"/>
                                     </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Time End: </label>
-                                        <input type="text" class="form-control" id="inputResTimeEnd" name="inputResTimeEnd"/>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label>First Name:</label>
+                                        <input type="text" class="form-control" id="inputResEvent" name="inputResEvent">
                                     </div>
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-4">
+                                        <label>Last Name:</label>
+                                        <input type="text" class="form-control" id="inputResEvent" name="inputResEvent">
+                                    </div>
+                                    <div class="form-group col-md-3">
                                         <label>Remarks: </label>
                                         <input type="text" class="form-control" id="inputResRemarks" name="inputResRemarks"/>
                                     </div>
@@ -223,19 +160,15 @@
                                     <thead style="background-color: black; color: white;">
                                         <tr>
                                             <th class="th-sm" style="text-align: center; vertical-align: middle;"></th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Location</th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Event</th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Date</th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Start Time</th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">End Time</th>
+                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Balance</th>
+                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Amount</th>
+                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Payment</th>
+                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Name</th>
                                             <th class="th-sm" style="text-align: center; vertical-align: middle;">Remarks</th>
-                                            <th class="th-sm" style="text-align: center; vertical-align: middle;">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody style="color: black;">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -250,13 +183,7 @@
 
 
                         <!-- Footer -->
-                        <footer class="sticky-footer bg-white">
-                            <div class="container my-auto">
-                                <div class="copyright text-center my-auto">
-                                    <span>Copyright &copy; Your Website 2019</span>
-                                </div>
-                            </div>
-                        </footer>
+                        <jsp:include page="_footer.jsp" />  
                         <!-- End of Footer -->
 
                     </div>

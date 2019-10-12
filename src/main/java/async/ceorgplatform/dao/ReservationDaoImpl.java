@@ -10,6 +10,7 @@ import async.ceorgplatform.model.Reservation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
@@ -37,11 +38,19 @@ public class ReservationDaoImpl implements ReservationDao {
 
     public int CreateReservation(Reservation request) {
 
-        String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_requested, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
+        String dateRequested = new SimpleDateFormat("yyyy-MM-dd").format(request.getDateRequested());
+        String check = "select date_requested, scheduled_start_time, scheduled_end_time, event_room_id from reservations where date_requested like '" + dateRequested + "%' and ((scheduled_start_time >= '" + request.getScheduledStartTime() + "' and scheduled_start_time <= '" + request.getScheduledEndTime() + "') or (scheduled_end_time > '" + request.getScheduledStartTime() + "' and scheduled_end_time < '" + request.getScheduledEndTime() + "')) and event_room_id = " + request.getEventRoomId() + "  and status_id = 4";
+        List<Reservation> checkList = jdbcTemplate.query(check, new ReservationDaoImpl.CheckReservationMapper());
+        int result = 0;
+        for (Reservation _checkList : checkList){
+            if(_checkList.getEventRoomId() != request.getEventRoomId()){
+                String sql = "insert into reservations (scheduled_start_time, scheduled_end_time, event_room_id, event_name, date_requested, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,?,?)";
 
-      int result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
-            request.getEventName(), request.getDateRequested(), request.getDateCreated(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
-
+                result = jdbcTemplate.update(sql, new Object[]{request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(),
+                request.getEventName(), request.getDateRequested(), request.getDateCreated(), request.getCreatedBy(), request.getRemarks(),request.getStatusId() });
+            }
+        }
+        
       return result;
     }
 
@@ -56,7 +65,9 @@ public class ReservationDaoImpl implements ReservationDao {
         int result = jdbcTemplate.update(sql, new Object[]{request.getReservationId()});
         
         String sqlRemove =  "update reservations set status_id = 2 where date_requested like ? and ((scheduled_start_time >= ? and scheduled_start_time <= ?) or (scheduled_end_time > ? and scheduled_end_time < ?)) and event_room_id = ? and reservation_id <> ?";
-        jdbcTemplate.update(sqlRemove, new Object[]{request.getDateRequested(), request.getScheduledStartTime(), request.getScheduledEndTime(), request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(), request.getReservationId() });
+        String dateRequested = new SimpleDateFormat("yyyy-MM-dd").format(request.getDateRequested());
+        jdbcTemplate.update(sqlRemove, new Object[]{dateRequested + "%", request.getScheduledStartTime(), request.getScheduledEndTime(), request.getScheduledStartTime(), request.getScheduledEndTime(), request.getEventRoomId(), request.getReservationId() });
+        
         return result;
     }
 
@@ -70,6 +81,25 @@ public class ReservationDaoImpl implements ReservationDao {
         return reservation;
     }
 
+    
+    class CheckReservationMapper implements RowMapper<Reservation>{
+     
+        public Reservation mapRow(ResultSet rs, int arg1) throws SQLException{
+            Reservation reservation = new Reservation();
+           // EventRooms eventRooms = reservation.new EventRooms();
+            
+            reservation.setScheduledStartTime(rs.getTime("scheduled_start_time"));
+            reservation.setScheduledEndTime(rs.getTime("scheduled_end_time"));
+            reservation.setEventRoomId(rs.getInt("event_room_id"));
+            reservation.setDateRequested(rs.getDate("date_requested"));
+//            reservation.eventRooms.setEventRoomId(rs.getInt("event_room_id"));
+            
+//            reservation.eventRooms.setDateCreated(rs.getTimestamp("date_created"));
+//            reservation.eventRooms.setCreatedBy(rs.getInt("created_by"));
+//            reservation.eventRooms.setStatusId(rs.getInt("status_id"));
+            return reservation;
+        }
+    }
     
     class ReservationMapper implements RowMapper<Reservation>{
      

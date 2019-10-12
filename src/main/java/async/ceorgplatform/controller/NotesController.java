@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class NotesController {
+
     @Autowired
     NoteService noteService;
     
@@ -92,4 +93,5 @@ public class NotesController {
 
         return user;
     }
+
 }
