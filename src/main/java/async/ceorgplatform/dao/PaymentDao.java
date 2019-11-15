@@ -16,5 +16,6 @@ public interface PaymentDao {
     int EditPayment(Payment request);
     int CreatePayment(Payment payment);
     int UpdatePayment(Payment payment);
+    int DeletePayment(Payment payment);
     List<Payment> getPayment();
 }

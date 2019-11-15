@@ -32,7 +32,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
         String sql = "insert into payments (payment_balance, principal_amount, org_id, payment_name, date_created, created_by, remarks, status_id) values(?,?,?,?,?,?,?,8)";
 
-        return jdbcTemplate.update(sql, new Object[]{payment.getPaymentBalance(), payment.getPrincipalAmount(), payment.getOrgId(),
+        return jdbcTemplate.update(sql, new Object[]{payment.getPaymentBalance(), payment.getPaymentBalance(), payment.getOrgId(),
             payment.getPaymentName(), payment.getDateCreated(), payment.getCreatedBy(), payment.getRemarks()});
     }
 
@@ -70,9 +70,16 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
     public List<Payment> getPayment() {
-        String sql = "Select * from payments as p where p.status_id = 1";
+        String sql = "Select * from payments as p where p.status_id = 8";
         List<Payment> payment = jdbcTemplate.query(sql, new PaymentDaoImpl.PaymentMapper());
         return payment;
+    }
+
+    @Override
+    public int DeletePayment(Payment payment) {
+        String sql = "update payments set status_id = 2 where payment_id = ? ";
+        int result = jdbcTemplate.update(sql, new Object[]{ payment.getPaymentId()});
+        return result;
     }
 
     class PaymentMapper implements RowMapper<Payment> {

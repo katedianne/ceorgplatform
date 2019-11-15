@@ -110,14 +110,14 @@
                     </div>
                     <div class="row button_class">
                         <div class="col row_button_announcements">
-                            <button class="btn btn-primary button_bold" type="button" data-toggle="tooltip" title="bold"> B </button>
+<!--                            <button class="btn btn-primary button_bold" type="button" data-toggle="tooltip" title="bold"> B </button>
                             <button class="btn btn-primary button_italicize" type="button" data-toggle="tooltip" title="italicize"> i </button>
                             <button class="btn btn-primary button_image" type="button" data-toggle="tooltip" title="Attach file">
                                 <i class="fa fa-paperclip"> </i> 
                             </button>
                             <button class="btn btn-primary button_image" type="button" data-toggle="tooltip" title="Upload image"> 
                                 <i class="far fa-image"> </i>
-                            </button>
+                            </button>-->
                             <button id="btnAddAnnouncement" type="submit" class="btn btn-primary" > SEND </button>
                         </div>
                     </div>

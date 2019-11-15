@@ -39,7 +39,9 @@ public class ReservationDaoImpl implements ReservationDao {
     public int CreateReservation(Reservation request) {
 
         String dateRequested = new SimpleDateFormat("yyyy-MM-dd").format(request.getDateRequested());
-        String check = "select date_requested, scheduled_start_time, scheduled_end_time, event_room_id from reservations where date_requested like '" + dateRequested + "%' and ((scheduled_start_time >= '" + request.getScheduledStartTime() + "' and scheduled_start_time <= '" + request.getScheduledEndTime() + "') or (scheduled_end_time > '" + request.getScheduledStartTime() + "' and scheduled_end_time < '" + request.getScheduledEndTime() + "')) and event_room_id = " + request.getEventRoomId() + "  and status_id = 4";
+
+        
+        String check = "select exists (select date_requested, scheduled_start_time, scheduled_end_time, event_room_id from reservations where date_requested like '" + dateRequested + "%' and ((scheduled_start_time >= '" + request.getScheduledStartTime() + "' and scheduled_start_time <= '" + request.getScheduledEndTime() + "') or (scheduled_end_time > '" + request.getScheduledStartTime() + "' and scheduled_end_time < '" + request.getScheduledEndTime() + "')) and event_room_id = " + request.getEventRoomId() + "  and status_id = 4) as result";
         List<Reservation> checkList = jdbcTemplate.query(check, new ReservationDaoImpl.CheckReservationMapper());
         int result = 0;
         if (checkList.get(0).getStatusId() == 0){
@@ -94,15 +96,7 @@ public class ReservationDaoImpl implements ReservationDao {
             Reservation reservation = new Reservation();
            // EventRooms eventRooms = reservation.new EventRooms();
             
-            reservation.setScheduledStartTime(rs.getTime("scheduled_start_time"));
-            reservation.setScheduledEndTime(rs.getTime("scheduled_end_time"));
-            reservation.setEventRoomId(rs.getInt("event_room_id"));
-            reservation.setDateRequested(rs.getDate("date_requested"));
-//            reservation.eventRooms.setEventRoomId(rs.getInt("event_room_id"));
-            
-//            reservation.eventRooms.setDateCreated(rs.getTimestamp("date_created"));
-//            reservation.eventRooms.setCreatedBy(rs.getInt("created_by"));
-//            reservation.eventRooms.setStatusId(rs.getInt("status_id"));
+            reservation.setStatusId(rs.getInt("result"));
             return reservation;
         }
     }

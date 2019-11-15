@@ -41,8 +41,20 @@
         <script src="${contextPath}/resources/js/jquery.dataTables.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.timepicker.min.js"></script>
         <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
+        
+        <script>
+            var currentRoleId = ${currentRoleId};
+            var currentUserId = ${currentUserId};
+            var currentOrgId = ${currentOrgId};
+        </script>
         <script src="${contextPath}/resources/js/payment.js"></script>
 
+        <style>
+            .help-block {
+                color: red
+                
+            }
+        </style>
 
     </head>
     <body id="page-top">
